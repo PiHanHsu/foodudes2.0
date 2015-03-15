@@ -15,6 +15,10 @@
 		E80389D01AB5C289004FEEDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E80389CF1AB5C289004FEEDD /* Images.xcassets */; };
 		E80389D31AB5C289004FEEDD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80389D11AB5C289004FEEDD /* LaunchScreen.xib */; };
 		E80389DF1AB5C289004FEEDD /* foodudes2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389DE1AB5C289004FEEDD /* foodudes2_0Tests.m */; };
+		E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EC1AB5CE61004FEEDD /* FDLoginViewController.m */; };
+		E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */; };
+		E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */; };
+		E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,14 @@
 		E80389D81AB5C289004FEEDD /* foodudes2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = foodudes2.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80389DD1AB5C289004FEEDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E80389DE1AB5C289004FEEDD /* foodudes2_0Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = foodudes2_0Tests.m; sourceTree = "<group>"; };
+		E80389EB1AB5CE61004FEEDD /* FDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDLoginViewController.h; sourceTree = "<group>"; };
+		E80389EC1AB5CE61004FEEDD /* FDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDLoginViewController.m; sourceTree = "<group>"; };
+		E80389EE1AB5CE7B004FEEDD /* FDAddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddItemViewController.h; sourceTree = "<group>"; };
+		E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemViewController.m; sourceTree = "<group>"; };
+		E80389F11AB5CE88004FEEDD /* FDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSearchViewController.h; sourceTree = "<group>"; };
+		E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDSearchViewController.m; sourceTree = "<group>"; };
+		E80389F41AB5CE9E004FEEDD /* FDProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDProfileViewController.h; sourceTree = "<group>"; };
+		E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +177,14 @@
 		E80389EA1AB5C93F004FEEDD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E80389EB1AB5CE61004FEEDD /* FDLoginViewController.h */,
+				E80389EC1AB5CE61004FEEDD /* FDLoginViewController.m */,
+				E80389EE1AB5CE7B004FEEDD /* FDAddItemViewController.h */,
+				E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */,
+				E80389F11AB5CE88004FEEDD /* FDSearchViewController.h */,
+				E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */,
+				E80389F41AB5CE9E004FEEDD /* FDProfileViewController.h */,
+				E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */,
 			);
 			name = Controllers;
 			path = ../Controllers;
@@ -307,8 +327,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */,
+				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,
+				E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */,
 				E80389CB1AB5C289004FEEDD /* ViewController.m in Sources */,
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
+				E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */,
 				E80389C51AB5C289004FEEDD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
