@@ -7,16 +7,31 @@
 //
 
 #import "FDSearchViewController.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface FDSearchViewController ()
+@interface FDSearchViewController ()<GMSMapViewDelegate>
 
+@property (strong, nonatomic) GMSMapView *mapView;
 @end
 
 @implementation FDSearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    NSLog(@"search view");
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:25.023868 longitude:121.528976 zoom:15 bearing:0 viewingAngle:0];
+    
+    self.mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    self.mapView.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height-65);
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.settings.myLocationButton = YES;
+    self.mapView.delegate = self;
+    
+    [self.view addSubview:self.mapView];
+
+
+
 }
 
 - (void)didReceiveMemoryWarning {
