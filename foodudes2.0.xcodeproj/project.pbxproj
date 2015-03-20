@@ -19,6 +19,7 @@
 		E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */; };
 		E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */; };
 		E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */; };
+		E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDSearchViewController.m; sourceTree = "<group>"; };
 		E80389F41AB5CE9E004FEEDD /* FDProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDProfileViewController.h; sourceTree = "<group>"; };
 		E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileViewController.m; sourceTree = "<group>"; };
+		E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCGeocodingService.h; sourceTree = "<group>"; };
+		E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCGeocodingService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,7 @@
 		E80389C11AB5C289004FEEDD /* foodudes2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				E8E63E621ABC5118006ABD86 /* 3rd Party Library */,
 				E80389CC1AB5C289004FEEDD /* Main.storyboard */,
 				E80389EA1AB5C93F004FEEDD /* Controllers */,
 				E80389E91AB5C939004FEEDD /* Views */,
@@ -188,6 +192,24 @@
 			);
 			name = Controllers;
 			path = ../Controllers;
+			sourceTree = "<group>";
+		};
+		E8E63E621ABC5118006ABD86 /* 3rd Party Library */ = {
+			isa = PBXGroup;
+			children = (
+				E8E63E661ABC516F006ABD86 /* Geocoding */,
+			);
+			name = "3rd Party Library";
+			path = "../3rd Party Library";
+			sourceTree = "<group>";
+		};
+		E8E63E661ABC516F006ABD86 /* Geocoding */ = {
+			isa = PBXGroup;
+			children = (
+				E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */,
+				E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */,
+			);
+			path = Geocoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */,
+				E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */,
 				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,
 				E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */,
 				E80389CB1AB5C289004FEEDD /* ViewController.m in Sources */,

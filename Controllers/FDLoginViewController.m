@@ -38,6 +38,7 @@
     [self.view addSubview:loginButton];
     
     [self saveUserDataToParse];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,9 +50,11 @@
     [super viewWillAppear:animated];
     
     //Check if user is cached and linked to Facebook, if so, bypass login
-    //    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-    //    [self _ViewControllerAnimated:YES];
-    //    }
+        if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+            NSLog(@"current user!!");
+            
+        [self _ViewControllerAnimated:YES];
+        }
 }
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     // Set permissions required from the facebook user account
@@ -102,7 +105,6 @@
     UITabBarController *tabBarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
     [tabBarVC setSelectedIndex:1];
     [self presentViewController:tabBarVC animated:YES completion:nil];
-    //    [self.navigationController pushViewController:tabBarVC animated:animated];
 }
 
 -(void) saveUserDataToParse

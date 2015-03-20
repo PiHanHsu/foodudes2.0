@@ -7,17 +7,23 @@
 //
 
 #import "FDSearchViewController.h"
+#import "GCGeocodingService.h"
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface FDSearchViewController ()<GMSMapViewDelegate>
+
+@interface FDSearchViewController ()<GMSMapViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong,nonatomic) GCGeocodingService *gs;
 @end
+
 
 @implementation FDSearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     NSLog(@"search view");
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:25.023868 longitude:121.528976 zoom:15 bearing:0 viewingAngle:0];
     
@@ -28,9 +34,16 @@
     self.mapView.settings.myLocationButton = YES;
     self.mapView.delegate = self;
     
-    [self.view addSubview:self.mapView];
+    self.searchBar.showsSearchResultsButton=YES;
+    self.searchBar.searchBarStyle = UIBarStyleDefault;
+    self.searchBar.placeholder=@"輸入地點,例如：台北北投、台北淡水...";
+    self.searchBar.delegate=self;
+    
+    [self.view addSubview:self.searchBar];
+    
+    [self.view insertSubview:self.mapView atIndex:0];
 
-
+    self.gs = [[GCGeocodingService alloc] init];
 
 }
 
@@ -39,14 +52,37 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark SearchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self.searchBar resignFirstResponder];
+    NSLog(@"%@", self.searchBar.text);
+    [self.gs geocodeAddress:self.searchBar.text];
+    [self addMarker];
+    self.searchBar.text=@"";
+    self.searchBar.placeholder=@"輸入地點,例如：台北北投、台北淡水...";
 }
-*/
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    //[self.infoView removeFromSuperview];
+    return YES;
+    
+}
+
+- (void)addMarker{
+    double lat = [[self.gs.geocode objectForKey:@"lat"] doubleValue];
+    double lng = [[self.gs.geocode objectForKey:@"lng"] doubleValue];
+ 
+    NSLog(@"lat: %f, lmng: %f", lat, lng);
+       GMSMarker *options = [[GMSMarker alloc] init];
+       options.position = CLLocationCoordinate2DMake(lat, lng);
+       options.title = [self.gs.geocode objectForKey:@"address"];
+       options.appearAnimation= kGMSMarkerAnimationPop;
+       options.map =self.mapView;
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:lat                                                                longitude:lng                                                        zoom:15];
+    [self.mapView setCamera:camera];
+    
+}
 
 @end

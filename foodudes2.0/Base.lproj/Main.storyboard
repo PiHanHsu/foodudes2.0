@@ -54,7 +54,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="Ycv-ZH-l2f"/>
-                        <segue destination="HVf-Z2-huw" kind="relationship" relationship="viewControllers" id="EZL-WQ-0Bz"/>
+                        <segue destination="8VM-uD-AWw" kind="relationship" relationship="viewControllers" id="EZL-WQ-0Bz"/>
                         <segue destination="Qhh-LW-DYd" kind="relationship" relationship="viewControllers" id="0Pi-ZA-fNC"/>
                     </connections>
                 </tabBarController>
@@ -62,7 +62,7 @@
             </objects>
             <point key="canvasLocation" x="536" y="332"/>
         </scene>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="siB-oU-UCY">
             <objects>
                 <viewController id="HVf-Z2-huw" customClass="FDSearchViewController" sceneMemberID="viewController">
@@ -73,13 +73,31 @@
                     <view key="view" contentMode="scaleToFill" id="lmW-h7-PCg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Xer-9Z-del">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mha-HL-S32"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="s3x-u7-4Kr"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xer-9Z-del" firstAttribute="top" secondItem="irD-LV-FtS" secondAttribute="bottom" id="0vQ-Q6-mMn"/>
+                            <constraint firstAttribute="trailing" secondItem="Xer-9Z-del" secondAttribute="trailing" id="MOd-ED-wJw"/>
+                            <constraint firstItem="Xer-9Z-del" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="NqF-6d-bqi"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="Tab_icon_search" id="CLx-ME-YnC"/>
+                    <navigationItem key="navigationItem" id="Cxc-GH-p3r"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Xer-9Z-del" id="aGp-PA-kDe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7b4-SK-YsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="1079"/>
+            <point key="canvasLocation" x="1348" y="1079"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Vc4-j2-Qbp">
@@ -98,7 +116,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBK-TT-ent" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1189" y="1079"/>
+            <point key="canvasLocation" x="2001" y="1079"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="Abn-AE-EM9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8VM-uD-AWw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="Tab_icon_search" id="CLx-ME-YnC"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="t8l-04-P4q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HVf-Z2-huw" kind="relationship" relationship="rootViewController" id="rpa-lV-zjc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NWK-rB-8Ji" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="536" y="1079"/>
         </scene>
     </scenes>
     <resources>
