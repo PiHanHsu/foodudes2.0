@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Add-->
@@ -102,7 +103,7 @@
         <!--Profile-->
         <scene sceneID="Vc4-j2-Qbp">
             <objects>
-                <viewController id="Qhh-LW-DYd" sceneMemberID="viewController">
+                <viewController id="Qhh-LW-DYd" customClass="FDProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bQh-63-LQP"/>
                         <viewControllerLayoutGuide type="bottom" id="kYH-Yx-XvV"/>
@@ -110,9 +111,38 @@
                     <view key="view" contentMode="scaleToFill" id="95C-m2-Xza">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ivD-6x-Qgo">
+                                <rect key="frame" x="30" y="50" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Gdm-1C-ud0"/>
+                                    <constraint firstAttribute="width" constant="100" id="lUj-nA-W20"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8Z-J2-dk0" userLabel="NameLabel">
+                                <rect key="frame" x="160" y="60" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="3hx-3j-JVs"/>
+                                    <constraint firstAttribute="width" constant="200" id="MD8-rU-wRn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R8Z-J2-dk0" firstAttribute="leading" secondItem="ivD-6x-Qgo" secondAttribute="trailing" constant="30" id="Czr-DF-vVb"/>
+                            <constraint firstItem="R8Z-J2-dk0" firstAttribute="top" secondItem="95C-m2-Xza" secondAttribute="topMargin" constant="60" id="DSv-H6-hcW"/>
+                            <constraint firstItem="ivD-6x-Qgo" firstAttribute="top" secondItem="bQh-63-LQP" secondAttribute="bottom" constant="30" id="fBN-SD-Zqq"/>
+                            <constraint firstItem="ivD-6x-Qgo" firstAttribute="leading" secondItem="95C-m2-Xza" secondAttribute="leading" constant="30" id="fEt-uo-9G4"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="Tab_icon_profile" id="vTb-L6-Mee"/>
+                    <connections>
+                        <outlet property="headImageView" destination="ivD-6x-Qgo" id="Pne-Kp-E6H"/>
+                        <outlet property="nameLabel" destination="R8Z-J2-dk0" id="jxW-tn-SMC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBK-TT-ent" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

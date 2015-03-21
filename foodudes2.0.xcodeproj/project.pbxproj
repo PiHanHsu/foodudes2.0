@@ -20,6 +20,10 @@
 		E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */; };
 		E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */; };
 		E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */; };
+		E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E6E1ABDB92B006ABD86 /* FDUser.m */; };
+		E8E63E721ABDBD1D006ABD86 /* FDMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E711ABDBD1D006ABD86 /* FDMarker.m */; };
+		E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E741ABDC2D7006ABD86 /* userMarkerView.m */; };
+		E8E63E771ABDC2D7006ABD86 /* UserMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,13 @@
 		E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileViewController.m; sourceTree = "<group>"; };
 		E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCGeocodingService.h; sourceTree = "<group>"; };
 		E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCGeocodingService.m; sourceTree = "<group>"; };
+		E8E63E6D1ABDB92B006ABD86 /* FDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDUser.h; sourceTree = "<group>"; };
+		E8E63E6E1ABDB92B006ABD86 /* FDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDUser.m; sourceTree = "<group>"; };
+		E8E63E701ABDBD1D006ABD86 /* FDMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDMarker.h; sourceTree = "<group>"; };
+		E8E63E711ABDBD1D006ABD86 /* FDMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDMarker.m; sourceTree = "<group>"; };
+		E8E63E731ABDC2D7006ABD86 /* userMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userMarkerView.h; sourceTree = "<group>"; };
+		E8E63E741ABDC2D7006ABD86 /* userMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userMarkerView.m; sourceTree = "<group>"; };
+		E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMarkerView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +176,10 @@
 		E80389E81AB5C92E004FEEDD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E8E63E6D1ABDB92B006ABD86 /* FDUser.h */,
+				E8E63E6E1ABDB92B006ABD86 /* FDUser.m */,
+				E8E63E701ABDBD1D006ABD86 /* FDMarker.h */,
+				E8E63E711ABDBD1D006ABD86 /* FDMarker.m */,
 			);
 			name = Models;
 			path = ../Models;
@@ -173,6 +188,9 @@
 		E80389E91AB5C939004FEEDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E8E63E731ABDC2D7006ABD86 /* userMarkerView.h */,
+				E8E63E741ABDC2D7006ABD86 /* userMarkerView.m */,
+				E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */,
 			);
 			name = Views;
 			path = ../Views;
@@ -299,6 +317,7 @@
 				E80389CE1AB5C289004FEEDD /* Main.storyboard in Resources */,
 				E80389D31AB5C289004FEEDD /* LaunchScreen.xib in Resources */,
 				E80389D01AB5C289004FEEDD /* Images.xcassets in Resources */,
+				E8E63E771ABDC2D7006ABD86 /* UserMarkerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,10 +372,13 @@
 				E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */,
 				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,
 				E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */,
+				E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */,
+				E8E63E721ABDBD1D006ABD86 /* FDMarker.m in Sources */,
 				E80389CB1AB5C289004FEEDD /* ViewController.m in Sources */,
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
 				E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */,
 				E80389C51AB5C289004FEEDD /* main.m in Sources */,
+				E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

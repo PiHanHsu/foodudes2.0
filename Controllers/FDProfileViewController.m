@@ -7,16 +7,49 @@
 //
 
 #import "FDProfileViewController.h"
+#import <Parse/Parse.h>
+#import "FDUser.h"
 
 @interface FDProfileViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 
 @end
+
 
 @implementation FDProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Display userName and image
+    NSString *name = [PFUser currentUser][@"name"];
+    if (name) {
+        self.nameLabel.text = name;
+        self.nameLabel.textColor = [UIColor blueColor];
+        self.nameLabel.font = [UIFont systemFontOfSize:30];
+    }
+    NSString *userProfilePhotoURLString = [PFUser currentUser][@"pictureURL"];
+    // Download the user's facebook profile picture
+    
+    NSLog(@"URL: %@", userProfilePhotoURLString);
+    
+    if (userProfilePhotoURLString) {
+        NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+        [NSURLConnection sendAsynchronousRequest:urlRequest
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   if (connectionError == nil && data != nil) {
+                                       self.headImageView.image = [UIImage imageWithData:data];
+                                       
+                                   } else {
+                                       NSLog(@"Failed to load profile photo.");
+                                   }
+                               }];
+        
+    }
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +57,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
