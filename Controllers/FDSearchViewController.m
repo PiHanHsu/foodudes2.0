@@ -8,6 +8,7 @@
 
 #import "FDSearchViewController.h"
 #import "GCGeocodingService.h"
+#import "userMarkerView.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 
@@ -130,11 +131,58 @@
         NSString *market_lng = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lng"]];
         double lng = [market_lng doubleValue];
         
-        restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
+        NSString *objectID =[NSString stringWithFormat:@"%@", restaurantMarker.info.objectId];
+        
+        NSLog(@"Restaurant objectID: %@", objectID);
+        
+        for (PFObject *postObj in self.postArray) {
+            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
+            NSString *userID =[NSString stringWithFormat:@"%@", postObj[@"userID"]];
+            
+            if ([restID isEqualToString:objectID]) {
+                PFQuery *query =[PFUser query];
+                [query whereKey:@"objectId" equalTo:userID];
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    if (!object) {
+                        NSLog(@"The get user for marker request failed.");
+                    } else {
+                    
+                       NSString *userProfilePhotoURLString = object[@"pictureURL"];
+                        if (userProfilePhotoURLString) {
+                            NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
+                            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+                            [NSURLConnection sendAsynchronousRequest:urlRequest
+                                                               queue:[NSOperationQueue mainQueue]
+                                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                                       if (connectionError == nil && data != nil) {
+                                                           userMarkerView *view =  [[[NSBundle mainBundle] loadNibNamed:@"UserMarkerView" owner:self options:nil] objectAtIndex:0];
+                                                           view.userImage.image =[UIImage imageWithData:data];
+                                                           view.userImage.layer.cornerRadius = 18.0f;
+                                                           view.userImage.layer.masksToBounds =YES;UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
+                                                           [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+                                                           UIImage *imageScreen =UIGraphicsGetImageFromCurrentImageContext();
+                                                           UIGraphicsEndImageContext();
+                                                           restaurantMarker.icon =imageScreen;
+                                                           restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
+                                                           restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
+                                                           restaurantMarker.map =self.mapView;
 
-        restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
-        restaurantMarker.map =self.mapView;
-    }
+                                                       } else {
+                                                           NSLog(@"Failed to load user image for marker.");
+                                                       }
+                                                   }];
+
+                        
+                    }
+                    }
+                }];
+                
+            }
+        }
+
+        
+        
+            }
 }
 
 -(void)loadPost{
