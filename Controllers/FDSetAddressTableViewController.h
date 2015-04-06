@@ -10,4 +10,6 @@
 
 @interface FDSetAddressTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSString * addressString;
+
 @end

@@ -10,4 +10,6 @@
 
 @interface FDAddItemTableViewController : UITableViewController
 
+//@property (strong, nonatomic)NSString *address;
+
 @end
