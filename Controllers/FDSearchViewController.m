@@ -105,7 +105,7 @@
             // The find succeeded.
             self.restaurantArray =objects;
             
-            NSLog(@"Successfully retrieved %lu restaurants.", (unsigned long)objects.count);
+            //NSLog(@"Successfully retrieved %lu restaurants.", (unsigned long)objects.count);
            
             //[self displayMarker];
             [self loadPost];
@@ -133,7 +133,7 @@
         
         NSString *objectID =[NSString stringWithFormat:@"%@", restaurantMarker.info.objectId];
         
-        NSLog(@"Restaurant objectID: %@", objectID);
+        //NSLog(@"Restaurant objectID: %@", objectID);
         
         for (PFObject *postObj in self.postArray) {
             NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
@@ -192,7 +192,7 @@
             // The find succeeded.
             self.postArray =objects;
             
-            NSLog(@"Successfully retrieved %lu posts.", (unsigned long)objects.count);
+            //NSLog(@"Successfully retrieved %lu posts.", (unsigned long)objects.count);
             [self displayMarker];
             
         } else {
