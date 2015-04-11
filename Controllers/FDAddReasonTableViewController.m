@@ -7,8 +7,10 @@
 //
 
 #import "FDAddReasonTableViewController.h"
+#import "FDAddItemTableViewController.h"
 
 @interface FDAddReasonTableViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *reasonTextView;
 
 @end
 
@@ -27,6 +29,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)saveButtonPressed:(id)sender {
+    
+    UIViewController *backVC;
+    backVC = [self.navigationController.viewControllers objectAtIndex:1];
+    
+    if ([backVC isKindOfClass:[FDAddItemTableViewController class]]){
+        
+        self.reasonString = self.reasonTextView.text;
+       
+        ((FDAddItemTableViewController *) backVC).reason=self.reasonString;
+        
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    
 }
 
 #pragma mark - Table view data source

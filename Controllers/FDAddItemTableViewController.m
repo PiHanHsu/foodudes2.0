@@ -14,7 +14,7 @@
 @interface FDAddItemTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *restaurantNameTextField;
-
+@property NSString *restID;
 
 
 
@@ -40,17 +40,19 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)saveButtonPressed:(id)sender {
-    
-    
-      NSLog(@"address: %@", self.address);
 
     PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
     restaurant[@"name"] = self.restaurantNameTextField.text;
     restaurant[@"address"] = self.address;
     restaurant[@"phone"] = self.phone;
     
-    [restaurant saveInBackground];
-    
+    PFObject *post =[PFObject objectWithClassName:@"Posts"];
+    post[@"reason"] = self.reason;
+    post[@"parent"] =restaurant;  //set relation between post and restaurant
+    post[@"userID"] = [PFUser currentUser].objectId;
+    post[@"userName"] = [PFUser currentUser][@"name"];
+        
+    [post saveInBackground];
 }
 
 #pragma mark - Navigation

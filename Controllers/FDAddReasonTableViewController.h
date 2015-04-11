@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FDAddReasonTableViewController : UITableViewController
+@property (strong, nonatomic) NSString * reasonString;
+
 
 @end

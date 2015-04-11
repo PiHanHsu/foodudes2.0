@@ -349,18 +349,21 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lUP-cr-Qpu" id="bpO-eo-qEW">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olx-0J-ZHe">
+                                                    <rect key="frame" x="23" y="216" width="34" height="30"/>
+                                                    <state key="normal" title="Save">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="saveButtonPressed:" destination="vAH-XL-rAV" eventType="touchUpInside" id="FJq-2f-AaD"/>
+                                                    </connections>
+                                                </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Reasons..." translatesAutoresizingMaskIntoConstraints="NO" id="p2s-2R-B5X">
                                                     <rect key="frame" x="8" y="8" width="584" height="200"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olx-0J-ZHe">
-                                                    <rect key="frame" x="23" y="216" width="34" height="30"/>
-                                                    <state key="normal" title="Save">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="p2s-2R-B5X" firstAttribute="top" secondItem="bpO-eo-qEW" secondAttribute="top" constant="8" id="Elp-4Z-7Ab"/>
@@ -381,6 +384,9 @@
                             <outlet property="delegate" destination="vAH-XL-rAV" id="H28-oR-el2"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="reasonTextView" destination="p2s-2R-B5X" id="fw5-4p-Dnv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bh-l4-u5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
