@@ -36,8 +36,18 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)saveButtonPressed:(id)sender {
-    self.addressString = [NSString stringWithFormat:@"%@%@%@", self.countryTextField.text, self.cityTextField.text, self.addressTextField.text];
+    UIViewController *backVC;
+    backVC = [self.navigationController.viewControllers objectAtIndex:1];
     
+    if ([backVC isKindOfClass:[FDAddItemTableViewController class]]){
+        
+        self.addressString = [NSString stringWithFormat:@"%@%@%@", self.countryTextField.text, self.cityTextField.text, self.addressTextField.text];
+        self.phoneString = self.phoneTextField.text;
+        ((FDAddItemTableViewController *) backVC).address=self.addressString;
+        ((FDAddItemTableViewController *) backVC).phone=self.phoneString;
+
+    }
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -56,13 +66,6 @@
     return 5;
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([segue.destinationViewController isKindOfClass:[FDAddItemTableViewController class]]) {
-//        FDAddItemTableViewController *vc = (FDAddItemTableViewController *) segue.destinationViewController;
-//        vc.address = self.addressString;
-//    }
-//}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

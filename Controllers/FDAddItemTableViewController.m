@@ -14,8 +14,7 @@
 @interface FDAddItemTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *restaurantNameTextField;
-@property (strong, nonatomic)NSString *address;
-@property (strong, nonatomic)NSString *phone;
+
 
 
 
@@ -25,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -44,15 +42,26 @@
 - (IBAction)saveButtonPressed:(id)sender {
     
     
-//     NSLog(@"address: %@", self.address);
-//    
-//    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-//    restaurant[@"name"] = self.restaurantNameTextField.text;
-//    restaurant[@"address"] = self.address;
-//    restaurant[@"phone"] = self.phone;
+      NSLog(@"address: %@", self.address);
+
+    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
+    restaurant[@"name"] = self.restaurantNameTextField.text;
+    restaurant[@"address"] = self.address;
+    restaurant[@"phone"] = self.phone;
     
-    //[restaurant saveInBackground];
+    [restaurant saveInBackground];
     
+}
+
+#pragma mark - Navigation
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.destinationViewController isKindOfClass:[FDSetAddressTableViewController class]]) {
+        FDSetAddressTableViewController *vc = (FDSetAddressTableViewController *) segue.destinationViewController;
+        vc.addressString =self.address;
+    }
 }
 
 #pragma mark - Table view data source
@@ -114,16 +123,7 @@
 */
 
 
-#pragma mark - Navigation
 
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//  
-//    if ([segue.destinationViewController isKindOfClass:[FDSetAddressTableViewController class]]) {
-//        FDSetAddressTableViewController *vc = (FDSetAddressTableViewController *) segue.destinationViewController;
-//        vc.addressString = self.address;
-//    }
-//}
 
 
 @end

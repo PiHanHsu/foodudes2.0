@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface FDSetAddressTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSString * addressString;
+@property (strong, nonatomic) NSString * phoneString;
+
 
 @end

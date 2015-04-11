@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface FDAddItemTableViewController : UITableViewController
 
-//@property (strong, nonatomic)NSString *address;
+@property (strong, nonatomic)NSString *address;
+@property (strong, nonatomic)NSString *phone;
+@property (strong, nonatomic)NSString *reason;
 
 @end
