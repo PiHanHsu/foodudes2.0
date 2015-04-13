@@ -131,7 +131,7 @@
         NSString *market_lng = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lng"]];
         double lng = [market_lng doubleValue];
         
-        NSString *objectID =[NSString stringWithFormat:@"%@", restaurantMarker.info.objectId];
+        //NSString *objectID =[NSString stringWithFormat:@"%@", restaurantMarker.info.objectId];
         
         //NSLog(@"Restaurant objectID: %@", objectID);
         
@@ -139,7 +139,7 @@
             
             //use relation in Parse
             PFObject * restaurant = postObj[@"parent"];
-            [restaurant fetchIfNeededInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
+            [restaurant fetchInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
                 if (!error) {
                     PFQuery * queryUser = [PFUser query];
                     [queryUser whereKey:@"objectId" equalTo:postObj[@"userID"]];

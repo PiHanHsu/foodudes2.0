@@ -37,7 +37,7 @@
     [self.view addSubview:logoImageView];
     [self.view addSubview:loginButton];
     
-    [self saveUserDataToParse];
+    //[self saveUserDataToParse];
     
 }
 
@@ -111,6 +111,7 @@
 -(void) saveUserDataToParse
 {
     FBRequest *request = [FBRequest requestForMe];
+    
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         // handle response
         if (!error) {
@@ -119,14 +120,15 @@
             
             NSString *facebookID = userData[@"id"];
             NSString *name = userData[@"name"];
-            NSString *birthday = userData[@"birthday"];
+            //some people may be make birthday public
+            //NSString *birthday = userData[@"birthday"];
             NSString *email =userData[@"email"];
             NSString *pictureURL =[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID];
             NSString *gender =userData[@"gender"];
             
             [[PFUser currentUser] setObject:name forKey:@"name"];
             [[PFUser currentUser] setObject:facebookID forKey:@"facebookID"];
-            [[PFUser currentUser] setObject:birthday forKey:@"birthday"];
+            //[[PFUser currentUser] setObject:birthday forKey:@"birthday"];
             [[PFUser currentUser] setObject:email forKey:@"email"];
             [[PFUser currentUser] setObject:pictureURL forKey:@"pictureURL"];
             [[PFUser currentUser] setObject:gender forKey:@"gender"];
@@ -163,7 +165,7 @@
             // findObjects will return a list of PFUsers that are friends
             // with the current user
             NSArray *friendUsers = [friendQuery findObjects];
-            //NSLog(@"friends: %@", friendUsers);
+            NSLog(@"friends: %@", friendUsers);
             
         }
     }];

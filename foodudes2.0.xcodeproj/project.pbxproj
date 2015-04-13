@@ -18,10 +18,11 @@
 		E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EC1AB5CE61004FEEDD /* FDLoginViewController.m */; };
 		E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */; };
 		E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */; };
-		E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */; };
 		E8868E811ADA84CC0030FE92 /* FDParseTestingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */; };
 		E8868E841ADA889A0030FE92 /* FDParseTestingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */; };
 		E8868E8A1ADAAB850030FE92 /* FDCommentTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */; };
+		E8868E8D1ADBF44A0030FE92 /* FDProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */; };
+		E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */; };
 		E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */; };
 		E8DBAAB51AD2AF0E0064262F /* FDSetAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB41AD2AF0E0064262F /* FDSetAddressTableViewController.m */; };
 		E8DBAAB81AD2AF250064262F /* FDAddReasonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB71AD2AF250064262F /* FDAddReasonTableViewController.m */; };
@@ -65,14 +66,16 @@
 		E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemViewController.m; sourceTree = "<group>"; };
 		E80389F11AB5CE88004FEEDD /* FDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSearchViewController.h; sourceTree = "<group>"; };
 		E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDSearchViewController.m; sourceTree = "<group>"; };
-		E80389F41AB5CE9E004FEEDD /* FDProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDProfileViewController.h; sourceTree = "<group>"; };
-		E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileViewController.m; sourceTree = "<group>"; };
 		E8868E7F1ADA84CC0030FE92 /* FDParseTestingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDParseTestingTableViewController.h; sourceTree = "<group>"; };
 		E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDParseTestingTableViewController.m; sourceTree = "<group>"; };
 		E8868E821ADA889A0030FE92 /* FDParseTestingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDParseTestingTableViewCell.h; sourceTree = "<group>"; };
 		E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDParseTestingTableViewCell.m; sourceTree = "<group>"; };
 		E8868E881ADAAB850030FE92 /* FDCommentTestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCommentTestTableViewController.h; sourceTree = "<group>"; };
 		E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCommentTestTableViewController.m; sourceTree = "<group>"; };
+		E8868E8B1ADBF4490030FE92 /* FDProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDProfileTableViewController.h; sourceTree = "<group>"; };
+		E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileTableViewController.m; sourceTree = "<group>"; };
+		E8868E8E1ADBF5700030FE92 /* FDFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDFriendsTableViewCell.h; sourceTree = "<group>"; };
+		E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDFriendsTableViewCell.m; sourceTree = "<group>"; };
 		E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddItemTableViewController.h; sourceTree = "<group>"; };
 		E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemTableViewController.m; sourceTree = "<group>"; };
 		E8DBAAB31AD2AF0E0064262F /* FDSetAddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSetAddressTableViewController.h; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */,
 				E8868E821ADA889A0030FE92 /* FDParseTestingTableViewCell.h */,
 				E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */,
+				E8868E8E1ADBF5700030FE92 /* FDFriendsTableViewCell.h */,
+				E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */,
 			);
 			name = Views;
 			path = ../Views;
@@ -225,8 +230,6 @@
 				E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */,
 				E80389F11AB5CE88004FEEDD /* FDSearchViewController.h */,
 				E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */,
-				E80389F41AB5CE9E004FEEDD /* FDProfileViewController.h */,
-				E80389F51AB5CE9E004FEEDD /* FDProfileViewController.m */,
 				E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */,
 				E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */,
 				E8DBAAB31AD2AF0E0064262F /* FDSetAddressTableViewController.h */,
@@ -237,6 +240,8 @@
 				E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */,
 				E8868E881ADAAB850030FE92 /* FDCommentTestTableViewController.h */,
 				E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */,
+				E8868E8B1ADBF4490030FE92 /* FDProfileTableViewController.h */,
+				E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */,
 			);
 			name = Controllers;
 			path = ../Controllers;
@@ -398,7 +403,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E80389F61AB5CE9E004FEEDD /* FDProfileViewController.m in Sources */,
 				E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */,
 				E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */,
 				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,
@@ -411,8 +415,10 @@
 				E80389CB1AB5C289004FEEDD /* ViewController.m in Sources */,
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
 				E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */,
+				E8868E8D1ADBF44A0030FE92 /* FDProfileTableViewController.m in Sources */,
 				E8DBAAB81AD2AF250064262F /* FDAddReasonTableViewController.m in Sources */,
 				E80389C51AB5C289004FEEDD /* main.m in Sources */,
+				E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */,
 				E8DBAAB51AD2AF0E0064262F /* FDSetAddressTableViewController.m in Sources */,
 				E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */,
 			);
@@ -538,10 +544,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = foodudes2.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -551,10 +559,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = foodudes2.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
