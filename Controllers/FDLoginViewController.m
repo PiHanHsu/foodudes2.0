@@ -163,7 +163,7 @@
             // findObjects will return a list of PFUsers that are friends
             // with the current user
             NSArray *friendUsers = [friendQuery findObjects];
-            NSLog(@"friends: %@", friendUsers);
+            //NSLog(@"friends: %@", friendUsers);
             
         }
     }];

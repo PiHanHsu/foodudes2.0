@@ -42,7 +42,7 @@
     PFObject * comment = [PFObject objectWithClassName:@"Comment"];
     comment[@"postID"] = post.objectId;
     comment[@"replier"] = [PFUser currentUser].objectId;
-    //comment[@"userID"] = [PFUser currentUser].objectId;
+    comment[@"parent"] = post;
     comment[@"comment"] = self.commentTextField.text;
     
     [comment saveInBackground];

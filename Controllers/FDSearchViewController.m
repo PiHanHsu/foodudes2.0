@@ -136,53 +136,49 @@
         //NSLog(@"Restaurant objectID: %@", objectID);
         
         for (PFObject *postObj in self.postArray) {
-            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
-            NSString *userID =[NSString stringWithFormat:@"%@", postObj[@"userID"]];
             
-            if ([restID isEqualToString:objectID]) {
-                PFQuery *query =[PFUser query];
-                [query whereKey:@"objectId" equalTo:userID];
-                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                    if (!object) {
-                        NSLog(@"The get user for marker request failed.");
-                    } else {
-                    
-                       NSString *userProfilePhotoURLString = object[@"pictureURL"];
-                        if (userProfilePhotoURLString) {
-                            NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
-                            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-                            [NSURLConnection sendAsynchronousRequest:urlRequest
-                                                               queue:[NSOperationQueue mainQueue]
-                                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                                                       if (connectionError == nil && data != nil) {
-                                                           userMarkerView *view =  [[[NSBundle mainBundle] loadNibNamed:@"UserMarkerView" owner:self options:nil] objectAtIndex:0];
-                                                           view.userImage.image =[UIImage imageWithData:data];
-                                                           view.userImage.layer.cornerRadius = 18.0f;
-                                                           view.userImage.layer.masksToBounds =YES;UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
-                                                           [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-                                                           UIImage *imageScreen =UIGraphicsGetImageFromCurrentImageContext();
-                                                           UIGraphicsEndImageContext();
-                                                           restaurantMarker.icon =imageScreen;
-                                                           restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
-                                                           restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
-                                                           restaurantMarker.map =self.mapView;
-
-                                                       } else {
-                                                           NSLog(@"Failed to load user image for marker.");
-                                                       }
-                                                   }];
-
+            //use relation in Parse
+            PFObject * restaurant = postObj[@"parent"];
+            [restaurant fetchIfNeededInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
+                if (!error) {
+                    PFQuery * queryUser = [PFUser query];
+                    [queryUser whereKey:@"objectId" equalTo:postObj[@"userID"]];
+                    [queryUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                        if (!error){
+                            NSString *userProfilePhotoURLString = object[@"pictureURL"];
+                            if (userProfilePhotoURLString) {
+                                NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
+                                NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+                                [NSURLConnection sendAsynchronousRequest:urlRequest
+                                                                   queue:[NSOperationQueue mainQueue]
+                                                       completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                                           if (connectionError == nil && data != nil) {
+                                                               userMarkerView *view =  [[[NSBundle mainBundle] loadNibNamed:@"UserMarkerView" owner:self options:nil] objectAtIndex:0];
+                                                               view.userImage.image =[UIImage imageWithData:data];
+                                                               view.userImage.layer.cornerRadius = 18.0f;
+                                                               view.userImage.layer.masksToBounds =YES;UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
+                                                               [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+                                                               UIImage *imageScreen =UIGraphicsGetImageFromCurrentImageContext();
+                                                               UIGraphicsEndImageContext();
+                                                               restaurantMarker.icon =imageScreen;
+                                                               restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
+                                                               restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
+                                                               restaurantMarker.map =self.mapView;
+                                                           }else {
+                                                               NSLog(@"Failed to load user image for marker.");
+                                                           }
+                                                       }];
+                            }
+                        }else{
+                            NSLog(@"query user error: %@", error);
+                        }
                         
-                    }
-                    }
-                }];
-                
-            }
+                    }];
+                }
+            }];
+            
         }
-
-        
-        
-            }
+    }
 }
 
 -(void)loadPost{
@@ -221,6 +217,8 @@
     }
 }
 
+
+
 #pragma mark mapView Delegate
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
@@ -242,4 +240,51 @@
     mapView.selectedMarker = marker;
     return YES;
 }
+
+//load mark info
+//
+//                            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
+//                            NSString *userID =[NSString stringWithFormat:@"%@", postObj[@"userID"]];
+//
+//                            if ([restID isEqualToString:objectID]) {
+//                                PFQuery *query =[PFUser query];
+//                                [query whereKey:@"objectId" equalTo:userID];
+//                                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//                                    if (!object) {
+//                                        NSLog(@"The get user for marker request failed.");
+//                                    } else {
+//
+//                                        NSString *userProfilePhotoURLString = object[@"pictureURL"];
+//                                        if (userProfilePhotoURLString) {
+//                                            NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
+//                                            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+//                                            [NSURLConnection sendAsynchronousRequest:urlRequest
+//                                                                               queue:[NSOperationQueue mainQueue]
+//                                                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//                                                                       if (connectionError == nil && data != nil) {
+//                                                                           userMarkerView *view =  [[[NSBundle mainBundle] loadNibNamed:@"UserMarkerView" owner:self options:nil] objectAtIndex:0];
+//                                                                           view.userImage.image =[UIImage imageWithData:data];
+//                                                                           view.userImage.layer.cornerRadius = 18.0f;
+//                                                                           view.userImage.layer.masksToBounds =YES;UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
+//                                                                           [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//                                                                           UIImage *imageScreen =UIGraphicsGetImageFromCurrentImageContext();
+//                                                                           UIGraphicsEndImageContext();
+//                                                                           restaurantMarker.icon =imageScreen;
+//                                                                           restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
+//                                                                           restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
+//                                                                           restaurantMarker.map =self.mapView;
+//
+//                                                                       } else {
+//                                                                           NSLog(@"Failed to load user image for marker.");
+//                                                                       }
+//                                                                   }];
+//
+//
+//                                        }
+//                                    }
+//                                }];
+//
+//                            }
+
+
 @end
