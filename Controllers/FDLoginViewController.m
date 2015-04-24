@@ -82,16 +82,11 @@
         } else {
             if (user.isNew) {
                 NSLog(@"User with facebook signed up and logged in!");
-                [self saveUserDataToParse];
-                
-                //[self initializeProgressHUD:@"Loading..."];
-                //[currentUser saveUserDataToParse];
+                //[self saveUserDataToParse];
                 
             } else {
                 NSLog(@"User with facebook logged in!");
-                [self saveUserDataToParse];
-                
-                //[self initializeProgressHUD:@"Loading..."];
+                //[self saveUserDataToParse];
             }
             [self getFBfriends];
             [self _ViewControllerAnimated:YES];
@@ -151,6 +146,8 @@
         if (!error) {
             // result will contain an array with your user's friends in the "data" key
             NSArray *friendObjects = [result objectForKey:@"data"];
+            
+            
             NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
             // Create a list of friends' Facebook IDs
             for (NSDictionary *friendObject in friendObjects) {
@@ -165,7 +162,8 @@
             // findObjects will return a list of PFUsers that are friends
             // with the current user
             NSArray *friendUsers = [friendQuery findObjects];
-            NSLog(@"friends: %@", friendUsers);
+            
+            //NSLog(@"friends: %@", friendUsers);
             
         }
     }];

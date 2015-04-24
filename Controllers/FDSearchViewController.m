@@ -9,6 +9,7 @@
 #import "FDSearchViewController.h"
 #import "GCGeocodingService.h"
 #import "userMarkerView.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 
@@ -53,8 +54,7 @@
 
     self.gs = [[GCGeocodingService alloc] init];
 
-    [self loadData];
-    //[self loadPost];
+    [self loadFriendsPost];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,50 +97,53 @@
 
 # pragma mark Loading data
 
-- (void) loadData{
-    PFQuery *query = [PFQuery queryWithClassName:@"Restaurant_new"];
-    //[query whereKey:@"playerName" equalTo:@"Dan Stemkoski"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            self.restaurantArray =objects;
-            
-            //NSLog(@"Successfully retrieved %lu restaurants.", (unsigned long)objects.count);
-           
-            //[self displayMarker];
-            [self loadPost];
 
-        } else {
-            // Log details of the failure
-            NSLog(@"Loading restanrant data Error: %@ %@", error, [error userInfo]);
+- (void) loadFriendsPost{
+    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            
+            NSArray *friendObjects = [result objectForKey:@"data"];
+            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
+            for (NSDictionary *friendObject in friendObjects) {
+                [friendIds addObject:[friendObject objectForKey:@"id"]];
+            }
+            PFQuery *friendQuery = [PFUser query];
+            [friendQuery whereKey:@"facebookID" containedIn:friendIds];
+            NSArray *friendUsers = [friendQuery findObjects];
+            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:friendUsers.count];
+            
+            for(PFUser * user in friendUsers){
+                [friendsIdArray addObject:user.objectId];
+                NSLog(@"friendsIdArray: %@", friendsIdArray);
+            }
+            PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+            [postQuery whereKey:@"userID" containedIn:friendsIdArray];
+            self.postArray = [postQuery findObjects];
+            
+            [self displayMarker];
+        }else{
+            NSLog(@"load [friendspost failed: %@", error);
         }
     }];
-    
-   }
+}
+
+
+#pragma mark displayMarker
 
 -(void) displayMarker{
     
-    for (int i=0; i<self.restaurantArray.count; i++) {
-    
-        FDMarker * restaurantMarker = [[FDMarker alloc]init];
-        restaurantMarker.info = self.restaurantArray[i];
         
-        NSString *market_lat = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lat"]];
-        double lat = [market_lat doubleValue];
-        
-        NSString *market_lng = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lng"]];
-        double lng = [market_lng doubleValue];
-        
-        //NSString *objectID =[NSString stringWithFormat:@"%@", restaurantMarker.info.objectId];
-        
-        //NSLog(@"Restaurant objectID: %@", objectID);
-        
-        for (PFObject *postObj in self.postArray) {
+        for (int i=0 ; i < self.postArray.count ; i++) {
             
+            PFObject *postObj = self.postArray[i];
             //use relation in Parse
             PFObject * restaurant = postObj[@"parent"];
+            NSLog(@"restauant: %@", restaurant);
+            
             [restaurant fetchInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
                 if (!error) {
+                    NSLog(@"postRestaurant: %@", postRestaurant);
+                    
                     PFQuery * queryUser = [PFUser query];
                     [queryUser whereKey:@"objectId" equalTo:postObj[@"userID"]];
                     [queryUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -160,7 +163,17 @@
                                                                [view.layer renderInContext:UIGraphicsGetCurrentContext()];
                                                                UIImage *imageScreen =UIGraphicsGetImageFromCurrentImageContext();
                                                                UIGraphicsEndImageContext();
-                                                               restaurantMarker.icon =imageScreen;
+                                                               
+                                                               FDMarker * restaurantMarker = [[FDMarker alloc]init];
+                                                               restaurantMarker.info = postRestaurant;
+                                                               restaurantMarker.icon = imageScreen;
+
+                                                               NSString *market_lat = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lat"]];
+                                                               double lat = [market_lat doubleValue];
+                                                               
+                                                               NSString *market_lng = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lng"]];
+                                                               double lng = [market_lng doubleValue];
+  
                                                                restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
                                                                restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
                                                                restaurantMarker.map =self.mapView;
@@ -178,44 +191,9 @@
             }];
             
         }
-    }
+    
 }
 
--(void)loadPost{
-    PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            self.postArray =objects;
-            
-            //NSLog(@"Successfully retrieved %lu posts.", (unsigned long)objects.count);
-            [self displayMarker];
-            
-        } else {
-            // Log details of the failure
-            NSLog(@"Loading posts data Error: %@ %@", error, [error userInfo]);
-        }
-    }];
-
-
-}
-
--(void)loadPostReason{
-    for(PFObject *object in self.restaurantArray) {
-        NSString *tmpID =[NSString stringWithFormat:@"%@",object.objectId];
-        
-        NSLog(@"objectId: %@", tmpID);
-        
-        for (PFObject *postObj in self.postArray) {
-            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
-            if ([restID isEqualToString:tmpID]) {
-                NSLog(@"find!");
-                NSLog(@"Post: %@", postObj[@"reason"]);
-            }
-        }
-        
-    }
-}
 
 
 
@@ -241,50 +219,47 @@
     return YES;
 }
 
-//load mark info
+//- (void) loadData{
+//    PFQuery *query = [PFQuery queryWithClassName:@"Restaurant_new"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            self.restaurantArray =objects;
+//            //NSLog(@"Successfully retrieved %lu restaurants.", (unsigned long)objects.count);
+//            //[self displayMarker];
+//            //[self loadPost];
+//        } else {
+//            //NSLog(@"Loading restanrant data Error: %@ %@", error, [error userInfo]);
+//        }
+//    }];
+//}
+
+//-(void)loadPost{
+//    PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            //self.postArray =objects;
+//            //NSLog(@"Successfully retrieved %lu posts.", (unsigned long)objects.count);
+//            [self displayMarker];
+//        } else {
+//            NSLog(@"Loading posts data Error: %@ %@", error, [error userInfo]);
+//        }
+//    }];
+//}
+
+//-(void)loadPostReason{
+//    for(PFObject *object in self.restaurantArray) {
+//        NSString *tmpID =[NSString stringWithFormat:@"%@",object.objectId];
+//        NSLog(@"objectId: %@", tmpID);
+//        for (PFObject *postObj in self.postArray) {
+//            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
+//            if ([restID isEqualToString:tmpID]) {
+//                NSLog(@"find!");
+//                NSLog(@"Post: %@", postObj[@"reason"]);
+//            }
+//        }
 //
-//                            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
-//                            NSString *userID =[NSString stringWithFormat:@"%@", postObj[@"userID"]];
-//
-//                            if ([restID isEqualToString:objectID]) {
-//                                PFQuery *query =[PFUser query];
-//                                [query whereKey:@"objectId" equalTo:userID];
-//                                [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//                                    if (!object) {
-//                                        NSLog(@"The get user for marker request failed.");
-//                                    } else {
-//
-//                                        NSString *userProfilePhotoURLString = object[@"pictureURL"];
-//                                        if (userProfilePhotoURLString) {
-//                                            NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
-//                                            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-//                                            [NSURLConnection sendAsynchronousRequest:urlRequest
-//                                                                               queue:[NSOperationQueue mainQueue]
-//                                                                   completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-//                                                                       if (connectionError == nil && data != nil) {
-//                                                                           userMarkerView *view =  [[[NSBundle mainBundle] loadNibNamed:@"UserMarkerView" owner:self options:nil] objectAtIndex:0];
-//                                                                           view.userImage.image =[UIImage imageWithData:data];
-//                                                                           view.userImage.layer.cornerRadius = 18.0f;
-//                                                                           view.userImage.layer.masksToBounds =YES;UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0.0);
-//                                                                           [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//                                                                           UIImage *imageScreen =UIGraphicsGetImageFromCurrentImageContext();
-//                                                                           UIGraphicsEndImageContext();
-//                                                                           restaurantMarker.icon =imageScreen;
-//                                                                           restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
-//                                                                           restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
-//                                                                           restaurantMarker.map =self.mapView;
-//
-//                                                                       } else {
-//                                                                           NSLog(@"Failed to load user image for marker.");
-//                                                                       }
-//                                                                   }];
-//
-//
-//                                        }
-//                                    }
-//                                }];
-//
-//                            }
+//    }
+//}
 
 
 @end
