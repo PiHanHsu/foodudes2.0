@@ -82,14 +82,15 @@
         } else {
             if (user.isNew) {
                 NSLog(@"User with facebook signed up and logged in!");
-                //[self saveUserDataToParse];
-                
+                [self saveUserDataToParse];
+                [self getFBfriends];
             } else {
                 NSLog(@"User with facebook logged in!");
-                //[self saveUserDataToParse];
+                [self saveUserDataToParse];
+                [self getFBfriends];
             }
-            [self getFBfriends];
-            [self _ViewControllerAnimated:YES];
+            
+            
         }
     }];
     
@@ -162,8 +163,22 @@
             // findObjects will return a list of PFUsers that are friends
             // with the current user
             NSArray *friendUsers = [friendQuery findObjects];
-            
             //NSLog(@"friends: %@", friendUsers);
+            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity: friendUsers.count];
+            
+            for(int i=0 ; i< friendUsers.count ; i++){
+                PFUser * user = friendUsers[i];
+                [friendsIdArray addObject:user.objectId];
+                
+                if (i == friendUsers.count -1) {
+                    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:friendsIdArray forKey:@"friendsIdArray"];
+                    [defaults synchronize];
+                    [self _ViewControllerAnimated:YES];
+                }
+            }
+            
+            
             
         }
     }];

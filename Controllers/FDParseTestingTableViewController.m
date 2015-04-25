@@ -43,7 +43,8 @@
                 NSLog(@"title: %@", title);
                 
             }];
-//            
+            
+//          For loading parent-child objects sample  
 //            PFQuery *innerQuery = [PFQuery queryWithClassName:@"Recipe"];
 //            [innerQuery whereKey:@"user" equalTo:[PFUser currentUser]];
 //            PFQuery *outerQuery = [PFQuery queryWithClassName:@"Ingredient"];

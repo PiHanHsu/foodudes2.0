@@ -102,20 +102,9 @@
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
-            PFQuery *friendQuery = [PFUser query];
-            [friendQuery whereKey:@"facebookID" containedIn:friendIds];
-            NSArray *friendUsers = [friendQuery findObjects];
-            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:friendUsers.count];
-            
-            for(PFUser * user in friendUsers){
-                [friendsIdArray addObject:user.objectId];
-                NSLog(@"friendsIdArray: %@", friendsIdArray);
-            }
+            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
+            friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
             PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
             [postQuery whereKey:@"userID" containedIn:friendsIdArray];
             self.postArray = [postQuery findObjects];
