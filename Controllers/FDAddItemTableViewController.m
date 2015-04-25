@@ -41,14 +41,16 @@
 }
 - (IBAction)saveButtonPressed:(id)sender {
 
-    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-    restaurant[@"name"] = self.restaurantNameTextField.text;
-    restaurant[@"address"] = self.address;
-    restaurant[@"phone"] = self.phone;
+//    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
+//    restaurant[@"name"] = self.restaurantNameTextField.text;
+//    restaurant[@"address"] = self.address;
+//    restaurant[@"phone"] = self.phone;
     
     PFObject *post =[PFObject objectWithClassName:@"Posts"];
     post[@"reason"] = self.reason;
-    post[@"parent"] =restaurant;  //set relation between post and restaurant
+    //post[@"parent"] =restaurant;  //set relation between post and restaurant
+    //test code
+    post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
     post[@"userID"] = [PFUser currentUser].objectId;
     post[@"userName"] = [PFUser currentUser][@"name"];
         

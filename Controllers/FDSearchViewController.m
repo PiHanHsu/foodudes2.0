@@ -132,18 +132,20 @@
 
 -(void) displayMarker{
     
-        
+        NSMutableArray * restaurantArray = [ NSMutableArray arrayWithCapacity:0];
+    
         for (int i=0 ; i < self.postArray.count ; i++) {
             
             PFObject *postObj = self.postArray[i];
             //use relation in Parse
             PFObject * restaurant = postObj[@"parent"];
-            NSLog(@"restauant: %@", restaurant);
+            //NSLog(@"restauant: %@", restaurant);
             
             [restaurant fetchInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
                 if (!error) {
-                    NSLog(@"postRestaurant: %@", postRestaurant);
-                    
+                    NSLog(@"postRestaurant: %@", postRestaurant.objectId);
+                    NSString * restautantID = [NSString stringWithFormat:@"%@",postRestaurant.objectId];
+                    [restaurantArray addObject:restautantID];
                     PFQuery * queryUser = [PFUser query];
                     [queryUser whereKey:@"objectId" equalTo:postObj[@"userID"]];
                     [queryUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -167,13 +169,13 @@
                                                                FDMarker * restaurantMarker = [[FDMarker alloc]init];
                                                                restaurantMarker.info = postRestaurant;
                                                                restaurantMarker.icon = imageScreen;
-
+                                                               
                                                                NSString *market_lat = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lat"]];
                                                                double lat = [market_lat doubleValue];
                                                                
                                                                NSString *market_lng = [NSString stringWithFormat:@"%@", restaurantMarker.info[@"lng"]];
                                                                double lng = [market_lng doubleValue];
-  
+                                                               
                                                                restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
                                                                restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
                                                                restaurantMarker.map =self.mapView;
@@ -187,6 +189,8 @@
                         }
                         
                     }];
+                    
+        
                 }
             }];
             
@@ -206,15 +210,12 @@
     NSLog(@"ObjectID: %@", objectID);
     NSLog(@"name: %@", tappedMarker.info[@"name"]);
     
-    for (PFObject *postObj in self.postArray) {
-        NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
-        
-        if ([restID isEqualToString:objectID]) {
-            NSLog(@"Post: %@", postObj[@"reason"]);
-            NSLog(@"Recommend by: %@", postObj[@"userName"]);
-        }
-    }
-
+    PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
+    [query whereKey:@"parent" equalTo:tappedMarker.info];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"posts: %@", objects);
+    }];
+ 
     mapView.selectedMarker = marker;
     return YES;
 }

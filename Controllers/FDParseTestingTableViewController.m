@@ -43,6 +43,17 @@
                 NSLog(@"title: %@", title);
                 
             }];
+//            
+//            PFQuery *innerQuery = [PFQuery queryWithClassName:@"Recipe"];
+//            [innerQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+//            PFQuery *outerQuery = [PFQuery queryWithClassName:@"Ingredient"];
+//            [outerQuery whereKey:@"recipe" matchesQuery:innerQuery];
+//            [outerQuery findObjectsInBackgroundWithBlock:^(NSArray *ingredients, NSError *error) {
+//                NSLog(@"found %i ingredients", ingredients.count);
+//                
+//            }];
+            
+            
             [self.tableView reloadData];
         }else{
             NSLog(@"load post error: %@", error);
