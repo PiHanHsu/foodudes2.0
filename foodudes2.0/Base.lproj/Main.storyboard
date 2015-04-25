@@ -40,20 +40,42 @@
                                     <segue destination="j95-4m-pDD" kind="show" id="ieo-Cm-YdS"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ljR-wO-v3c">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="AZH-QB-fIR"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="68Z-Zg-h0t" secondAttribute="centerX" id="AzQ-CA-EW7"/>
+                            <constraint firstItem="ljR-wO-v3c" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="UEZ-9x-3em"/>
+                            <constraint firstAttribute="trailing" secondItem="ljR-wO-v3c" secondAttribute="trailing" id="Xj5-2s-DUz"/>
                             <constraint firstAttribute="centerX" secondItem="kzO-Vz-vDe" secondAttribute="centerX" id="m1g-Iz-Rmq"/>
                             <constraint firstItem="68Z-Zg-h0t" firstAttribute="top" secondItem="kzO-Vz-vDe" secondAttribute="bottom" constant="16" id="rkT-IC-o3f"/>
                             <constraint firstAttribute="centerY" secondItem="kzO-Vz-vDe" secondAttribute="centerY" id="sEr-zL-UB3"/>
+                            <constraint firstItem="ljR-wO-v3c" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="xyg-wQ-PGR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zsf-5g-p9V"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="YDN-LT-OOl" id="7LB-4w-90f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="YDN-LT-OOl">
+                    <connections>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="xPb-zV-xjy"/>
+                        <outlet property="searchBar" destination="ljR-wO-v3c" id="PlB-dw-362"/>
+                        <outlet property="searchContentsController" destination="vXZ-lx-hvc" id="sxN-dW-x5q"/>
+                        <outlet property="searchResultsDataSource" destination="vXZ-lx-hvc" id="tP4-Dy-Kwt"/>
+                        <outlet property="searchResultsDelegate" destination="vXZ-lx-hvc" id="mk5-rt-hA7"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2001" y="332"/>
+            <point key="canvasLocation" x="2013" y="332"/>
         </scene>
         <!--Add Item Table View Controller-->
         <scene sceneID="LX0-aD-1d8">
