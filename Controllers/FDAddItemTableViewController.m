@@ -24,16 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
--(void) viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
@@ -44,16 +34,16 @@
 }
 - (IBAction)saveButtonPressed:(id)sender {
 
-//    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-//    restaurant[@"name"] = self.restaurantNameTextField.text;
-//    restaurant[@"address"] = self.address;
-//    restaurant[@"phone"] = self.phone;
+    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
+    restaurant[@"name"] = self.restaurantNameTextField.text;
+    restaurant[@"address"] = self.address;
+    restaurant[@"phone"] = self.phone;
     
     PFObject *post =[PFObject objectWithClassName:@"Posts"];
     post[@"reason"] = self.reason;
-    //post[@"parent"] =restaurant;  //set relation between post and restaurant
+    post[@"parent"] =restaurant; //set relation between post and restaurant
     //test code
-    post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
+    //post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
     post[@"userID"] = [PFUser currentUser].objectId;
     post[@"userName"] = [PFUser currentUser][@"name"];
         
@@ -63,27 +53,40 @@
 #pragma mark - Navigation
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.destinationViewController isKindOfClass:[FDSetAddressTableViewController class]]) {
-        FDSetAddressTableViewController *vc = (FDSetAddressTableViewController *) segue.destinationViewController;
-        vc.addressString =self.address;
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if ([segue.destinationViewController isKindOfClass:[FDSetAddressTableViewController class]]) {
+//        FDSetAddressTableViewController *vc = (FDSetAddressTableViewController *) segue.destinationViewController;
+//        vc.addressString =self.address;
+//    }
+//}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 3;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//#warning Potentially incomplete method implementation.
+//    // Return the number of sections.
+//    return 3;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//#warning Incomplete method implementation.
+//    // Return the number of rows in the section.
+//    switch (section) {
+//        case 0:
+//            return 1;
+//            break;
+//        case 1:
+//            return 3;
+//            break;
+//        case 2:
+//            return 1;
+//            break;
+//        default:
+//            break;
+//    }
+//    return 0;
+//}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
