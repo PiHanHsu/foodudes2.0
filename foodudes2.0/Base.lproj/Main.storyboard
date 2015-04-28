@@ -218,7 +218,6 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="restaurantNameTextField" destination="a5r-Zk-SUA" id="NjA-Es-6QW"/>

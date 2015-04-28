@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <FlurrySDK/Flurry.h>
 
 @interface AppDelegate ()
 
@@ -27,6 +28,10 @@
     [GMSServices provideAPIKey:@"AIzaSyCt1tGuzSRiPBdqxWDEE-CnpaT-rDhQw_w"];
     [PFFacebookUtils initializeFacebook];
 
+    // Flurry Analytics
+    [Flurry logEvent:@"Hello, Flurry!"];
+    [Flurry startSession:@"CQQ7TV7FMFFXG95DJDVF"];
+    
     return YES;
 }
 
