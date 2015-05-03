@@ -8,14 +8,18 @@
 
 #import "FDAddItemTableViewController.h"
 #import "FDSetAddressTableViewController.h"
-
+#import "UIPlaceHolderTextView.h"
 #import <Parse/Parse.h>
 
 @interface FDAddItemTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *restaurantNameTextField;
-@property NSString *restID;
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *addressTextView;
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *reasonTextView;
 
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+
+@property (weak, nonatomic) IBOutlet UIButton *photoButton;
 
 
 @end
@@ -25,6 +29,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.addressTextView.placeholder = @"Address";
+    self.reasonTextView.placeholder = @"Reasons...";
+    
+    
+    if (self.restaurantInfoDict){
+        self.restaurantNameTextField.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"name"]];
+        
+        self.phoneTextField.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_phone_number"]];
+        self.addressTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_address"]];
+        
+    }
+    
 }
 
 
@@ -36,11 +52,14 @@
 
     PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
     restaurant[@"name"] = self.restaurantNameTextField.text;
-    restaurant[@"address"] = self.address;
-    restaurant[@"phone"] = self.phone;
+    restaurant[@"address"] = self.addressTextView.text;
+    restaurant[@"phone"] = self.phoneTextField.text;
+    restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
+    restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
+    restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
     
     PFObject *post =[PFObject objectWithClassName:@"Posts"];
-    post[@"reason"] = self.reason;
+    post[@"reason"] = self.reasonTextView.text;
     post[@"parent"] =restaurant; //set relation between post and restaurant
     //test code
     //post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];

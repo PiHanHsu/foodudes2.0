@@ -8,6 +8,7 @@
 
 #import "FDAddItemViewController.h"
 #import "SPGooglePlacesAutocomplete.h"
+#import "FDAddItemTableViewController.h"
 
 #import <Parse/Parse.h>
 
@@ -21,6 +22,13 @@
 
 }
 @property (strong, nonatomic) NSMutableString * placeDetailURL;
+@property (strong, nonatomic) NSString * restaurantName;
+@property (strong, nonatomic) NSString * phoneNumber;
+@property (strong, nonatomic) NSArray * addressArray;
+@property (strong, nonatomic) NSString * reason;
+@property (strong, nonatomic) NSString * placeID;
+@property (strong, nonatomic) NSDictionary * restaurantInfoDict;
+
 
 @end
 
@@ -116,15 +124,20 @@
             NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
             if (!error) {
                 NSDictionary *resultsDict = [jsonDictionary objectForKey:@"result"];
+                self.restaurantInfoDict =  [jsonDictionary objectForKey:@"result"];
                 //NSLog(@"result: %@", resultsDict);
                 NSDictionary * geometryDict = [resultsDict objectForKey:@"geometry"];
-                NSString *name = [resultsDict objectForKey:@"name"];
-                NSArray *addressArray = [resultsDict objectForKey:@"address_components"];
+                self.restaurantName = [resultsDict objectForKey:@"name"];
+                self.addressArray = [resultsDict objectForKey:@"address_components"];
                 
                 NSString *address = [resultsDict objectForKey:@"formatted_address"]
                 ;
-                NSString * tel = [resultsDict objectForKey:@"formatted_phone_number"];
-                NSString * placeID =[resultsDict objectForKey:@"place_id"];
+                self.phoneNumber = [resultsDict objectForKey:@"formatted_phone_number"];
+                self.placeID =[resultsDict objectForKey:@"place_id"];
+                
+                FDAddItemTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"FDAddItemTableViewController"];
+                vc.restaurantInfoDict =self.restaurantInfoDict;
+                [self.navigationController pushViewController:vc animated:YES];
                 
                 
                 
@@ -269,32 +282,28 @@
 }
 
 - (BOOL)searchDisplayController:(UISearchController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    NSLog(@"searchString2: %@", searchString);
+    //NSLog(@"searchString2: %@", searchString);
     [self handleSearchForSearchString:searchString];
     
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }
 
+#pragma mark - Navigation
 
-//- (void)goAddItemPage:(id)sender
-//{
-//    
-//    [self _ViewControllerAnimated:YES];
-//    
-//}
-//
-//- (void)_ViewControllerAnimated:(BOOL)animated {
-// 
-//    AddItemTableViewController *addItemVC = [self.storyboard instantiateViewControllerWithIdentifier:@"addItemTableViewController"];
-//    
-//    
-//    addItemVC.nameText = self.restaurantName;
-//    addItemVC.addressText = self.restaurantAddress;
-//    addItemVC.telText = self.restaurantTel;
-//    [self.navigationController pushViewController:addItemVC animated:YES];
-//    
-//}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    if ([segue.destinationViewController isKindOfClass:[FDAddItemTableViewController class]]) {
+        FDAddItemTableViewController *vc = (FDAddItemTableViewController *) segue.destinationViewController;
+        
+        vc.restaurantInfoDict =self.restaurantInfoDict;
+        
+    }
+}
+
+
+
 
 
 @end
