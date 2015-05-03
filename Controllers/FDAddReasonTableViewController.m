@@ -39,7 +39,7 @@
         
         self.reasonString = self.reasonTextView.text;
        
-        ((FDAddItemTableViewController *) backVC).reason=self.reasonString;
+        //((FDAddItemTableViewController *) backVC).reason=self.reasonString;
         
     }
     

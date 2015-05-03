@@ -8,19 +8,21 @@
 
 #import "FDAddItemTableViewController.h"
 #import "FDSetAddressTableViewController.h"
+#import "GCGeocodingService.h"
 #import "UIPlaceHolderTextView.h"
 #import <Parse/Parse.h>
 
 @interface FDAddItemTableViewController ()
+{
+    
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *restaurantNameTextField;
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *addressTextView;
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *reasonTextView;
-
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-
 @property (weak, nonatomic) IBOutlet UIButton *photoButton;
-
+@property (strong, nonatomic) GCGeocodingService *gs;
 
 @end
 
@@ -38,7 +40,8 @@
         
         self.phoneTextField.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_phone_number"]];
         self.addressTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_address"]];
-        
+    }else if (self.restaurantName){
+        self.restaurantNameTextField.text = self.restaurantName;
     }
     
 }
@@ -49,24 +52,47 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)saveButtonPressed:(id)sender {
-
-    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-    restaurant[@"name"] = self.restaurantNameTextField.text;
-    restaurant[@"address"] = self.addressTextView.text;
-    restaurant[@"phone"] = self.phoneTextField.text;
-    restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
-    restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
-    restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
     
-    PFObject *post =[PFObject objectWithClassName:@"Posts"];
-    post[@"reason"] = self.reasonTextView.text;
-    post[@"parent"] =restaurant; //set relation between post and restaurant
-    //test code
-    //post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
-    post[@"userID"] = [PFUser currentUser].objectId;
-    post[@"userName"] = [PFUser currentUser][@"name"];
+    if (self.restaurantInfoDict) {
+        PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
+        restaurant[@"name"] = self.restaurantNameTextField.text;
+        restaurant[@"address"] = self.addressTextView.text;
+        restaurant[@"phone"] = self.phoneTextField.text;
+        restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
+        restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
+        restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
         
-    [post saveInBackground];
+        PFObject *post =[PFObject objectWithClassName:@"Posts"];
+        post[@"reason"] = self.reasonTextView.text;
+        post[@"parent"] =restaurant; //set relation between post and restaurant
+        //test code
+        //post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
+        post[@"userID"] = [PFUser currentUser].objectId;
+        post[@"userName"] = [PFUser currentUser][@"name"];
+        
+        [post saveInBackground];
+    }else{
+        self.gs = [[GCGeocodingService alloc] init];
+        [self.gs geocodeAddress:self.addressTextView.text];
+        
+        PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
+        restaurant[@"name"] = self.restaurantNameTextField.text;
+        restaurant[@"address"] = self.addressTextView.text;
+        restaurant[@"phone"] = self.phoneTextField.text;
+        //restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
+        restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lat"]];
+        restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lng"]];
+        
+        PFObject *post =[PFObject objectWithClassName:@"Posts"];
+        post[@"reason"] = self.reasonTextView.text;
+        post[@"parent"] =restaurant; //set relation between post and restaurant
+        post[@"userID"] = [PFUser currentUser].objectId;
+        post[@"userName"] = [PFUser currentUser][@"name"];
+        
+        [post saveInBackground];
+
+    }
+    
 }
 
 #pragma mark - Navigation

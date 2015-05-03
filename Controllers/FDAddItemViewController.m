@@ -176,9 +176,8 @@
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action)
                              {
-//                                 self.restaurantName=self.searchDisplayController.searchBar.text;
-//                                 [self _ViewControllerAnimated:YES];
-//                                 self.restaurantName=self.searchDisplayController.searchBar.text;
+                            self.restaurantName=self.searchDisplayController.searchBar.text;
+                            [self _ViewControllerAnimated:YES];
                                  
                              }];
         UIAlertAction* cancel = [UIAlertAction
@@ -219,9 +218,8 @@
                                                       style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * action)
                                                       {
-//                                                          self.restaurantName=self.searchDisplayController.searchBar.text;
-//                                                          [self _ViewControllerAnimated:YES];
-                                                          //self.restaurantName=self.searchDisplayController.searchBar.text;
+                                                         self.restaurantName=self.searchDisplayController.searchBar.text;
+                                                         [self _ViewControllerAnimated:YES];
                                                           
                                                       }];
                                  UIAlertAction* cancel = [UIAlertAction
@@ -292,16 +290,13 @@
 #pragma mark - Navigation
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-    if ([segue.destinationViewController isKindOfClass:[FDAddItemTableViewController class]]) {
-        FDAddItemTableViewController *vc = (FDAddItemTableViewController *) segue.destinationViewController;
-        
-        vc.restaurantInfoDict =self.restaurantInfoDict;
-        
-    }
+- (void)_ViewControllerAnimated:(BOOL)animated {
+    
+    FDAddItemTableViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"FDAddItemTableViewController"];
+    vc.restaurantName = self.restaurantName;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
-
 
 
 

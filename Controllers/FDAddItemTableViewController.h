@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic)NSString *address;
 @property (strong, nonatomic)NSString *phone;
-@property (strong, nonatomic)NSString *reason;
+@property (strong, nonatomic)NSString *restaurantName;
 @property (strong, nonatomic)NSDictionary *restaurantInfoDict;
 
 @end
