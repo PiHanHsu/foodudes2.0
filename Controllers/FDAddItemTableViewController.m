@@ -7,7 +7,6 @@
 //
 
 #import "FDAddItemTableViewController.h"
-#import "FDSetAddressTableViewController.h"
 #import "GCGeocodingService.h"
 #import "UIPlaceHolderTextView.h"
 #import <Parse/Parse.h>

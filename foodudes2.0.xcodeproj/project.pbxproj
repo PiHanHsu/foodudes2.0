@@ -25,8 +25,6 @@
 		E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */; };
 		E8CC920C1AF6717400BE9987 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */; };
 		E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */; };
-		E8DBAAB51AD2AF0E0064262F /* FDSetAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB41AD2AF0E0064262F /* FDSetAddressTableViewController.m */; };
-		E8DBAAB81AD2AF250064262F /* FDAddReasonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB71AD2AF250064262F /* FDAddReasonTableViewController.m */; };
 		E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */; };
 		E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E6E1ABDB92B006ABD86 /* FDUser.m */; };
 		E8E63E721ABDBD1D006ABD86 /* FDMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E711ABDBD1D006ABD86 /* FDMarker.m */; };
@@ -81,10 +79,6 @@
 		E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddItemTableViewController.h; sourceTree = "<group>"; };
 		E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemTableViewController.m; sourceTree = "<group>"; };
-		E8DBAAB31AD2AF0E0064262F /* FDSetAddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSetAddressTableViewController.h; sourceTree = "<group>"; };
-		E8DBAAB41AD2AF0E0064262F /* FDSetAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDSetAddressTableViewController.m; sourceTree = "<group>"; };
-		E8DBAAB61AD2AF250064262F /* FDAddReasonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddReasonTableViewController.h; sourceTree = "<group>"; };
-		E8DBAAB71AD2AF250064262F /* FDAddReasonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddReasonTableViewController.m; sourceTree = "<group>"; };
 		E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCGeocodingService.h; sourceTree = "<group>"; };
 		E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCGeocodingService.m; sourceTree = "<group>"; };
 		E8E63E6D1ABDB92B006ABD86 /* FDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDUser.h; sourceTree = "<group>"; };
@@ -235,10 +229,6 @@
 				E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */,
 				E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */,
 				E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */,
-				E8DBAAB31AD2AF0E0064262F /* FDSetAddressTableViewController.h */,
-				E8DBAAB41AD2AF0E0064262F /* FDSetAddressTableViewController.m */,
-				E8DBAAB61AD2AF250064262F /* FDAddReasonTableViewController.h */,
-				E8DBAAB71AD2AF250064262F /* FDAddReasonTableViewController.m */,
 				E8868E7F1ADA84CC0030FE92 /* FDParseTestingTableViewController.h */,
 				E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */,
 				E8868E881ADAAB850030FE92 /* FDCommentTestTableViewController.h */,
@@ -421,10 +411,8 @@
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
 				E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */,
 				E8868E8D1ADBF44A0030FE92 /* FDProfileTableViewController.m in Sources */,
-				E8DBAAB81AD2AF250064262F /* FDAddReasonTableViewController.m in Sources */,
 				E80389C51AB5C289004FEEDD /* main.m in Sources */,
 				E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */,
-				E8DBAAB51AD2AF0E0064262F /* FDSetAddressTableViewController.m in Sources */,
 				E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */,
 				E8CC920C1AF6717400BE9987 /* UIPlaceHolderTextView.m in Sources */,
 			);
