@@ -75,8 +75,8 @@
 		E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileTableViewController.m; sourceTree = "<group>"; };
 		E8868E8E1ADBF5700030FE92 /* FDFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDFriendsTableViewCell.h; sourceTree = "<group>"; };
 		E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDFriendsTableViewCell.m; sourceTree = "<group>"; };
-		E8CC920A1AF6717400BE9987 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
-		E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		E8CC920A1AF6717400BE9987 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPlaceHolderTextView.h; path = Geocoding/UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPlaceHolderTextView.m; path = Geocoding/UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddItemTableViewController.h; sourceTree = "<group>"; };
 		E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemTableViewController.m; sourceTree = "<group>"; };
 		E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCGeocodingService.h; sourceTree = "<group>"; };
@@ -240,9 +240,19 @@
 			path = ../Controllers;
 			sourceTree = "<group>";
 		};
+		E8CC920D1AF6833D00BE9987 /* PlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E8CC920A1AF6717400BE9987 /* UIPlaceHolderTextView.h */,
+				E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */,
+			);
+			name = PlaceHolderTextView;
+			sourceTree = "<group>";
+		};
 		E8E63E621ABC5118006ABD86 /* 3rd Party Library */ = {
 			isa = PBXGroup;
 			children = (
+				E8CC920D1AF6833D00BE9987 /* PlaceHolderTextView */,
 				E8E63E661ABC516F006ABD86 /* Geocoding */,
 			);
 			name = "3rd Party Library";
@@ -252,8 +262,6 @@
 		E8E63E661ABC516F006ABD86 /* Geocoding */ = {
 			isa = PBXGroup;
 			children = (
-				E8CC920A1AF6717400BE9987 /* UIPlaceHolderTextView.h */,
-				E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */,
 				E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */,
 				E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */,
 			);
