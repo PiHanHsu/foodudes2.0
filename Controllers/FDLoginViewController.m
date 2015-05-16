@@ -168,17 +168,17 @@
             
             // findObjects will return a list of PFUsers that are friends
             // with the current user
-            NSArray *friendUsers = [friendQuery findObjects];
-            //NSLog(@"friends: %@", friendUsers);
-            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity: friendUsers.count];
+            NSArray *friendsArray = [friendQuery findObjects];
+            
+            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity: friendsArray.count];
             //add current User objectId doesn't work
            [friendsIdArray addObject:self.currentUserID];
             
-            for(int i=0 ; i< friendUsers.count ; i++){
-                PFUser * user = friendUsers[i];
+            for(int i=0 ; i< friendsArray.count ; i++){
+                PFUser * user = friendsArray[i];
                 [friendsIdArray addObject:user.objectId];
                 
-                if (i == friendUsers.count -1) {
+                if (i == friendsArray.count -1) {
                     
                     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
                     [defaults setObject:friendsIdArray forKey:@"friendsIdArray"];

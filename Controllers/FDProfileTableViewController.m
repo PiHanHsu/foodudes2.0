@@ -16,6 +16,7 @@
 @interface FDProfileTableViewController ()
 
 @property (strong, nonatomic) NSArray * friendsArray; // array of FB friends
+@property (strong, nonatomic) NSMutableArray * friendsPostArray; // array of friends and post number
 @property (weak, nonatomic) IBOutlet UIImageView *userHeadImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPostsLabel;
@@ -90,16 +91,46 @@
                 [friendIds addObject:[friendObject objectForKey:@"id"]];
             }
             
-            // Construct a PFUser query that will find friends whose facebook ids
-            // are contained in the current user's friend list.
             PFQuery *friendQuery = [PFUser query];
             [friendQuery whereKey:@"facebookID" containedIn:friendIds];
             self.friendsArray = [friendQuery findObjects];
             self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
+            PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+            [postQuery whereKey:@"userID" equalTo:[PFUser currentUser].objectId];
+            NSArray * myPostArray = [postQuery findObjects];
+            self.userPostsLabel.text = [NSString stringWithFormat:@"Posts: %lu",myPostArray.count];
             
-            [self.tableView reloadData];
-            [self.indicator stopAnimating];
-            [self.indicator hidesWhenStopped];
+            
+            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
+            friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
+            
+            self.friendsPostArray = [[NSMutableArray alloc]initWithCapacity:0];
+            
+            for (int i = 0 ; i<self.friendsArray.count; i++) {
+                PFUser * user = self.friendsArray[i];
+                PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+                [postQuery whereKey:@"userID" equalTo:user.objectId];
+                NSArray * postNumberArray = [postQuery findObjects];
+                NSLog(@"%lu", (unsigned long)postNumberArray.count);
+                
+                NSNumber * number = [NSNumber numberWithUnsignedLong:postNumberArray.count];
+                NSString * name = [NSString stringWithFormat:@"%@",self.friendsArray[i][@"name"]];
+                NSString *pictureURL = [NSString stringWithFormat:@"%@", self.friendsArray[i][@"pictureURL"]];
+                NSDictionary * dict = @{@"postNum" : number,
+                                        @"name" : name,
+                                        @"pictureURL" : pictureURL};
+                [self.friendsPostArray addObject:dict];
+                
+                if (i == self.friendsPostArray.count -1) {
+                    [self.tableView reloadData];
+                    [self.indicator stopAnimating];
+                    [self.indicator hidesWhenStopped];
+                }
+                
+            }
+            
+            
         }
     }];
     
@@ -110,10 +141,10 @@
     FDFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friendsCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.friendNameLabel.text = self.friendsArray[indexPath.row][@"name"];
-    cell.postNumLabel.text = @"Posts:";
+    cell.friendNameLabel.text = self.friendsPostArray[indexPath.row][@"name"];
+    cell.postNumLabel.text = [NSString stringWithFormat:@"Posts: %@", self.friendsPostArray[indexPath.row][@"postNum"]];
     
-     NSString *userProfilePhotoURLString = self.friendsArray[indexPath.row][@"pictureURL"];
+     NSString *userProfilePhotoURLString = self.friendsPostArray[indexPath.row][@"pictureURL"];
     
     if (userProfilePhotoURLString) {
         NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];

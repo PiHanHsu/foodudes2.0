@@ -16,10 +16,11 @@
     
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *restaurantNameTextField;
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *restaurantNameTextView;
+
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *addressTextView;
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *reasonTextView;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *phoneTextView;
 @property (weak, nonatomic) IBOutlet UIButton *photoButton;
 @property (strong, nonatomic) GCGeocodingService *gs;
 
@@ -29,18 +30,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    self.restaurantNameTextView.placeholder = @"Name";
     self.addressTextView.placeholder = @"Address";
+    self.phoneTextView.placeholder = @"Phone Number";
     self.reasonTextView.placeholder = @"Reasons...";
     
     
     if (self.restaurantInfoDict){
-        self.restaurantNameTextField.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"name"]];
+        self.restaurantNameTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"name"]];
         
-        self.phoneTextField.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_phone_number"]];
+        self.phoneTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_phone_number"]];
         self.addressTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_address"]];
     }else if (self.restaurantName){
-        self.restaurantNameTextField.text = self.restaurantName;
+        self.restaurantNameTextView.text = self.restaurantName;
     }
     
 }
@@ -54,9 +59,9 @@
     
     if (self.restaurantInfoDict) {
         PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-        restaurant[@"name"] = self.restaurantNameTextField.text;
+        restaurant[@"name"] = self.restaurantNameTextView.text;
         restaurant[@"address"] = self.addressTextView.text;
-        restaurant[@"phone"] = self.phoneTextField.text;
+        restaurant[@"phone"] = self.phoneTextView.text;
         restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
         restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
         restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
@@ -75,9 +80,9 @@
         [self.gs geocodeAddress:self.addressTextView.text];
         
         PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-        restaurant[@"name"] = self.restaurantNameTextField.text;
+        restaurant[@"name"] = self.restaurantNameTextView.text;
         restaurant[@"address"] = self.addressTextView.text;
-        restaurant[@"phone"] = self.phoneTextField.text;
+        restaurant[@"phone"] = self.phoneTextView.text;
         //restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
         restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lat"]];
         restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lng"]];
