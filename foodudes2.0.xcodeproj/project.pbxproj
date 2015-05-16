@@ -23,6 +23,8 @@
 		E8868E8A1ADAAB850030FE92 /* FDCommentTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */; };
 		E8868E8D1ADBF44A0030FE92 /* FDProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */; };
 		E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */; };
+		E8B1A5881B076BD100322873 /* infoWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B1A5861B076BD100322873 /* infoWindowView.m */; };
+		E8B1A5891B076BD100322873 /* infoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8B1A5871B076BD100322873 /* infoWindowView.xib */; };
 		E8CC920C1AF6717400BE9987 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */; };
 		E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */; };
 		E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */; };
@@ -75,6 +77,9 @@
 		E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileTableViewController.m; sourceTree = "<group>"; };
 		E8868E8E1ADBF5700030FE92 /* FDFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDFriendsTableViewCell.h; sourceTree = "<group>"; };
 		E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDFriendsTableViewCell.m; sourceTree = "<group>"; };
+		E8B1A5851B076BD100322873 /* infoWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infoWindowView.h; sourceTree = "<group>"; };
+		E8B1A5861B076BD100322873 /* infoWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infoWindowView.m; sourceTree = "<group>"; };
+		E8B1A5871B076BD100322873 /* infoWindowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = infoWindowView.xib; sourceTree = "<group>"; };
 		E8CC920A1AF6717400BE9987 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPlaceHolderTextView.h; path = Geocoding/UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPlaceHolderTextView.m; path = Geocoding/UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddItemTableViewController.h; sourceTree = "<group>"; };
@@ -206,6 +211,9 @@
 		E80389E91AB5C939004FEEDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E8B1A5851B076BD100322873 /* infoWindowView.h */,
+				E8B1A5861B076BD100322873 /* infoWindowView.m */,
+				E8B1A5871B076BD100322873 /* infoWindowView.xib */,
 				E8E63E731ABDC2D7006ABD86 /* userMarkerView.h */,
 				E8E63E741ABDC2D7006ABD86 /* userMarkerView.m */,
 				E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */,
@@ -355,6 +363,7 @@
 				E80389CE1AB5C289004FEEDD /* Main.storyboard in Resources */,
 				E80389D31AB5C289004FEEDD /* LaunchScreen.xib in Resources */,
 				E80389D01AB5C289004FEEDD /* Images.xcassets in Resources */,
+				E8B1A5891B076BD100322873 /* infoWindowView.xib in Resources */,
 				E8E63E771ABDC2D7006ABD86 /* UserMarkerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8B1A5881B076BD100322873 /* infoWindowView.m in Sources */,
 				E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */,
 				E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */,
 				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,

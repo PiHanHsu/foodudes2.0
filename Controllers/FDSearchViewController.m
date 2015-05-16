@@ -13,16 +13,21 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 
-#import "FDMarker.h"
 
+#import "FDMarker.h"
+#import "infoWindowView.h"
 
 @interface FDSearchViewController ()<GMSMapViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIScrollView *postScrollView;
+
 @property (strong, nonatomic) GCGeocodingService *gs;
 @property (strong, nonatomic) NSArray * restaurantArray; //of restaurants
 @property (strong, nonatomic) NSArray * postArray; // of posts
+@property (strong, nonatomic) NSArray * markerPostsArray; // the posts on the tap marker
+@property (strong, nonatomic) PFObject * restaurantInfo;
 @property (strong, nonatomic) NSString *restaurantID;
 @property (strong, nonatomic) NSString *userID;
 @end
@@ -55,6 +60,11 @@
     self.gs = [[GCGeocodingService alloc] init];
 
     [self loadFriendsPost];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.postScrollView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,63 +203,95 @@
 #pragma mark mapView Delegate
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     
+    //move marker position
+    CGPoint point = [mapView.projection pointForCoordinate:marker.position];
+    point.y = point.y - 175;
+    GMSCameraUpdate *camera =
+    [GMSCameraUpdate setTarget:[mapView.projection coordinateForPoint:point]];
+    [mapView animateWithCameraUpdate:camera];
+    
     FDMarker * tappedMarker = (FDMarker *)marker;
+    self.restaurantInfo = tappedMarker.info;
+    
     NSString *objectID =[NSString stringWithFormat:@"%@", tappedMarker.info.objectId];
-   
     NSLog(@"ObjectID: %@", objectID);
     NSLog(@"name: %@", tappedMarker.info[@"name"]);
     
     PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
     [query whereKey:@"parent" equalTo:tappedMarker.info];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.markerPostsArray = objects;
         NSLog(@"posts: %@", objects);
+        [self displayPost];
     }];
  
     mapView.selectedMarker = marker;
+    
     return YES;
 }
 
-//- (void) loadData{
-//    PFQuery *query = [PFQuery queryWithClassName:@"Restaurant_new"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            self.restaurantArray =objects;
-//            //NSLog(@"Successfully retrieved %lu restaurants.", (unsigned long)objects.count);
-//            //[self displayMarker];
-//            //[self loadPost];
-//        } else {
-//            //NSLog(@"Loading restanrant data Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
-//}
+-(void) displayPost{
+    self.postScrollView.hidden = NO;
+    self.postScrollView.contentSize = CGSizeMake(275 *self.markerPostsArray.count +50, 290);
+    
+    self.postScrollView.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    for (int i= 0; i<self.markerPostsArray.count ; i++){
+        int x = 30;
+        infoWindowView *infoView =  [[[NSBundle mainBundle] loadNibNamed:@"infoWindowView" owner:self options:nil] objectAtIndex:0];
+        infoView.frame = CGRectMake(x+(275 *i), 0, 260, 290);
+        infoView.restaurantName.text = self.restaurantInfo[@"name"];
+        infoView.address.text = self.restaurantInfo[@"address"];
+        infoView.tel.text = self.restaurantInfo[@"phone"];
+        infoView.postLabel.text = self.markerPostsArray[i][@"reason"];
+        infoView.userNameLabel.text = self.markerPostsArray[i][@"userName"];
+        PFQuery * queryUser = [PFUser query];
+        [queryUser whereKey:@"objectId" equalTo:self.markerPostsArray[i][@"userID"]];
+        [queryUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!error){
+                NSString *userProfilePhotoURLString = object[@"pictureURL"];
+                if (userProfilePhotoURLString) {
+                    NSURL *pictureURL = [NSURL URLWithString:userProfilePhotoURLString];
+                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+                    [NSURLConnection sendAsynchronousRequest:urlRequest
+                                                       queue:[NSOperationQueue mainQueue]
+                                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                               if (connectionError == nil && data != nil) {
+                                                   infoView.userImageView.image =[UIImage imageWithData:data];
+                                                   infoView.userImageView.layer.cornerRadius = 25.0f;
+                                                   infoView.userImageView.layer.masksToBounds =YES;
+                                                   
+                                               }else {
+                                                   NSLog(@"Failed to load user image for posts.");
+                                               }
+                                           }];
+                }
+            }else{
+                NSLog(@"query user error: %@", error);
+            }
+            
+        }];
+        
+        
+        [self.postScrollView addSubview:infoView];
+    }
+    
+}
 
-//-(void)loadPost{
-//    PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            //self.postArray =objects;
-//            //NSLog(@"Successfully retrieved %lu posts.", (unsigned long)objects.count);
-//            [self displayMarker];
-//        } else {
-//            NSLog(@"Loading posts data Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
-//}
-
-//-(void)loadPostReason{
-//    for(PFObject *object in self.restaurantArray) {
-//        NSString *tmpID =[NSString stringWithFormat:@"%@",object.objectId];
-//        NSLog(@"objectId: %@", tmpID);
-//        for (PFObject *postObj in self.postArray) {
-//            NSString *restID =[NSString stringWithFormat:@"%@", postObj[@"restID"]];
-//            if ([restID isEqualToString:tmpID]) {
-//                NSLog(@"find!");
-//                NSLog(@"Post: %@", postObj[@"reason"]);
-//            }
-//        }
-//
-//    }
-//}
+- (void)mapView:(GMSMapView *)mapView
+didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    self.postScrollView.hidden = YES;
+    
+    //remove all the subviews in postScrollView
+    for(UIView *subview in [self.postScrollView subviews]) {
+        [subview removeFromSuperview];
+    }
+    [self.searchBar resignFirstResponder];
+    
+}
 
 
 @end

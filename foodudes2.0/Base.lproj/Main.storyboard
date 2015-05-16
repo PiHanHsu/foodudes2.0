@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2hr-yC-uTi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2hr-yC-uTi">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -400,16 +400,26 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-0s-ue7">
+                                <rect key="frame" x="0.0" y="128" width="600" height="290"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="290" id="GuH-3B-qe8"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="top" secondItem="irD-LV-FtS" secondAttribute="bottom" id="0vQ-Q6-mMn"/>
+                            <constraint firstItem="AXd-0s-ue7" firstAttribute="top" secondItem="Xer-9Z-del" secondAttribute="bottom" constant="20" id="BL4-Ie-mNK"/>
                             <constraint firstAttribute="trailing" secondItem="Xer-9Z-del" secondAttribute="trailing" id="MOd-ED-wJw"/>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="NqF-6d-bqi"/>
+                            <constraint firstAttribute="trailing" secondItem="AXd-0s-ue7" secondAttribute="trailing" id="UIe-u2-W6J"/>
+                            <constraint firstItem="AXd-0s-ue7" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="dr2-KT-U0h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cxc-GH-p3r"/>
                     <connections>
+                        <outlet property="postScrollView" destination="AXd-0s-ue7" id="VSt-He-SxJ"/>
                         <outlet property="searchBar" destination="Xer-9Z-del" id="aGp-PA-kDe"/>
                     </connections>
                 </viewController>
