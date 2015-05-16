@@ -25,7 +25,7 @@
 
 @property (strong, nonatomic) GCGeocodingService *gs;
 @property (strong, nonatomic) NSArray * restaurantArray; //of restaurants
-@property (strong, nonatomic) NSArray * postArray; // of posts
+@property (strong, nonatomic) NSArray * postArray; // of all posts
 @property (strong, nonatomic) NSArray * markerPostsArray; // the posts on the tap marker
 @property (strong, nonatomic) PFObject * restaurantInfo;
 @property (strong, nonatomic) NSString *restaurantID;
@@ -115,6 +115,7 @@
             NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
             NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
             friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
+            
             PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
             [postQuery whereKey:@"userID" containedIn:friendsIdArray];
             self.postArray = [postQuery findObjects];
@@ -142,7 +143,7 @@
             
             [restaurant fetchInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
                 if (!error) {
-                    NSLog(@"postRestaurant: %@", postRestaurant.objectId);
+                    //NSLog(@"postRestaurant: %@", postRestaurant.objectId);
                     NSString * restautantID = [NSString stringWithFormat:@"%@",postRestaurant.objectId];
                     [restaurantArray addObject:restautantID];
                     PFQuery * queryUser = [PFUser query];
@@ -213,15 +214,11 @@
     FDMarker * tappedMarker = (FDMarker *)marker;
     self.restaurantInfo = tappedMarker.info;
     
-    NSString *objectID =[NSString stringWithFormat:@"%@", tappedMarker.info.objectId];
-    NSLog(@"ObjectID: %@", objectID);
-    NSLog(@"name: %@", tappedMarker.info[@"name"]);
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
     [query whereKey:@"parent" equalTo:tappedMarker.info];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.markerPostsArray = objects;
-        NSLog(@"posts: %@", objects);
+        //NSLog(@"posts: %@", objects);
         [self displayPost];
     }];
  

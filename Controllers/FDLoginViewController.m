@@ -13,6 +13,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface FDLoginViewController ()
+@property (strong, nonatomic) NSString * currentUserID;
 
 @end
 
@@ -143,6 +144,11 @@
 
 // find FB friends
 -(void) getFBfriends{
+    
+    PFUser * currentUser = [PFUser currentUser];
+    self.currentUserID = [NSString stringWithFormat:@"%@", currentUser.objectId];
+    NSLog(@"user objectID: %@", self.currentUserID);
+
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             // result will contain an array with your user's friends in the "data" key
@@ -165,12 +171,15 @@
             NSArray *friendUsers = [friendQuery findObjects];
             //NSLog(@"friends: %@", friendUsers);
             NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity: friendUsers.count];
+            //add current User objectId doesn't work
+           [friendsIdArray addObject:self.currentUserID];
             
             for(int i=0 ; i< friendUsers.count ; i++){
                 PFUser * user = friendUsers[i];
                 [friendsIdArray addObject:user.objectId];
                 
                 if (i == friendUsers.count -1) {
+                    
                     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
                     [defaults setObject:friendsIdArray forKey:@"friendsIdArray"];
                     [defaults synchronize];
@@ -184,5 +193,7 @@
     }];
 
 }
+
+
 
 @end
