@@ -126,11 +126,11 @@
                 NSDictionary *resultsDict = [jsonDictionary objectForKey:@"result"];
                 self.restaurantInfoDict =  [jsonDictionary objectForKey:@"result"];
                 //NSLog(@"result: %@", resultsDict);
-                NSDictionary * geometryDict = [resultsDict objectForKey:@"geometry"];
+                //NSDictionary * geometryDict = [resultsDict objectForKey:@"geometry"];
                 self.restaurantName = [resultsDict objectForKey:@"name"];
                 self.addressArray = [resultsDict objectForKey:@"address_components"];
                 
-                NSString *address = [resultsDict objectForKey:@"formatted_address"]
+                //NSString *address = [resultsDict objectForKey:@"formatted_address"]
                 ;
                 self.phoneNumber = [resultsDict objectForKey:@"formatted_phone_number"];
                 self.placeID =[resultsDict objectForKey:@"place_id"];

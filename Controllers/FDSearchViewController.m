@@ -244,6 +244,17 @@
         infoView.tel.text = self.restaurantInfo[@"phone"];
         infoView.postLabel.text = self.markerPostsArray[i][@"reason"];
         infoView.userNameLabel.text = self.markerPostsArray[i][@"userName"];
+        
+        PFFile * file = self.markerPostsArray[i][@"photo"];
+        if(file)  {
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if(!error)
+                    infoView.restaurantImageView.image = [UIImage imageWithData:data];
+                else
+                    NSLog(@"%@", error);
+            }];
+        }
+        
         PFQuery * queryUser = [PFUser query];
         [queryUser whereKey:@"objectId" equalTo:self.markerPostsArray[i][@"userID"]];
         [queryUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {

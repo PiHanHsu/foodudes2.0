@@ -11,18 +11,17 @@
 #import "UIPlaceHolderTextView.h"
 #import <Parse/Parse.h>
 
-@interface FDAddItemTableViewController ()
+@interface FDAddItemTableViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
-    
 }
 
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *restaurantNameTextView;
-
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *addressTextView;
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *reasonTextView;
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *phoneTextView;
 @property (weak, nonatomic) IBOutlet UIButton *photoButton;
 @property (strong, nonatomic) GCGeocodingService *gs;
+@property (assign) BOOL photoImageSelected;
 
 @end
 
@@ -37,6 +36,9 @@
     self.addressTextView.placeholder = @"Address";
     self.phoneTextView.placeholder = @"Phone Number";
     self.reasonTextView.placeholder = @"Reasons...";
+    
+
+    [self.photoButton addTarget:self action:@selector(showOptions:) forControlEvents:UIControlEventTouchUpInside];
     
     
     if (self.restaurantInfoDict){
@@ -73,7 +75,17 @@
         //post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
         post[@"userID"] = [PFUser currentUser].objectId;
         post[@"userName"] = [PFUser currentUser][@"name"];
-        
+        if(self.photoImageSelected) {
+            // reset
+            self.photoImageSelected = NO;
+            
+            NSData *image = UIImageJPEGRepresentation(self.photoButton.imageView.image, 0.5f);
+            PFFile *photo = [PFFile fileWithData:image];
+            [photo saveInBackground];
+            
+            post[@"photo"] = photo;
+        }
+
         [post saveInBackground];
     }else{
         self.gs = [[GCGeocodingService alloc] init];
@@ -92,12 +104,104 @@
         post[@"parent"] =restaurant; //set relation between post and restaurant
         post[@"userID"] = [PFUser currentUser].objectId;
         post[@"userName"] = [PFUser currentUser][@"name"];
-        
+       
+        if(self.photoImageSelected) {
+            // reset
+            self.photoImageSelected = NO;
+            
+            NSData *image = UIImageJPEGRepresentation(self.photoButton.imageView.image, 0.5f);
+            PFFile *photo = [PFFile fileWithData:image];
+            [photo saveInBackground];
+            
+            post[@"photo"] = photo;
+        }
         [post saveInBackground];
 
     }
     
 }
+
+- (void) showOptions:(id)sender{
+    UIAlertController * view=   [UIAlertController
+                                 alertControllerWithTitle:nil
+                                 message:nil
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* camera = [UIAlertAction
+                             actionWithTitle:@"Take photo from Camera"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [self takePhoto];
+                                 [view dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    UIAlertAction* album = [UIAlertAction
+                            actionWithTitle:@"Choose photo from Album"
+                            style:UIAlertActionStyleDefault
+                            handler:^(UIAlertAction * action)
+                            {
+                                [self selectPhoto];
+                                [view dismissViewControllerAnimated:YES completion:nil];
+                                
+                            }];
+    
+    
+    [view addAction:camera];
+    [view addAction:album];
+    [self presentViewController:view animated:YES completion:nil];
+}
+- (void)selectPhoto {
+    //使用內建相簿
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;//使用內建相簿
+        //modal
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)takePhoto {
+    
+    //先檢查是否有照相機功能
+    if ([UIImagePickerController isSourceTypeAvailable:(UIImagePickerControllerSourceTypeSavedPhotosAlbum)]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.showsCameraControls =YES;
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    [self.photoButton setImage:chosenImage forState:UIControlStateNormal];
+    self.photoImageSelected = YES;
+    
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera){
+        UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+
+
+//user有可能會按"cancel"取消操作
+//只要移除PickerController就可以了
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
 
 #pragma mark - Navigation
 
@@ -109,43 +213,6 @@
 //        vc.addressString =self.address;
 //    }
 //}
-
-#pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 3;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    switch (section) {
-//        case 0:
-//            return 1;
-//            break;
-//        case 1:
-//            return 3;
-//            break;
-//        case 2:
-//            return 1;
-//            break;
-//        default:
-//            break;
-//    }
-//    return 0;
-//}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 
 /*
 // Override to support conditional editing of the table view.
