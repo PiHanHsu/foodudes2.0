@@ -32,6 +32,8 @@
 		E8E63E721ABDBD1D006ABD86 /* FDMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E711ABDBD1D006ABD86 /* FDMarker.m */; };
 		E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E741ABDC2D7006ABD86 /* userMarkerView.m */; };
 		E8E63E771ABDC2D7006ABD86 /* UserMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */; };
+		E8ED1F7D1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8ED1F7C1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m */; };
+		E8ED1F831B1A018E00F53A2E /* FDRestaurantListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8ED1F821B1A018E00F53A2E /* FDRestaurantListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,10 @@
 		E8E63E731ABDC2D7006ABD86 /* userMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = userMarkerView.h; sourceTree = "<group>"; };
 		E8E63E741ABDC2D7006ABD86 /* userMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = userMarkerView.m; sourceTree = "<group>"; };
 		E8E63E751ABDC2D7006ABD86 /* UserMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserMarkerView.xib; sourceTree = "<group>"; };
+		E8ED1F7B1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDRestaurantListTableViewCell.h; sourceTree = "<group>"; };
+		E8ED1F7C1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDRestaurantListTableViewCell.m; sourceTree = "<group>"; };
+		E8ED1F811B1A018E00F53A2E /* FDRestaurantListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDRestaurantListTableViewController.h; sourceTree = "<group>"; };
+		E8ED1F821B1A018E00F53A2E /* FDRestaurantListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDRestaurantListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +227,8 @@
 				E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */,
 				E8868E8E1ADBF5700030FE92 /* FDFriendsTableViewCell.h */,
 				E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */,
+				E8ED1F7B1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.h */,
+				E8ED1F7C1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m */,
 			);
 			name = Views;
 			path = ../Views;
@@ -243,6 +251,8 @@
 				E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */,
 				E8868E8B1ADBF4490030FE92 /* FDProfileTableViewController.h */,
 				E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */,
+				E8ED1F811B1A018E00F53A2E /* FDRestaurantListTableViewController.h */,
+				E8ED1F821B1A018E00F53A2E /* FDRestaurantListTableViewController.m */,
 			);
 			name = Controllers;
 			path = ../Controllers;
@@ -430,9 +440,11 @@
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
 				E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */,
 				E8868E8D1ADBF44A0030FE92 /* FDProfileTableViewController.m in Sources */,
+				E8ED1F7D1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m in Sources */,
 				E80389C51AB5C289004FEEDD /* main.m in Sources */,
 				E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */,
 				E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */,
+				E8ED1F831B1A018E00F53A2E /* FDRestaurantListTableViewController.m in Sources */,
 				E8CC920C1AF6717400BE9987 /* UIPlaceHolderTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

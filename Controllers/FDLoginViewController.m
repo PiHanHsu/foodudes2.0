@@ -101,7 +101,7 @@
 - (void)_ViewControllerAnimated:(BOOL)animated {
     
     UITabBarController *tabBarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-    [tabBarVC setSelectedIndex:1];
+    [tabBarVC setSelectedIndex:2];
     [self presentViewController:tabBarVC animated:YES completion:nil];
 }
 

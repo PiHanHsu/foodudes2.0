@@ -306,7 +306,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="odM-wn-K03" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2734" y="1079"/>
+            <point key="canvasLocation" x="3546" y="1079"/>
         </scene>
         <!--Comment Test Table View Controller-->
         <scene sceneID="ZcL-g8-gVA">
@@ -367,7 +367,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Upd-eU-6h2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2664" y="1717"/>
+            <point key="canvasLocation" x="3476" y="1717"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="62p-aO-5lh">
@@ -400,7 +400,7 @@
                     <connections>
                         <segue destination="mVh-kJ-M4Q" kind="relationship" relationship="viewControllers" id="Ycv-ZH-l2f"/>
                         <segue destination="8VM-uD-AWw" kind="relationship" relationship="viewControllers" id="EZL-WQ-0Bz"/>
-                        <segue destination="DO2-fP-SIE" kind="relationship" relationship="viewControllers" id="baO-jH-2FC"/>
+                        <segue destination="tWg-3e-eNR" kind="relationship" relationship="viewControllers" id="baO-jH-2FC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GH-Of-BRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -454,7 +454,7 @@
             </objects>
             <point key="canvasLocation" x="1348" y="1079"/>
         </scene>
-        <!--Profile-->
+        <!--Profile Table View Controller-->
         <scene sceneID="A4l-Bx-4xe">
             <objects>
                 <tableViewController id="DO2-fP-SIE" customClass="FDProfileTableViewController" sceneMemberID="viewController">
@@ -525,17 +525,72 @@
                             <outlet property="delegate" destination="DO2-fP-SIE" id="wa0-kv-fJT"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Profile" image="Tab_icon_profile" id="uhg-Xv-TZo"/>
+                    <navigationItem key="navigationItem" id="ozO-wf-S99"/>
                     <connections>
                         <outlet property="userFriendsLabel" destination="klI-UF-IQ4" id="4Az-YD-K5R"/>
                         <outlet property="userHeadImage" destination="q19-kE-hl7" id="Z9u-gn-lOb"/>
                         <outlet property="userNameLabel" destination="2jC-9t-3VR" id="JmD-rE-fUE"/>
                         <outlet property="userPostsLabel" destination="ffl-sf-ZHb" id="X4m-GU-zRD"/>
+                        <segue destination="o77-ez-PGt" kind="show" identifier="Go to Restaurant List" id="kpb-Sg-kij"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zU-To-0fs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="1079"/>
+            <point key="canvasLocation" x="2813" y="1079"/>
+        </scene>
+        <!--Restaurant List Table View Controller-->
+        <scene sceneID="OR7-6d-nfi">
+            <objects>
+                <tableViewController id="o77-ez-PGt" customClass="FDRestaurantListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Uxd-Cc-1CM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="restaurantCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="restaurantCell" rowHeight="60" id="gGR-qw-xFg" customClass="FDRestaurantListTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gGR-qw-xFg" id="Hr8-SP-FMp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c2g-Bm-PYT">
+                                            <rect key="frame" x="8" y="5" width="50" height="50"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vus-dC-yV3" userLabel="Name">
+                                            <rect key="frame" x="88" y="8" width="504" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3Z-nS-fWr" userLabel="Address">
+                                            <rect key="frame" x="88" y="30" width="504" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="trailing" secondItem="Hr8-SP-FMp" secondAttribute="trailingMargin" id="3Pa-SI-Zgl"/>
+                                        <constraint firstAttribute="centerY" secondItem="U3Z-nS-fWr" secondAttribute="centerY" constant="-11" id="42X-0b-KmP"/>
+                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="leading" secondItem="c2g-Bm-PYT" secondAttribute="trailing" constant="30" id="nyn-Mb-olT"/>
+                                        <constraint firstItem="U3Z-nS-fWr" firstAttribute="leading" secondItem="c2g-Bm-PYT" secondAttribute="trailing" constant="30" id="ugI-RZ-5vN"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="restaurantAddressLabel" destination="U3Z-nS-fWr" id="el9-TB-Qmm"/>
+                                    <outlet property="restaurantImageView" destination="c2g-Bm-PYT" id="Kav-CT-Bqa"/>
+                                    <outlet property="restaurantNameLabel" destination="Vus-dC-yV3" id="R7s-Bm-Qoq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="o77-ez-PGt" id="oyR-E4-ky7"/>
+                            <outlet property="delegate" destination="o77-ez-PGt" id="nw8-zs-vLW"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AQs-6q-0iy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2788" y="1842"/>
         </scene>
         <!--Search-->
         <scene sceneID="Abn-AE-EM9">
@@ -591,6 +646,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPD-LY-5ZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="G7c-2m-x8f">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tWg-3e-eNR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="Tab_icon_profile" id="uhg-Xv-TZo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RCV-1h-rY4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DO2-fP-SIE" kind="relationship" relationship="rootViewController" id="vRi-lr-hjX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t3R-bA-6Bc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2001" y="1079"/>
         </scene>
     </scenes>
     <resources>

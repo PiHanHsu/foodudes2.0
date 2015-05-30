@@ -12,6 +12,8 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "FDRestaurantListTableViewController.h"
+
 
 @interface FDProfileTableViewController ()
 
@@ -21,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPostsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userFriendsLabel;
+@property (strong, nonatomic) NSArray * restaurantListArray; //array of restaurants
 @property (strong, nonatomic) UIActivityIndicatorView * indicator;
 
 @end
@@ -111,15 +114,16 @@
                 PFUser * user = self.friendsArray[i];
                 PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
                 [postQuery whereKey:@"userID" equalTo:user.objectId];
-                NSArray * postNumberArray = [postQuery findObjects];
-                NSLog(@"%lu", (unsigned long)postNumberArray.count);
+                NSArray * postListArray = [postQuery findObjects];
+                NSLog(@"%lu", (unsigned long)postListArray.count);
                 
-                NSNumber * number = [NSNumber numberWithUnsignedLong:postNumberArray.count];
+                NSNumber * number = [NSNumber numberWithUnsignedLong:postListArray.count];
                 NSString * name = [NSString stringWithFormat:@"%@",self.friendsArray[i][@"name"]];
                 NSString *pictureURL = [NSString stringWithFormat:@"%@", self.friendsArray[i][@"pictureURL"]];
                 NSDictionary * dict = @{@"postNum" : number,
                                         @"name" : name,
-                                        @"pictureURL" : pictureURL};
+                                        @"pictureURL" : pictureURL,
+                                        @"postListArray" : postListArray};
                 [self.friendsPostArray addObject:dict];
                 
                 if (i == self.friendsPostArray.count -1) {
@@ -172,6 +176,14 @@
 heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60.0;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //FDFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friendsCell" forIndexPath:indexPath];
+    self.restaurantListArray = self.friendsPostArray[indexPath.row][@"postListArray"];
+    [self performSegueWithIdentifier:@"Go to Restaurant List" sender:indexPath];
+    
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -206,14 +218,19 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.destinationViewController isKindOfClass:[FDRestaurantListTableViewController class]]) {
+        FDRestaurantListTableViewController *vc = (FDRestaurantListTableViewController *) segue.destinationViewController;
+        vc.restaurantListArray =self.restaurantListArray;
+        
+    }
+    
+   
 }
-*/
 
 @end

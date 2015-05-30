@@ -179,8 +179,6 @@
         PFObject *post =[PFObject objectWithClassName:@"Posts"];
         post[@"reason"] = self.reasonTextView.text;
         post[@"parent"] =restaurant; //set relation between post and restaurant
-        //test code
-        //post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:@"b4kJRAYc9o"];
         post[@"userID"] = [PFUser currentUser].objectId;
         post[@"userName"] = [PFUser currentUser][@"name"];
         if(self.photoImageSelected) {
@@ -227,7 +225,9 @@
         restaurant[@"phone"] = self.phoneTextView.text;
         restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lat"]];
         restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lng"]];
-        
+    
+        //TODO: need to save objectID to placeID
+    
         PFObject *post =[PFObject objectWithClassName:@"Posts"];
         post[@"reason"] = self.reasonTextView.text;
         post[@"parent"] =restaurant; //set relation between post and restaurant
