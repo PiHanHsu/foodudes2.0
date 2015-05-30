@@ -298,6 +298,12 @@
     
 }
 
+- (IBAction)pushButton:(id)sender {
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setMessage:@"1st push test!"];
+    [push sendPushInBackground];
+}
 
 
 

@@ -65,6 +65,8 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.postScrollView.hidden = YES;
+    
+    [self loadFriendsPost];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -47,15 +47,30 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="AZH-QB-fIR"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdF-vG-QV8">
+                                <rect key="frame" x="267" y="377" width="67" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9qp-8W-RvG"/>
+                                    <constraint firstAttribute="width" constant="67" id="UaC-O2-DOw"/>
+                                </constraints>
+                                <state key="normal" title="Push Test">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="L8T-rr-uzR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="68Z-Zg-h0t" secondAttribute="centerX" id="AzQ-CA-EW7"/>
+                            <constraint firstItem="wdF-vG-QV8" firstAttribute="top" secondItem="68Z-Zg-h0t" secondAttribute="bottom" constant="16" id="G1N-ZS-ws6"/>
                             <constraint firstItem="ljR-wO-v3c" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="UEZ-9x-3em"/>
                             <constraint firstAttribute="trailing" secondItem="ljR-wO-v3c" secondAttribute="trailing" id="Xj5-2s-DUz"/>
                             <constraint firstAttribute="centerX" secondItem="kzO-Vz-vDe" secondAttribute="centerX" id="m1g-Iz-Rmq"/>
                             <constraint firstItem="68Z-Zg-h0t" firstAttribute="top" secondItem="kzO-Vz-vDe" secondAttribute="bottom" constant="16" id="rkT-IC-o3f"/>
                             <constraint firstAttribute="centerY" secondItem="kzO-Vz-vDe" secondAttribute="centerY" id="sEr-zL-UB3"/>
+                            <constraint firstAttribute="centerX" secondItem="wdF-vG-QV8" secondAttribute="centerX" id="xoP-AU-ajA"/>
                             <constraint firstItem="ljR-wO-v3c" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="xyg-wQ-PGR"/>
                         </constraints>
                     </view>

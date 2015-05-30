@@ -60,6 +60,114 @@
 - (IBAction)saveButtonPressed:(id)sender {
     
     if (self.restaurantInfoDict) {
+        PFQuery *query = [PFQuery queryWithClassName:@"Restaurant_new"];
+        [query whereKey:@"placeID" equalTo:self.restaurantInfoDict[@"id"]];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!object) {
+                [self saveDataToParse];
+            } else {
+                NSString *objID = object.objectId;
+                
+                PFObject *post =[PFObject objectWithClassName:@"Posts"];
+                post[@"reason"] = self.reasonTextView.text;
+                post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:objID];
+                post[@"userID"] = [PFUser currentUser].objectId;
+                post[@"userName"] = [PFUser currentUser][@"name"];
+                if(self.photoImageSelected) {
+                    // reset
+                    self.photoImageSelected = NO;
+                    
+                    NSData *image = UIImageJPEGRepresentation(self.photoButton.imageView.image, 0.5f);
+                    PFFile *photo = [PFFile fileWithData:image];
+                    [photo saveInBackground];
+                    
+                    post[@"photo"] = photo;
+                }
+                
+                [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增成功"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        [self _ViewControllerAnimated:YES];
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增失敗"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        NSLog(@"Save failed: %@", error);
+                    }
+                }];
+                
+                
+                
+            }
+        }];
+    }else{
+        self.gs = [[GCGeocodingService alloc] init];
+        [self.gs geocodeAddress:self.addressTextView.text];
+        NSString * lat = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lat"]];
+        NSString * lng = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lng"]];
+        
+        //TODO: need to add more conditions
+        PFQuery *query = [PFQuery queryWithClassName:@"Restaurant_new"];
+        //[query whereKey:@"name" equalTo:self.restaurantNameTextView.text];
+        [query whereKey:@"lat" equalTo:lat];
+        [query whereKey:@"lng" equalTo:lng];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!object) {
+                [self saveDataToParse2];
+            } else{
+                NSString *objID = object.objectId;
+                
+                PFObject *post =[PFObject objectWithClassName:@"Posts"];
+                post[@"reason"] = self.reasonTextView.text;
+                post[@"parent"] =[PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:objID];                post[@"userID"] = [PFUser currentUser].objectId;
+                post[@"userName"] = [PFUser currentUser][@"name"];
+                
+                if(self.photoImageSelected) {
+                    // reset
+                    self.photoImageSelected = NO;
+                    
+                    NSData *image = UIImageJPEGRepresentation(self.photoButton.imageView.image, 0.5f);
+                    PFFile *photo = [PFFile fileWithData:image];
+                    [photo saveInBackground];
+                    
+                    post[@"photo"] = photo;
+                }
+                [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增成功"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        [self _ViewControllerAnimated:YES];
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增失敗"
+                                                                        message:nil
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        NSLog(@"Save failed: %@", error);
+                    }
+                }];
+            }
+        }];
+
+    }
+    
+    
+}
+
+-(void) saveDataToParse{
         PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
         restaurant[@"name"] = self.restaurantNameTextView.text;
         restaurant[@"address"] = self.addressTextView.text;
@@ -85,9 +193,31 @@
             
             post[@"photo"] = photo;
         }
+        
+        [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增成功"
+                                                                message:nil
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [self _ViewControllerAnimated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增失敗"
+                                                                message:nil
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                NSLog(@"Save failed: %@", error);
+            }
+        }];
 
-        [post saveInBackground];
-    }else{
+}
+
+- (void) saveDataToParse2{
+
         self.gs = [[GCGeocodingService alloc] init];
         [self.gs geocodeAddress:self.addressTextView.text];
         
@@ -95,7 +225,6 @@
         restaurant[@"name"] = self.restaurantNameTextView.text;
         restaurant[@"address"] = self.addressTextView.text;
         restaurant[@"phone"] = self.phoneTextView.text;
-        //restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
         restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lat"]];
         restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.gs.geocode[@"lng"]];
         
@@ -104,7 +233,7 @@
         post[@"parent"] =restaurant; //set relation between post and restaurant
         post[@"userID"] = [PFUser currentUser].objectId;
         post[@"userName"] = [PFUser currentUser][@"name"];
-       
+        
         if(self.photoImageSelected) {
             // reset
             self.photoImageSelected = NO;
@@ -115,11 +244,36 @@
             
             post[@"photo"] = photo;
         }
-        [post saveInBackground];
-
-    }
+        [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增成功"
+                                                                message:nil
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [self _ViewControllerAnimated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"新增失敗"
+                                                                message:nil
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                NSLog(@"Save failed: %@", error);
+            }
+        }];
     
+
 }
+
+- (void)_ViewControllerAnimated:(BOOL)animated {
+    
+    UITabBarController *tabBarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+    [tabBarVC setSelectedIndex:1];
+    [self presentViewController:tabBarVC animated:YES completion:nil];
+}
+
 
 - (void) showOptions:(id)sender{
     UIAlertController * view=   [UIAlertController
