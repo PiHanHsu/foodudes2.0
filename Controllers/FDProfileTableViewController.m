@@ -13,6 +13,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "FDRestaurantListTableViewController.h"
+#import "FDMyPostListTableViewController.h"
 
 
 @interface FDProfileTableViewController ()
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userPostsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userFriendsLabel;
 @property (strong, nonatomic) NSArray * restaurantListArray; //array of restaurants
+@property (strong, nonatomic) NSArray * myPostArray;// array of my posts
 @property (strong, nonatomic) UIActivityIndicatorView * indicator;
 
 @end
@@ -100,8 +102,8 @@
             self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
             PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
             [postQuery whereKey:@"userID" equalTo:[PFUser currentUser].objectId];
-            NSArray * myPostArray = [postQuery findObjects];
-            self.userPostsLabel.text = [NSString stringWithFormat:@"Posts: %lu",myPostArray.count];
+            self.myPostArray = [postQuery findObjects];
+            self.userPostsLabel.text = [NSString stringWithFormat:@"Posts: %lu",self.myPostArray.count];
             
             
             NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
@@ -228,6 +230,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
         FDRestaurantListTableViewController *vc = (FDRestaurantListTableViewController *) segue.destinationViewController;
         vc.restaurantListArray =self.restaurantListArray;
         
+    }else if([segue.destinationViewController isKindOfClass:[FDMyPostListTableViewController class]]){
+        FDMyPostListTableViewController *vc = (FDMyPostListTableViewController *) segue.destinationViewController;
+        vc.myPostListArray =self.myPostArray;
     }
     
    

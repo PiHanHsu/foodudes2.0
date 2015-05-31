@@ -1,28 +1,31 @@
 //
-//  FDRestaurantListTableViewController.m
+//  FDMyPostListTableViewController.m
 //  foodudes2.0
 //
-//  Created by PiHan Hsu on 2015/5/30.
+//  Created by PiHan Hsu on 2015/5/31.
 //  Copyright (c) 2015年 PiHan Hsu. All rights reserved.
 //
 
-#import "FDRestaurantListTableViewController.h"
-#import "FDRestaurantListTableViewCell.h"
+#import "FDMyPostListTableViewController.h"
+#import "FDMyPostTableViewCell.h"
 #import <Parse/Parse.h>
 
-@interface FDRestaurantListTableViewController ()
-
-@property (strong, nonatomic) NSMutableArray * listArray; //array of restaurant list
+@interface FDMyPostListTableViewController ()
 
 @end
 
-@implementation FDRestaurantListTableViewController
+@implementation FDMyPostListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    NSLog(@"array: %@", self.restaurantListArray);
+    NSLog(@"MyPostList: %@" , self.myPostListArray);
     [self loadData];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,57 +33,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) loadData{
-    self.listArray = [@[] mutableCopy];
-    for (PFObject * post in self.restaurantListArray) {
-        PFObject * obj = post[@"parent"];
-        NSString *objID = obj.objectId;
-        PFQuery * query = [PFQuery queryWithClassName:@"Restaurant_new"];
-        [query getObjectInBackgroundWithId:objID block:^(PFObject *restaurant, NSError *error) {
-            
-            NSLog(@"rest: %@", restaurant);
-            NSDictionary * dict = [[NSDictionary alloc]init];
-            dict = @{ @"name" : restaurant[@"name"],
-                      @"address" : restaurant[@"address"]};
-            
-            [self.listArray addObject:dict];
-            [self.tableView reloadData];
-            
-        }];
-       
-       
-        
+-(void) loadData{
+    for (PFObject * post in self.myPostListArray) {
+        PFObject * restaurant = post[@"parent"];
+        [restaurant fetch];
+        //TODO: tbc...
     }
+    
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return self.listArray.count;
+    
+    return self.myPostListArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FDRestaurantListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"restaurantCell" forIndexPath:indexPath];
-    if (self.listArray){
-        cell.restaurantNameLabel.text = self.listArray[indexPath.row][@"name"];
-        cell.restaurantAddressLabel.text = self.listArray[indexPath.row][@"address"];
-    }
-   
-
+    FDMyPostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myPostCell" forIndexPath:indexPath];
+    
+    cell.nameLabel.text = @"NAME";
+    cell.addressLabel.text = @"Taipei";
+    cell.phoneLabel.text = @"123";
+    
+    // Configure the cell...
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60.0;
+    return 80.0;
 }
-
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

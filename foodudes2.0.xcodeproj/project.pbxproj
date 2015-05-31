@@ -18,6 +18,8 @@
 		E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EC1AB5CE61004FEEDD /* FDLoginViewController.m */; };
 		E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */; };
 		E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */; };
+		E86E38051B1B590D006C5F20 /* FDMyPostListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E86E38041B1B590D006C5F20 /* FDMyPostListTableViewController.m */; };
+		E86E38081B1B5946006C5F20 /* FDMyPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E86E38071B1B5946006C5F20 /* FDMyPostTableViewCell.m */; };
 		E8868E811ADA84CC0030FE92 /* FDParseTestingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */; };
 		E8868E841ADA889A0030FE92 /* FDParseTestingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */; };
 		E8868E8A1ADAAB850030FE92 /* FDCommentTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */; };
@@ -69,6 +71,10 @@
 		E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemViewController.m; sourceTree = "<group>"; };
 		E80389F11AB5CE88004FEEDD /* FDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSearchViewController.h; sourceTree = "<group>"; };
 		E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDSearchViewController.m; sourceTree = "<group>"; };
+		E86E38031B1B590D006C5F20 /* FDMyPostListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDMyPostListTableViewController.h; sourceTree = "<group>"; };
+		E86E38041B1B590D006C5F20 /* FDMyPostListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDMyPostListTableViewController.m; sourceTree = "<group>"; };
+		E86E38061B1B5946006C5F20 /* FDMyPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDMyPostTableViewCell.h; sourceTree = "<group>"; };
+		E86E38071B1B5946006C5F20 /* FDMyPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDMyPostTableViewCell.m; sourceTree = "<group>"; };
 		E8868E7F1ADA84CC0030FE92 /* FDParseTestingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDParseTestingTableViewController.h; sourceTree = "<group>"; };
 		E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDParseTestingTableViewController.m; sourceTree = "<group>"; };
 		E8868E821ADA889A0030FE92 /* FDParseTestingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDParseTestingTableViewCell.h; sourceTree = "<group>"; };
@@ -229,6 +235,8 @@
 				E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */,
 				E8ED1F7B1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.h */,
 				E8ED1F7C1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m */,
+				E86E38061B1B5946006C5F20 /* FDMyPostTableViewCell.h */,
+				E86E38071B1B5946006C5F20 /* FDMyPostTableViewCell.m */,
 			);
 			name = Views;
 			path = ../Views;
@@ -253,6 +261,8 @@
 				E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */,
 				E8ED1F811B1A018E00F53A2E /* FDRestaurantListTableViewController.h */,
 				E8ED1F821B1A018E00F53A2E /* FDRestaurantListTableViewController.m */,
+				E86E38031B1B590D006C5F20 /* FDMyPostListTableViewController.h */,
+				E86E38041B1B590D006C5F20 /* FDMyPostListTableViewController.m */,
 			);
 			name = Controllers;
 			path = ../Controllers;
@@ -431,6 +441,7 @@
 				E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */,
 				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,
 				E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */,
+				E86E38081B1B5946006C5F20 /* FDMyPostTableViewCell.m in Sources */,
 				E8868E8A1ADAAB850030FE92 /* FDCommentTestTableViewController.m in Sources */,
 				E8868E841ADA889A0030FE92 /* FDParseTestingTableViewCell.m in Sources */,
 				E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */,
@@ -443,6 +454,7 @@
 				E8ED1F7D1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m in Sources */,
 				E80389C51AB5C289004FEEDD /* main.m in Sources */,
 				E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */,
+				E86E38051B1B590D006C5F20 /* FDMyPostListTableViewController.m in Sources */,
 				E8E63E761ABDC2D7006ABD86 /* userMarkerView.m in Sources */,
 				E8ED1F831B1A018E00F53A2E /* FDRestaurantListTableViewController.m in Sources */,
 				E8CC920C1AF6717400BE9987 /* UIPlaceHolderTextView.m in Sources */,
