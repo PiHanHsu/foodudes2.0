@@ -10,7 +10,7 @@
 
 @interface FDMyPostTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *restaurantImageView;
+@property (weak, nonatomic) IBOutlet UIImageView*restaurantImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;

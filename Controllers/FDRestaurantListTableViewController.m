@@ -32,25 +32,36 @@
 
 - (void) loadData{
     self.listArray = [@[] mutableCopy];
-    for (PFObject * post in self.restaurantListArray) {
-        PFObject * obj = post[@"parent"];
-        NSString *objID = obj.objectId;
-        PFQuery * query = [PFQuery queryWithClassName:@"Restaurant_new"];
-        [query getObjectInBackgroundWithId:objID block:^(PFObject *restaurant, NSError *error) {
+    for (PFObject * post in self.restaurantListArray){
+        PFFile * file = post[@"photo"];
+        if(file)  {
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if(!error){
+                    NSData * imageData = data;
+                    NSDictionary * dict = [[NSDictionary alloc]init];
+                    dict = @{ @"name" : post[@"rName"],
+                              @"address" : post[@"rAddress"],
+                              @"imageData" : imageData};
+                    [self.listArray addObject:dict];
+                    [self.tableView reloadData];
+                }
+                else
+                    NSLog(@"%@", error);
+            }];
+        }else{
+            NSData * imageData = [[NSData alloc]init];
             
-            NSLog(@"rest: %@", restaurant);
             NSDictionary * dict = [[NSDictionary alloc]init];
-            dict = @{ @"name" : restaurant[@"name"],
-                      @"address" : restaurant[@"address"]};
-            
+            dict = @{ @"name" : post[@"rName"],
+                      @"address" : post[@"rAddress"],
+                      @"imageData" : imageData
+                      };
             [self.listArray addObject:dict];
             [self.tableView reloadData];
-            
-        }];
-       
-       
-        
+        }
     }
+    
+    
 }
 #pragma mark - Table view data source
 
@@ -70,6 +81,10 @@
     if (self.listArray){
         cell.restaurantNameLabel.text = self.listArray[indexPath.row][@"name"];
         cell.restaurantAddressLabel.text = self.listArray[indexPath.row][@"address"];
+        cell.restaurantImageView.image = [UIImage imageWithData:self.listArray[indexPath.row][@"imageData"]];
+//        cell.restaurantImageView.contentMode = UIViewContentModeScaleAspectFit;
+//        cell.restaurantImageView.clipsToBounds = YES;
+        
     }
    
 

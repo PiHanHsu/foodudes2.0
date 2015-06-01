@@ -349,7 +349,7 @@
                                     <outlet property="addressLabel" destination="JgL-At-lb3" id="E0u-o1-Fef"/>
                                     <outlet property="nameLabel" destination="V7z-e3-czx" id="WpT-TK-4bC"/>
                                     <outlet property="phoneLabel" destination="3kF-IS-2Ty" id="5oy-ka-3bx"/>
-                                    <outlet property="restaurantImageView" destination="kl9-nG-9xU" id="Oem-TO-oIp"/>
+                                    <outlet property="restaurantImageView" destination="uob-9E-58S" id="PrT-MT-Pkn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -616,28 +616,49 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gGR-qw-xFg" id="Hr8-SP-FMp">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c2g-Bm-PYT">
-                                            <rect key="frame" x="8" y="5" width="50" height="50"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c2g-Bm-PYT">
+                                            <rect key="frame" x="16" y="5" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="dMl-E2-y70"/>
+                                                <constraint firstAttribute="width" constant="50" id="lqh-0w-PwY"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vus-dC-yV3" userLabel="Name">
-                                            <rect key="frame" x="88" y="8" width="504" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vus-dC-yV3" userLabel="Name">
+                                            <rect key="frame" x="76" y="5" width="526" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3Z-nS-fWr" userLabel="Address">
-                                            <rect key="frame" x="88" y="30" width="504" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="76" y="30" width="519" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="trailing" secondItem="Hr8-SP-FMp" secondAttribute="trailingMargin" id="3Pa-SI-Zgl"/>
+                                        <constraint firstItem="c2g-Bm-PYT" firstAttribute="top" secondItem="Hr8-SP-FMp" secondAttribute="top" constant="5" id="2p5-CE-FnE"/>
+                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="trailing" secondItem="Hr8-SP-FMp" secondAttribute="trailingMargin" constant="10" id="3Pa-SI-Zgl"/>
                                         <constraint firstAttribute="centerY" secondItem="U3Z-nS-fWr" secondAttribute="centerY" constant="-11" id="42X-0b-KmP"/>
-                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="leading" secondItem="c2g-Bm-PYT" secondAttribute="trailing" constant="30" id="nyn-Mb-olT"/>
-                                        <constraint firstItem="U3Z-nS-fWr" firstAttribute="leading" secondItem="c2g-Bm-PYT" secondAttribute="trailing" constant="30" id="ugI-RZ-5vN"/>
+                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="top" secondItem="Hr8-SP-FMp" secondAttribute="top" constant="5" id="7Li-mV-qch"/>
+                                        <constraint firstItem="c2g-Bm-PYT" firstAttribute="leading" secondItem="Hr8-SP-FMp" secondAttribute="leadingMargin" constant="5" id="HsU-DH-dd6"/>
+                                        <constraint firstItem="c2g-Bm-PYT" firstAttribute="top" secondItem="Hr8-SP-FMp" secondAttribute="topMargin" constant="5" id="KH6-1C-rkU"/>
+                                        <constraint firstAttribute="bottom" secondItem="c2g-Bm-PYT" secondAttribute="bottom" constant="4" id="PWE-k4-VMg"/>
+                                        <constraint firstItem="Vus-dC-yV3" firstAttribute="leading" secondItem="c2g-Bm-PYT" secondAttribute="trailing" constant="10" id="nyn-Mb-olT"/>
+                                        <constraint firstAttribute="bottom" secondItem="U3Z-nS-fWr" secondAttribute="bottom" constant="8" id="s2u-oq-dYC"/>
+                                        <constraint firstItem="c2g-Bm-PYT" firstAttribute="top" secondItem="Hr8-SP-FMp" secondAttribute="topMargin" constant="-3" id="sNb-xc-dWR"/>
+                                        <constraint firstAttribute="trailing" secondItem="U3Z-nS-fWr" secondAttribute="trailing" constant="5" id="tdf-kT-JEC"/>
+                                        <constraint firstItem="U3Z-nS-fWr" firstAttribute="leading" secondItem="c2g-Bm-PYT" secondAttribute="trailing" constant="10" id="ugI-RZ-5vN"/>
+                                        <constraint firstItem="c2g-Bm-PYT" firstAttribute="leading" secondItem="Hr8-SP-FMp" secondAttribute="leading" constant="16" id="zFr-PB-YO4"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="HsU-DH-dd6"/>
+                                            <exclude reference="KH6-1C-rkU"/>
+                                            <exclude reference="sNb-xc-dWR"/>
+                                            <exclude reference="42X-0b-KmP"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="restaurantAddressLabel" destination="U3Z-nS-fWr" id="el9-TB-Qmm"/>

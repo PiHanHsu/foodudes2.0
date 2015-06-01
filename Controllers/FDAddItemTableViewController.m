@@ -168,19 +168,25 @@
 }
 
 -(void) saveDataToParse{
-        PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
-        restaurant[@"name"] = self.restaurantNameTextView.text;
-        restaurant[@"address"] = self.addressTextView.text;
-        restaurant[@"phone"] = self.phoneTextView.text;
-        restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
-        restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
-        restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
+    PFObject *restaurant = [PFObject objectWithClassName:@"Restaurant_new"];
+    restaurant[@"name"] = self.restaurantNameTextView.text;
+    restaurant[@"address"] = self.addressTextView.text;
+    restaurant[@"phone"] = self.phoneTextView.text;
+    restaurant[@"placeID"] = self.restaurantInfoDict[@"id"];
+    restaurant[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
+    restaurant[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
         
-        PFObject *post =[PFObject objectWithClassName:@"Posts"];
-        post[@"reason"] = self.reasonTextView.text;
-        post[@"parent"] =restaurant; //set relation between post and restaurant
-        post[@"userID"] = [PFUser currentUser].objectId;
-        post[@"userName"] = [PFUser currentUser][@"name"];
+    PFObject *post =[PFObject objectWithClassName:@"Posts"];
+    post[@"reason"] = self.reasonTextView.text;
+    post[@"parent"] =restaurant; //set relation between post and restaurant
+    post[@"userID"] = [PFUser currentUser].objectId;
+    post[@"userName"] = [PFUser currentUser][@"name"];
+    post[@"rName"] = self.restaurantNameTextView.text;
+    post[@"rAddress"] = self.addressTextView.text;
+    post[@"rPhone"] = self.phoneTextView.text;
+    post[@"rPlaceID"] = self.restaurantInfoDict[@"id"];
+    post[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
+    post[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
         if(self.photoImageSelected) {
             // reset
             self.photoImageSelected = NO;

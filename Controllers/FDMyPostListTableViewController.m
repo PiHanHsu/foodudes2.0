@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 
 @interface FDMyPostListTableViewController ()
-
+@property (strong, nonatomic) NSMutableArray * listArray; //array of myPosts
 @end
 
 @implementation FDMyPostListTableViewController
@@ -34,10 +34,38 @@
 }
 
 -(void) loadData{
+    self.listArray = [@[] mutableCopy];
     for (PFObject * post in self.myPostListArray) {
-        PFObject * restaurant = post[@"parent"];
-        [restaurant fetch];
-        //TODO: tbc...
+        
+        PFFile * file = post[@"photo"];
+        if(file)  {
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if(!error){
+                    NSData * imageData = data;
+                    NSDictionary * dict = [[NSDictionary alloc]init];
+                    dict = @{ @"name" : post[@"rName"],
+                              @"address" : post[@"rAddress"],
+                              @"phone" : post[@"rPhone"],
+                              @"imageData" : imageData};
+                    [self.listArray addObject:dict];
+                    [self.tableView reloadData];
+                }
+                else
+                    NSLog(@"%@", error);
+            }];
+        }else{
+            NSData * imageData = [[NSData alloc]init];
+            
+            NSDictionary * dict = [[NSDictionary alloc]init];
+            dict = @{ @"name" : post[@"rName"],
+                      @"address" : post[@"rAddress"],
+                      @"phone" : post[@"rPhone"],
+                      @"imageData" : imageData
+                      };
+            [self.listArray addObject:dict];
+            [self.tableView reloadData];
+        }
+
     }
     
 }
@@ -50,19 +78,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.myPostListArray.count;
+    return self.listArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FDMyPostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myPostCell" forIndexPath:indexPath];
-    
-    cell.nameLabel.text = @"NAME";
-    cell.addressLabel.text = @"Taipei";
-    cell.phoneLabel.text = @"123";
-    
-    // Configure the cell...
-    
+    if (self.listArray){
+        cell.nameLabel.text = self.listArray[indexPath.row][@"name"];
+        cell.addressLabel.text = self.listArray[indexPath.row][@"address"];
+        cell.phoneLabel.text= self.listArray[indexPath.row][@"phone"];
+        cell.restaurantImageView.image = [UIImage imageWithData:self.listArray[indexPath.row][@"imageData"]];
+     }
     return cell;
 }
 
