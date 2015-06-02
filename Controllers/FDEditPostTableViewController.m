@@ -25,16 +25,17 @@
     [super viewDidLoad];
     NSLog(@"post: %@", self.post);
     
-    
     self.nameTextView.text = self.post[@"rName"];
-    self.addressTextView.placeholder = self.post[@"rAddress"];
-    self.phoneTextView.placeholder = self.post[@"rPhone"];
-    self.reasonTextView.placeholder = self.post[@"reason" ];
+    self.addressTextView.text = self.post[@"rAddress"];
+    self.phoneTextView.text = self.post[@"rPhone"];
+    self.reasonTextView.text = self.post[@"reason" ];
+    [self.editPhotoButton addTarget:self action:@selector(showOptions:) forControlEvents:UIControlEventTouchUpInside];
     PFFile * file = self.post[@"photo"];
     if (file) {
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                                 if(!error){
-                                    [self.editPhotoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal] ;
+                                 [self.editPhotoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal] ;
+                                //self.editPhotoButton.imageView.image = [UIImage imageWithData:data];
                                     
                                 }
                                 else
@@ -58,6 +59,49 @@
     [self presentViewController:tabBarVC animated:YES completion:nil];
 }
 
+- (IBAction)saveButtonPressed:(id)sender {
+
+    PFQuery * query = [PFQuery queryWithClassName:@"Posts"];
+    
+    [query getObjectInBackgroundWithId:self.post.objectId
+                                 block:^(PFObject *post, NSError *error) {
+                                    post[@"reason"] = self.reasonTextView.text;
+                                     //TODO: finish this
+//                                    post[@"rName"] = self.nameTextView.text;
+//                                    post[@"rAddress"] = self.addressTextView.text;
+//                                    post[@"rPhone"] = self.phoneTextView.text;
+                                     
+                                     NSData *image = UIImageJPEGRepresentation(self.editPhotoButton.imageView.image, 0.5f);
+                                     if (image) {
+                                         PFFile *photo = [PFFile fileWithData:image];
+                                         [photo saveInBackground];
+                                         post[@"photo"] = photo;
+                                     }
+                                     
+                                     
+                                     [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                         if (succeeded) {
+                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改成功"
+                                                                                             message:nil
+                                                                                            delegate:nil
+                                                                                   cancelButtonTitle:@"OK"
+                                                                                   otherButtonTitles:nil];
+                                             [alert show];
+                                             [self _ViewControllerAnimated:YES];
+                                         } else {
+                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失敗"
+                                                                                             message:nil
+                                                                                            delegate:nil
+                                                                                   cancelButtonTitle:@"OK"
+                                                                                   otherButtonTitles:nil];
+                                             [alert show];
+                                             NSLog(@"Save failed: %@", error);
+                                         }
+                                     }];
+
+                                 }];
+    
+}
 
 - (void) showOptions:(id)sender{
     UIAlertController * view=   [UIAlertController

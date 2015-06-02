@@ -366,10 +366,10 @@
             </objects>
             <point key="canvasLocation" x="3196" y="1826"/>
         </scene>
-        <!--Edit Post Table View Controller-->
+        <!--Edit-->
         <scene sceneID="x1k-E5-NwE">
             <objects>
-                <tableViewController id="ScE-0V-fTd" customClass="FDEditPostTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FDEditPostTableViewController" id="ScE-0V-fTd" customClass="FDEditPostTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="27Q-uO-54t">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,6 +495,17 @@
                             <outlet property="delegate" destination="ScE-0V-fTd" id="as7-3o-hTI"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="UuH-kA-iOf"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Edit" id="L4u-2K-zV7">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="JRA-gK-RH8">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="ScE-0V-fTd" id="fcO-I4-OVG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addressTextView" destination="Xln-rY-S8a" id="OTg-hg-y8L"/>
                         <outlet property="editPhotoButton" destination="ilb-L2-54h" id="LNB-cx-4pD"/>
