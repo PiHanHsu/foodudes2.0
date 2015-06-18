@@ -35,6 +35,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    UIImageView *background = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background"]];
+    background.frame =CGRectMake(0, 0, 600,self.view.frame.size.height);
+    
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]
+    ;
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    visualEffectView.frame = background.bounds;
+    [background addSubview:visualEffectView];
+    [self.view insertSubview:background atIndex:0];
+
     self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.indicator.center = self.view.center;
     [self.indicator startAnimating];
@@ -43,7 +56,7 @@
     NSString *name = [PFUser currentUser][@"name"];
     if (name) {
         self.userNameLabel.text = name;
-        self.userNameLabel.textColor = [UIColor blueColor];
+        //self.userNameLabel.textColor = [UIColor blueColor];
         self.userNameLabel.font = [UIFont systemFontOfSize:24];
     }
     
@@ -56,6 +69,8 @@
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                                    if (connectionError == nil && data != nil) {
                                        self.userHeadImage.image = [UIImage imageWithData:data];
+                                       self.userHeadImage.layer.cornerRadius = 5.0f;
+                                       self.userHeadImage.clipsToBounds = YES;
                                        
                                    } else {
                                        NSLog(@"Failed to load profile photo.");
@@ -70,6 +85,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - Table view data source

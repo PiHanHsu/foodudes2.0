@@ -30,6 +30,7 @@
 		E8B1A5881B076BD100322873 /* infoWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B1A5861B076BD100322873 /* infoWindowView.m */; };
 		E8B1A5891B076BD100322873 /* infoWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8B1A5871B076BD100322873 /* infoWindowView.xib */; };
 		E8CC920C1AF6717400BE9987 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */; };
+		E8D781E21B331AF40097E8C6 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D781E11B331AF40097E8C6 /* background@2x.png */; };
 		E8DBAAB21AD2AEF10064262F /* FDAddItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */; };
 		E8E63E691ABC5208006ABD86 /* GCGeocodingService.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E681ABC5208006ABD86 /* GCGeocodingService.m */; };
 		E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E63E6E1ABDB92B006ABD86 /* FDUser.m */; };
@@ -95,6 +96,7 @@
 		E8B1A5871B076BD100322873 /* infoWindowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = infoWindowView.xib; sourceTree = "<group>"; };
 		E8CC920A1AF6717400BE9987 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPlaceHolderTextView.h; path = Geocoding/UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		E8CC920B1AF6717400BE9987 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPlaceHolderTextView.m; path = Geocoding/UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		E8D781E11B331AF40097E8C6 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDAddItemTableViewController.h; sourceTree = "<group>"; };
 		E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemTableViewController.m; sourceTree = "<group>"; };
 		E8E63E671ABC5208006ABD86 /* GCGeocodingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCGeocodingService.h; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				E86E38091B1C9AF7006C5F20 /* restaurant_placeholder.png */,
+				E8D781E11B331AF40097E8C6 /* background@2x.png */,
 				E80389C61AB5C289004FEEDD /* AppDelegate.h */,
 				E80389C71AB5C289004FEEDD /* AppDelegate.m */,
 				E80389C91AB5C289004FEEDD /* ViewController.h */,
@@ -392,6 +395,7 @@
 				E80389CE1AB5C289004FEEDD /* Main.storyboard in Resources */,
 				E80389D31AB5C289004FEEDD /* LaunchScreen.xib in Resources */,
 				E80389D01AB5C289004FEEDD /* Images.xcassets in Resources */,
+				E8D781E21B331AF40097E8C6 /* background@2x.png in Resources */,
 				E8B1A5891B076BD100322873 /* infoWindowView.xib in Resources */,
 				E86E380A1B1C9AF7006C5F20 /* restaurant_placeholder.png in Resources */,
 				E8E63E771ABDC2D7006ABD86 /* UserMarkerView.xib in Resources */,

@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     //NSLog(@"MyPostList: %@" , self.myPostListArray);
     //[self loadData];
     

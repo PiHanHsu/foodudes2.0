@@ -30,6 +30,8 @@
 @property (strong, nonatomic) PFObject * restaurantInfo;
 @property (strong, nonatomic) NSString *restaurantID;
 @property (strong, nonatomic) NSString *userID;
+
+@property(nonatomic,strong) UIDynamicAnimator *animator;
 @end
 
 
@@ -208,7 +210,7 @@
     
     //move marker position
     CGPoint point = [mapView.projection pointForCoordinate:marker.position];
-    point.y = point.y - 175;
+    point.y = point.y - 195;
     GMSCameraUpdate *camera =
     [GMSCameraUpdate setTarget:[mapView.projection coordinateForPoint:point]];
     [mapView animateWithCameraUpdate:camera];
@@ -231,16 +233,24 @@
 
 -(void) displayPost{
     self.postScrollView.hidden = NO;
-    self.postScrollView.contentSize = CGSizeMake(275 *self.markerPostsArray.count +50, 290);
+    self.postScrollView.contentSize = CGSizeMake(275 *self.markerPostsArray.count +50, 310);
+    self.postScrollView.backgroundColor = [UIColor clearColor];
+    //self.postScrollView.backgroundColor = [UIColor colorWithRed:233/255.0 green:234/255.0 blue:237/255.0 alpha:1.0];
     
-    self.postScrollView.backgroundColor = [UIColor whiteColor];
-    
-    
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]
+    ;
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    visualEffectView.frame = self.postScrollView.bounds;
+    //[self.postScrollView addSubview:visualEffectView];
     
     for (int i= 0; i<self.markerPostsArray.count ; i++){
         int x = 30;
         infoWindowView *infoView =  [[[NSBundle mainBundle] loadNibNamed:@"infoWindowView" owner:self options:nil] objectAtIndex:0];
-        infoView.frame = CGRectMake(x+(275 *i), 0, 260, 290);
+        infoView.frame = CGRectMake(x+(275 *i), 10, 260, 290);
+        infoView.layer.cornerRadius = 10.0;
+        infoView.clipsToBounds = YES;
         infoView.restaurantName.text = self.restaurantInfo[@"name"];
         infoView.address.text = self.restaurantInfo[@"address"];
         infoView.tel.text = self.restaurantInfo[@"phone"];
@@ -293,15 +303,34 @@
 - (void)mapView:(GMSMapView *)mapView
 didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
+   // [self viewDismiss];
     self.postScrollView.hidden = YES;
-    
-    //remove all the subviews in postScrollView
-    for(UIView *subview in [self.postScrollView subviews]) {
-        [subview removeFromSuperview];
-    }
+   //remove all the subviews in postScrollView
+        for(UIView *subview in [self.postScrollView subviews]) {
+            [subview removeFromSuperview];
+        }
+
     [self.searchBar resignFirstResponder];
-    
+   
 }
 
+-(void)viewDismiss {
+    
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[self.postScrollView]];
+    //控制方向與速度. 0.0f -->正下方, 10.0f 速度 （數字越大越快）
+    gravityBehaviour.gravityDirection = CGVectorMake(0.0f, 2.0f);
+    [self.animator addBehavior:gravityBehaviour];
+    
+    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.postScrollView]];
+    //控制轉動程度,2.0f-->數字越大轉動越大
+    [itemBehaviour addAngularVelocity:2.0f forItem:self.postScrollView];
+    [self.animator addBehavior:itemBehaviour];
+    
+    //remove all the subviews in postScrollView
+//    for(UIView *subview in [self.postScrollView subviews]) {
+//        [subview removeFromSuperview];
+//    }
 
+}
 @end
