@@ -637,22 +637,30 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-0s-ue7">
-                                <rect key="frame" x="0.0" y="128" width="600" height="310"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-0s-ue7">
+                                <rect key="frame" x="0.0" y="128" width="600" height="290"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="310" id="GuH-3B-qe8"/>
+                                    <constraint firstAttribute="height" constant="290" id="h9o-n4-6Yh"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="h9o-n4-6Yh"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="top" secondItem="irD-LV-FtS" secondAttribute="bottom" id="0vQ-Q6-mMn"/>
-                            <constraint firstItem="AXd-0s-ue7" firstAttribute="top" secondItem="Xer-9Z-del" secondAttribute="bottom" constant="20" id="BL4-Ie-mNK"/>
                             <constraint firstAttribute="trailing" secondItem="Xer-9Z-del" secondAttribute="trailing" id="MOd-ED-wJw"/>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="NqF-6d-bqi"/>
-                            <constraint firstAttribute="trailing" secondItem="AXd-0s-ue7" secondAttribute="trailing" id="UIe-u2-W6J"/>
-                            <constraint firstItem="AXd-0s-ue7" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="dr2-KT-U0h"/>
+                            <constraint firstItem="AXd-0s-ue7" firstAttribute="top" secondItem="Xer-9Z-del" secondAttribute="bottom" constant="20" id="ULe-vR-GRF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ULe-vR-GRF"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Cxc-GH-p3r"/>
                     <connections>
@@ -711,7 +719,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="friendsCell" rowHeight="60" id="Ngs-NC-s3c" customClass="FDFriendsTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="friendsCell" rowHeight="60" id="Ngs-NC-s3c" customClass="FDFriendsTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ngs-NC-s3c" id="3mI-Ra-NEn">
                                     <autoresizingMask key="autoresizingMask"/>

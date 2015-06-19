@@ -46,6 +46,8 @@
         
         self.phoneTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_phone_number"]];
         self.addressTextView.text = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"formatted_address"]];
+        //NSLog(@"info: %@", self.restaurantInfoDict);
+        
     }else if (self.restaurantName){
         self.restaurantNameTextView.text = self.restaurantName;
     }

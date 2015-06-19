@@ -48,7 +48,7 @@
     [background addSubview:visualEffectView];
     [self.view insertSubview:background atIndex:0];
 
-    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.indicator.center = self.view.center;
     [self.indicator startAnimating];
     [self.view addSubview:self.indicator];

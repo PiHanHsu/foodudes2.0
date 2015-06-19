@@ -66,6 +66,11 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if ([UIScreen mainScreen].bounds.size.height == 480){
+        self.postScrollView.frame = CGRectMake(0, 70, self.view.frame.size.width , 290);
+    }else{
+        self.postScrollView.frame = CGRectMake(0, self.view.frame.size.height * 0.2, self.view.frame.size.width , 290);
+    }
     self.postScrollView.hidden = YES;
     
     [self loadFriendsPost];
@@ -210,7 +215,15 @@
     
     //move marker position
     CGPoint point = [mapView.projection pointForCoordinate:marker.position];
-    point.y = point.y - 195;
+    if ([UIScreen mainScreen].bounds.size.height == 480){
+        point.y = point.y - 205;
+    }else if ([UIScreen mainScreen].bounds.size.height == 568){
+        point.y = point.y - 210;
+    }else if ([UIScreen mainScreen].bounds.size.height == 667){
+        point.y = point.y - 175;
+    }else if ([UIScreen mainScreen].bounds.size.height == 736){
+        point.y = point.y - 155;
+    }
     GMSCameraUpdate *camera =
     [GMSCameraUpdate setTarget:[mapView.projection coordinateForPoint:point]];
     [mapView animateWithCameraUpdate:camera];
@@ -233,28 +246,26 @@
 
 -(void) displayPost{
     self.postScrollView.hidden = NO;
-    self.postScrollView.contentSize = CGSizeMake(275 *self.markerPostsArray.count +50, 310);
+    self.postScrollView.contentSize = CGSizeMake(275 *self.markerPostsArray.count +50, 290);
     self.postScrollView.backgroundColor = [UIColor clearColor];
-    //self.postScrollView.backgroundColor = [UIColor colorWithRed:233/255.0 green:234/255.0 blue:237/255.0 alpha:1.0];
-    
-    UIVisualEffect *blurEffect;
-    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]
-    ;
-    UIVisualEffectView *visualEffectView;
-    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    visualEffectView.frame = self.postScrollView.bounds;
-    //[self.postScrollView addSubview:visualEffectView];
     
     for (int i= 0; i<self.markerPostsArray.count ; i++){
-        int x = 30;
+        int x = (self.view.frame.size.width-260)/2;
         infoWindowView *infoView =  [[[NSBundle mainBundle] loadNibNamed:@"infoWindowView" owner:self options:nil] objectAtIndex:0];
-        infoView.frame = CGRectMake(x+(275 *i), 10, 260, 290);
-        infoView.layer.cornerRadius = 10.0;
+        infoView.frame = CGRectMake(x+(275 *i), 0, 260, 290);
+        infoView.layer.cornerRadius = 5.0;
         infoView.clipsToBounds = YES;
         infoView.restaurantName.text = self.restaurantInfo[@"name"];
-        infoView.address.text = self.restaurantInfo[@"address"];
-        infoView.tel.text = self.restaurantInfo[@"phone"];
-        infoView.postLabel.text = self.markerPostsArray[i][@"reason"];
+        //TDOD: make sure it won't screw up
+        NSString *address = self.restaurantInfo[@"address"];
+        if ([address containsString:@"台灣"]) {
+            NSString * newAddress = [address substringFromIndex:5];
+            infoView.addressTextView.text = newAddress;
+        }else{
+            infoView.addressTextView.text = address;
+        }
+        infoView.phoneTextView.text = self.restaurantInfo[@"phone"];
+        infoView.postTextView.text = self.markerPostsArray[i][@"reason"];
         infoView.userNameLabel.text = self.markerPostsArray[i][@"userName"];
         
         PFFile * file = self.markerPostsArray[i][@"photo"];

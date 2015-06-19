@@ -21,7 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    NSLog(@"array: %@", self.restaurantListArray);
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    //NSLog(@"array: %@", self.restaurantListArray);
     [self loadData];
 }
 
@@ -50,7 +51,6 @@
             }];
         }else{
             NSData * imageData = [[NSData alloc]init];
-            
             NSDictionary * dict = [[NSDictionary alloc]init];
             dict = @{ @"name" : post[@"rName"],
                       @"address" : post[@"rAddress"],
