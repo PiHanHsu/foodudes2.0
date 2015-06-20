@@ -232,7 +232,6 @@
         <!--Parse Testing Table View Controller-->
         <scene sceneID="oJ9-ft-nh7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="odM-wn-K03" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="j95-4m-pDD" customClass="FDParseTestingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="1il-HJ-8pg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -293,6 +292,7 @@
                         </connections>
                     </tableView>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="odM-wn-K03" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3546" y="1079"/>
         </scene>
@@ -677,13 +677,13 @@
                                     <rect key="frame" x="20" y="30" width="120" height="120"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jC-9t-3VR">
-                                    <rect key="frame" x="160" y="40" width="207" height="27"/>
+                                    <rect key="frame" x="160" y="30" width="207" height="27"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Posts:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffl-sf-ZHb">
-                                    <rect key="frame" x="160" y="81" width="207" height="21"/>
+                                    <rect key="frame" x="160" y="65" width="207" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -695,7 +695,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je3-t5-QJH">
-                                    <rect key="frame" x="260" y="77" width="32" height="32"/>
+                                    <rect key="frame" x="260" y="60" width="32" height="32"/>
                                     <state key="normal" image="edit">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -703,6 +703,12 @@
                                         <segue destination="JbS-LM-b2s" kind="show" id="T6d-ua-PXo"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Likes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2T-Q8-7eV">
+                                    <rect key="frame" x="160" y="94" width="207" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -745,6 +751,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="ozO-wf-S99"/>
                     <connections>
+                        <outlet property="likesLabel" destination="T2T-Q8-7eV" id="iMv-wP-X7I"/>
                         <outlet property="userFriendsLabel" destination="klI-UF-IQ4" id="4Az-YD-K5R"/>
                         <outlet property="userHeadImage" destination="q19-kE-hl7" id="Z9u-gn-lOb"/>
                         <outlet property="userNameLabel" destination="2jC-9t-3VR" id="JmD-rE-fUE"/>

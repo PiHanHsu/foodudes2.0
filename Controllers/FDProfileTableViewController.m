@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPostsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userFriendsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (strong, nonatomic) NSArray * restaurantListArray; //array of restaurants
 @property (strong, nonatomic) NSArray * myPostArray;// array of my posts
 @property (strong, nonatomic) UIActivityIndicatorView * indicator;
@@ -78,7 +79,7 @@
                                }];
     }
 
-    
+    [self getlikes];
     [self getFBfriends];
 }
 
@@ -205,6 +206,22 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"Go to Restaurant List" sender:indexPath];
     
 }
+
+- (void)getlikes {
+    PFQuery * query = [PFQuery queryWithClassName:@"Posts"];
+    [query whereKey:@"userID" equalTo:[PFUser currentUser].objectId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSNumber * sum = [objects valueForKeyPath:@"@sum.likeNumber"];
+            self.likesLabel.text = [NSString stringWithFormat:@"Likes: %@", sum];
+            
+        } else {
+            
+            NSLog(@"get likes Error: %@ ", error);
+        }
+    }];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
