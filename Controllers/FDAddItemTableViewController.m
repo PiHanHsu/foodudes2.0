@@ -75,6 +75,12 @@
                 post[@"parent"] = [PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:objID];
                 post[@"userID"] = [PFUser currentUser].objectId;
                 post[@"userName"] = [PFUser currentUser][@"name"];
+                post[@"rName"] = self.restaurantNameTextView.text;
+                post[@"rAddress"] = self.addressTextView.text;
+                post[@"rPhone"] = self.phoneTextView.text;
+                post[@"rPlaceID"] = self.restaurantInfoDict[@"id"];
+                post[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
+                post[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
                 if(self.photoImageSelected) {
                     // reset
                     self.photoImageSelected = NO;
@@ -241,7 +247,8 @@
         post[@"parent"] =restaurant; //set relation between post and restaurant
         post[@"userID"] = [PFUser currentUser].objectId;
         post[@"userName"] = [PFUser currentUser][@"name"];
-        
+        post[@"likeNumber"] = 0;
+    
         if(self.photoImageSelected) {
             // reset
             self.photoImageSelected = NO;

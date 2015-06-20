@@ -18,6 +18,7 @@
 		E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EC1AB5CE61004FEEDD /* FDLoginViewController.m */; };
 		E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */; };
 		E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */; };
+		E85393241B35B13300290E3F /* FDLikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E85393231B35B13300290E3F /* FDLikeButton.m */; };
 		E86E38051B1B590D006C5F20 /* FDMyPostListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E86E38041B1B590D006C5F20 /* FDMyPostListTableViewController.m */; };
 		E86E38081B1B5946006C5F20 /* FDMyPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E86E38071B1B5946006C5F20 /* FDMyPostTableViewCell.m */; };
 		E86E380A1B1C9AF7006C5F20 /* restaurant_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E86E38091B1C9AF7006C5F20 /* restaurant_placeholder.png */; };
@@ -74,6 +75,8 @@
 		E80389EF1AB5CE7B004FEEDD /* FDAddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDAddItemViewController.m; sourceTree = "<group>"; };
 		E80389F11AB5CE88004FEEDD /* FDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDSearchViewController.h; sourceTree = "<group>"; };
 		E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDSearchViewController.m; sourceTree = "<group>"; };
+		E85393221B35B13300290E3F /* FDLikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDLikeButton.h; sourceTree = "<group>"; };
+		E85393231B35B13300290E3F /* FDLikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDLikeButton.m; sourceTree = "<group>"; };
 		E86E38031B1B590D006C5F20 /* FDMyPostListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDMyPostListTableViewController.h; sourceTree = "<group>"; };
 		E86E38041B1B590D006C5F20 /* FDMyPostListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDMyPostListTableViewController.m; sourceTree = "<group>"; };
 		E86E38061B1B5946006C5F20 /* FDMyPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDMyPostTableViewCell.h; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 				E8ED1F7C1B19FEAC00F53A2E /* FDRestaurantListTableViewCell.m */,
 				E86E38061B1B5946006C5F20 /* FDMyPostTableViewCell.h */,
 				E86E38071B1B5946006C5F20 /* FDMyPostTableViewCell.m */,
+				E85393221B35B13300290E3F /* FDLikeButton.h */,
+				E85393231B35B13300290E3F /* FDLikeButton.m */,
 			);
 			name = Views;
 			path = ../Views;
@@ -461,6 +466,7 @@
 				E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */,
 				E8E63E721ABDBD1D006ABD86 /* FDMarker.m in Sources */,
 				E8868E811ADA84CC0030FE92 /* FDParseTestingTableViewController.m in Sources */,
+				E85393241B35B13300290E3F /* FDLikeButton.m in Sources */,
 				E80389CB1AB5C289004FEEDD /* ViewController.m in Sources */,
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
 				E80389F31AB5CE88004FEEDD /* FDSearchViewController.m in Sources */,

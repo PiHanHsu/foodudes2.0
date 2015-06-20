@@ -16,6 +16,7 @@
 
 #import "FDMarker.h"
 #import "infoWindowView.h"
+#import "FDLikeButton.h"
 
 @interface FDSearchViewController ()<GMSMapViewDelegate, UISearchBarDelegate>
 
@@ -268,6 +269,19 @@
         infoView.postTextView.text = self.markerPostsArray[i][@"reason"];
         infoView.userNameLabel.text = self.markerPostsArray[i][@"userName"];
         
+        infoView.likeButton.postObj =self.markerPostsArray[i];
+        PFQuery * query = [PFQuery queryWithClassName:@"Like"];
+        [query whereKey:@"postID" equalTo:infoView.likeButton.postObj.objectId];
+        [query whereKey:@"userID" equalTo:[PFUser currentUser].objectId];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                [infoView.likeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+                infoView.likeButton.enabled = NO;
+            } else {
+                [infoView.likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }];
+    
         PFFile * file = self.markerPostsArray[i][@"photo"];
         if(file)  {
             [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -310,6 +324,38 @@
     }
     
 }
+
+- (void) likeButtonPressed:(id)sender{
+    FDLikeButton * likeButton = (FDLikeButton *) sender;
+    [likeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    likeButton.enabled = NO;
+    
+    PFObject * likeObject = [PFObject objectWithClassName:@"Like"];
+    likeObject[@"userID"] = [PFUser currentUser].objectId;
+    likeObject[@"userName"] = likeButton.postObj[@"userName"];
+    likeObject[@"like"] = @YES;
+    likeObject[@"postID"] = likeButton.postObj.objectId;
+    
+    [likeObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            // The object has been saved.
+            PFQuery * query = [PFQuery queryWithClassName:@"Posts"];
+            
+            [query getObjectInBackgroundWithId:likeButton.postObj.objectId
+                                         block:^(PFObject *object, NSError *error) {
+                                             NSNumber * likeNumber = object[@"likeNumber"];
+                                             likeNumber = @(likeNumber.intValue + 1);
+                                             object[@"likeNumber"] = likeNumber;
+                                             [object saveInBackground];
+                                         }];
+            
+        } else {
+            NSLog(@"Save like failed: %@" , error);
+        }
+    }];
+}
+
+
 
 - (void)mapView:(GMSMapView *)mapView
 didTapAtCoordinate:(CLLocationCoordinate2D)coordinate

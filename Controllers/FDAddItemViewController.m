@@ -40,11 +40,13 @@
     shouldBeginEditing = YES;
     
     self.searchDisplayController.searchBar.placeholder =@"輸入餐廳名稱";
-    
+    [self.searchDisplayController setActive:YES animated:YES];
+    [self.searchDisplayController.searchBar becomeFirstResponder];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
 }
 
 -(void) viewDidDisappear:(BOOL)animated

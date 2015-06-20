@@ -30,7 +30,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8cc-Ju-RYe">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8cc-Ju-RYe" customClass="FDLikeButton">
                                     <rect key="frame" x="16" y="169" width="30" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Like">
@@ -99,7 +99,7 @@
             <connections>
                 <outlet property="addressTextView" destination="BwC-Qw-gTR" id="pCU-A8-yqx"/>
                 <outlet property="commentButton" destination="7uA-Y9-WSy" id="5Ou-az-xmn"/>
-                <outlet property="likeButton" destination="8cc-Ju-RYe" id="V7h-i9-RBu"/>
+                <outlet property="likeButton" destination="8cc-Ju-RYe" id="PW2-8Z-GaN"/>
                 <outlet property="phoneTextView" destination="d4u-1x-Xfa" id="T80-5D-z3w"/>
                 <outlet property="postTextView" destination="eay-QJ-beB" id="pUG-Rk-crn"/>
                 <outlet property="restaurantImageView" destination="wSY-DM-3Rv" id="kWf-u4-odh"/>
