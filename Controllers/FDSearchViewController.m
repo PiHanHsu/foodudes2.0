@@ -67,7 +67,6 @@
 
     self.gs = [[GCGeocodingService alloc] init];
     self.commentView.hidden = YES;
-    [self loadFriendsPost];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -133,9 +132,11 @@
             
             PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
             [postQuery whereKey:@"userID" containedIn:friendsIdArray];
-            self.postArray = [postQuery findObjects];
+            [postQuery findObjectsInBackgroundWithBlock:^(NSArray * postArray, NSError * error){
+                self.postArray = postArray;
+                [self displayMarker];
+            }];
             
-            [self displayMarker];
         }else{
             NSLog(@"load [friendspost failed: %@", error);
         }
@@ -154,7 +155,6 @@
             PFObject *postObj = self.postArray[i];
             //use relation in Parse
             PFObject * restaurant = postObj[@"parent"];
-            //NSLog(@"restauant: %@", restaurant);
             
             [restaurant fetchInBackgroundWithBlock:^(PFObject *postRestaurant, NSError *error) {
                 if (!error) {

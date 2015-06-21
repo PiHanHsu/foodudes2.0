@@ -24,9 +24,7 @@
 		E86E38081B1B5946006C5F20 /* FDMyPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E86E38071B1B5946006C5F20 /* FDMyPostTableViewCell.m */; };
 		E86E380A1B1C9AF7006C5F20 /* restaurant_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E86E38091B1C9AF7006C5F20 /* restaurant_placeholder.png */; };
 		E86E380D1B1CAE37006C5F20 /* FDEditPostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E86E380C1B1CAE37006C5F20 /* FDEditPostTableViewController.m */; };
-		E8868E811ADA84CC0030FE92 /* FDParseTestingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */; };
 		E8868E841ADA889A0030FE92 /* FDParseTestingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */; };
-		E8868E8A1ADAAB850030FE92 /* FDCommentTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */; };
 		E8868E8D1ADBF44A0030FE92 /* FDProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */; };
 		E8868E901ADBF5700030FE92 /* FDFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E8868E8F1ADBF5700030FE92 /* FDFriendsTableViewCell.m */; };
 		E8B1A5881B076BD100322873 /* infoWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B1A5861B076BD100322873 /* infoWindowView.m */; };
@@ -87,12 +85,8 @@
 		E86E38091B1C9AF7006C5F20 /* restaurant_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurant_placeholder.png; sourceTree = "<group>"; };
 		E86E380B1B1CAE37006C5F20 /* FDEditPostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDEditPostTableViewController.h; sourceTree = "<group>"; };
 		E86E380C1B1CAE37006C5F20 /* FDEditPostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDEditPostTableViewController.m; sourceTree = "<group>"; };
-		E8868E7F1ADA84CC0030FE92 /* FDParseTestingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDParseTestingTableViewController.h; sourceTree = "<group>"; };
-		E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDParseTestingTableViewController.m; sourceTree = "<group>"; };
 		E8868E821ADA889A0030FE92 /* FDParseTestingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDParseTestingTableViewCell.h; sourceTree = "<group>"; };
 		E8868E831ADA889A0030FE92 /* FDParseTestingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDParseTestingTableViewCell.m; sourceTree = "<group>"; };
-		E8868E881ADAAB850030FE92 /* FDCommentTestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDCommentTestTableViewController.h; sourceTree = "<group>"; };
-		E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDCommentTestTableViewController.m; sourceTree = "<group>"; };
 		E8868E8B1ADBF4490030FE92 /* FDProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDProfileTableViewController.h; sourceTree = "<group>"; };
 		E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDProfileTableViewController.m; sourceTree = "<group>"; };
 		E8868E8E1ADBF5700030FE92 /* FDFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDFriendsTableViewCell.h; sourceTree = "<group>"; };
@@ -272,10 +266,6 @@
 				E80389F21AB5CE88004FEEDD /* FDSearchViewController.m */,
 				E8DBAAB01AD2AEF10064262F /* FDAddItemTableViewController.h */,
 				E8DBAAB11AD2AEF10064262F /* FDAddItemTableViewController.m */,
-				E8868E7F1ADA84CC0030FE92 /* FDParseTestingTableViewController.h */,
-				E8868E801ADA84CC0030FE92 /* FDParseTestingTableViewController.m */,
-				E8868E881ADAAB850030FE92 /* FDCommentTestTableViewController.h */,
-				E8868E891ADAAB850030FE92 /* FDCommentTestTableViewController.m */,
 				E8868E8B1ADBF4490030FE92 /* FDProfileTableViewController.h */,
 				E8868E8C1ADBF4490030FE92 /* FDProfileTableViewController.m */,
 				E8ED1F811B1A018E00F53A2E /* FDRestaurantListTableViewController.h */,
@@ -467,11 +457,9 @@
 				E80389F01AB5CE7B004FEEDD /* FDAddItemViewController.m in Sources */,
 				E80389ED1AB5CE61004FEEDD /* FDLoginViewController.m in Sources */,
 				E86E38081B1B5946006C5F20 /* FDMyPostTableViewCell.m in Sources */,
-				E8868E8A1ADAAB850030FE92 /* FDCommentTestTableViewController.m in Sources */,
 				E8868E841ADA889A0030FE92 /* FDParseTestingTableViewCell.m in Sources */,
 				E8E63E6F1ABDB92B006ABD86 /* FDUser.m in Sources */,
 				E8E63E721ABDBD1D006ABD86 /* FDMarker.m in Sources */,
-				E8868E811ADA84CC0030FE92 /* FDParseTestingTableViewController.m in Sources */,
 				E85393241B35B13300290E3F /* FDLikeButton.m in Sources */,
 				E80389CB1AB5C289004FEEDD /* ViewController.m in Sources */,
 				E80389C81AB5C289004FEEDD /* AppDelegate.m in Sources */,
