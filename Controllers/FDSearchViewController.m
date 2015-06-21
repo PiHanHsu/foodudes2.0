@@ -273,7 +273,29 @@
         infoView.phoneTextView.text = self.restaurantInfo[@"phone"];
         infoView.postTextView.text = self.markerPostsArray[i][@"reason"];
         infoView.userNameLabel.text = self.markerPostsArray[i][@"userName"];
-        
+        infoView.likeAndCommentLabel.text = [NSString stringWithFormat:@"%@個讚 · %@則留言",self.markerPostsArray[i][@"likeNumber"],self.markerPostsArray[i][@"commentNumber"]];
+        [[NSNotificationCenter defaultCenter]
+         addObserverForName:@"likeNumberUpdated"
+         object:nil
+         queue:[NSOperationQueue mainQueue]
+         usingBlock:^(NSNotification *notification) {
+             if ([notification.name isEqualToString:@"likeNumberUpdated"]) {
+                 NSNumber * likeNumber = self.markerPostsArray[i][@"likeNumber"];
+                 likeNumber = @(likeNumber.intValue + 1);
+                 infoView.likeAndCommentLabel.text = [NSString stringWithFormat:@"%@個讚 · %@則留言",likeNumber ,self.markerPostsArray[i][@"commentNumber"]];
+             }
+         }];
+        [[NSNotificationCenter defaultCenter]
+         addObserverForName:@"commentNumberUpdated"
+         object:nil
+         queue:[NSOperationQueue mainQueue]
+         usingBlock:^(NSNotification *notification) {
+             if ([notification.name isEqualToString:@"commentNumberUpdated"]) {
+                 NSNumber * commentNumber = self.markerPostsArray[i][@"commentNumber"];
+                 commentNumber = @(commentNumber.intValue + 1);
+                 infoView.likeAndCommentLabel.text = [NSString stringWithFormat:@"%@個讚 · %@則留言",self.markerPostsArray[i][@"likeNumber"] , commentNumber];
+             }
+         }];
         infoView.likeButton.postObj =self.markerPostsArray[i];
         PFQuery * query = [PFQuery queryWithClassName:@"Like"];
         [query whereKey:@"postID" equalTo:infoView.likeButton.postObj.objectId];
@@ -372,6 +394,7 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
                                              likeNumber = @(likeNumber.intValue + 1);
                                              object[@"likeNumber"] = likeNumber;
                                              [object saveInBackground];
+                                             [[NSNotificationCenter defaultCenter] postNotificationName:@"likeNumberUpdated" object:self];
                                          }];
             
         } else {
@@ -416,6 +439,7 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
                                                      commentNumber = @(commentNumber.intValue + 1);
                                                      object[@"commentNumber"] = commentNumber;
                                                      [object saveInBackground];
+                                                     [[NSNotificationCenter defaultCenter] postNotificationName:@"commentNumberUpdated" object:self];
                                                      //remove self.postObj
                                                      self.postObj = nil;
                                                  }];
