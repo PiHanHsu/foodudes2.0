@@ -617,16 +617,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Xer-9Z-del">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="mha-HL-S32"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="s3x-u7-4Kr"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-0s-ue7">
-                                <rect key="frame" x="0.0" y="128" width="600" height="290"/>
+                                <rect key="frame" x="13" y="49" width="20" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="290" id="h9o-n4-6Yh"/>
                                 </constraints>
@@ -636,24 +628,67 @@
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdm-sQ-avc" userLabel="CommentView">
+                                <rect key="frame" x="0.0" y="259" width="600" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6j5-Ng-Cb3" customClass="FDCommentButton">
+                                        <rect key="frame" x="536" y="30" width="36" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="3vx-7k-EUX"/>
+                                            <constraint firstAttribute="height" constant="30" id="ryt-9l-BAG"/>
+                                        </constraints>
+                                        <state key="normal" title="Send">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nG1-G0-ZtE">
+                                        <rect key="frame" x="8" y="8" width="514" height="74"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="jNu-bk-qdm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="0W1-Is-3ef"/>
+                                    <constraint firstItem="6j5-Ng-Cb3" firstAttribute="top" secondItem="Kdm-sQ-avc" secondAttribute="top" constant="30" id="2Pk-M8-xAo"/>
+                                    <constraint firstAttribute="bottom" secondItem="nG1-G0-ZtE" secondAttribute="bottom" constant="8" id="8tA-HN-2QV"/>
+                                    <constraint firstItem="6j5-Ng-Cb3" firstAttribute="leading" secondItem="nG1-G0-ZtE" secondAttribute="trailing" constant="14" id="FUo-Pk-v0S"/>
+                                    <constraint firstItem="nG1-G0-ZtE" firstAttribute="leading" secondItem="Kdm-sQ-avc" secondAttribute="leading" constant="8" id="O3k-kg-fyA"/>
+                                    <constraint firstAttribute="bottom" secondItem="6j5-Ng-Cb3" secondAttribute="bottom" constant="30" id="TmY-Sc-405"/>
+                                    <constraint firstItem="nG1-G0-ZtE" firstAttribute="top" secondItem="Kdm-sQ-avc" secondAttribute="top" constant="8" id="d1x-9A-McF"/>
+                                    <constraint firstAttribute="trailing" secondItem="6j5-Ng-Cb3" secondAttribute="trailing" constant="28" id="fnF-qI-POk"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Xer-9Z-del">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="mha-HL-S32"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="s3x-u7-4Kr"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="top" secondItem="irD-LV-FtS" secondAttribute="bottom" id="0vQ-Q6-mMn"/>
                             <constraint firstAttribute="trailing" secondItem="Xer-9Z-del" secondAttribute="trailing" id="MOd-ED-wJw"/>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="NqF-6d-bqi"/>
-                            <constraint firstItem="AXd-0s-ue7" firstAttribute="top" secondItem="Xer-9Z-del" secondAttribute="bottom" constant="20" id="ULe-vR-GRF"/>
+                            <constraint firstItem="Kdm-sQ-avc" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leadingMargin" constant="-16" id="bnP-Hu-8bg"/>
+                            <constraint firstItem="ZIi-rT-BFc" firstAttribute="top" secondItem="Kdm-sQ-avc" secondAttribute="bottom" constant="202" id="dBq-AQ-aij"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kdm-sQ-avc" secondAttribute="trailing" constant="-16" id="tKm-SR-0r9"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ULe-vR-GRF"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Cxc-GH-p3r"/>
                     <connections>
+                        <outlet property="CommentTextView" destination="nG1-G0-ZtE" id="EK5-68-vai"/>
+                        <outlet property="commentView" destination="Kdm-sQ-avc" id="hQo-GD-k9G"/>
                         <outlet property="postScrollView" destination="AXd-0s-ue7" id="VSt-He-SxJ"/>
                         <outlet property="searchBar" destination="Xer-9Z-del" id="aGp-PA-kDe"/>
+                        <outlet property="sendButton" destination="6j5-Ng-Cb3" id="WNU-6r-BQP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7b4-SK-YsX" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -17,18 +17,23 @@
 #import "FDMarker.h"
 #import "infoWindowView.h"
 #import "FDLikeButton.h"
+#import "FDCommentButton.h"
 
 @interface FDSearchViewController ()<GMSMapViewDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIScrollView *postScrollView;
+@property (weak, nonatomic) IBOutlet UIView *commentView;
+@property (weak, nonatomic) IBOutlet FDCommentButton *sendButton;
+@property (weak, nonatomic) IBOutlet UITextView *CommentTextView;
 
 @property (strong, nonatomic) GCGeocodingService *gs;
 @property (strong, nonatomic) NSArray * restaurantArray; //of restaurants
 @property (strong, nonatomic) NSArray * postArray; // of all posts
 @property (strong, nonatomic) NSArray * markerPostsArray; // the posts on the tap marker
 @property (strong, nonatomic) PFObject * restaurantInfo;
+@property (strong, nonatomic) PFObject * postObj;
 @property (strong, nonatomic) NSString *restaurantID;
 @property (strong, nonatomic) NSString *userID;
 
@@ -61,7 +66,7 @@
     [self.view insertSubview:self.mapView atIndex:0];
 
     self.gs = [[GCGeocodingService alloc] init];
-
+    self.commentView.hidden = YES;
     [self loadFriendsPost];
 }
 
@@ -282,6 +287,10 @@
             }
         }];
     
+        infoView.commentButton.postObj = self.markerPostsArray[i];
+        [infoView.commentButton addTarget:self action:@selector(commentButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.sendButton addTarget:self action:@selector(sendButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
         PFFile * file = self.markerPostsArray[i][@"photo"];
         if(file)  {
             [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -325,6 +334,22 @@
     
 }
 
+- (void)mapView:(GMSMapView *)mapView
+didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    // [self viewDismiss];
+    self.postScrollView.hidden = YES;
+    //remove all the subviews in postScrollView
+    for(UIView *subview in [self.postScrollView subviews]) {
+        [subview removeFromSuperview];
+    }
+    
+    [self.searchBar resignFirstResponder];
+    
+}
+
+#pragma mark buttons
+
 - (void) likeButtonPressed:(id)sender{
     FDLikeButton * likeButton = (FDLikeButton *) sender;
     [likeButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -355,21 +380,58 @@
     }];
 }
 
+- (void) commentButtonPressed:(id)sender{
+    self.commentView.hidden = NO;
+    [self.CommentTextView becomeFirstResponder];
+    
+    self.sendButton = (FDCommentButton *) sender;
+    self.postObj = self.sendButton.postObj;
 
-
-- (void)mapView:(GMSMapView *)mapView
-didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
-{
-   // [self viewDismiss];
-    self.postScrollView.hidden = YES;
-   //remove all the subviews in postScrollView
-        for(UIView *subview in [self.postScrollView subviews]) {
-            [subview removeFromSuperview];
-        }
-
-    [self.searchBar resignFirstResponder];
-   
 }
+
+- (void) sendButtonPressed:(id)sender{
+    self.commentView.hidden = YES;
+    [self.CommentTextView resignFirstResponder];
+    
+    if (self.postObj) {
+        //TODO: parent
+        PFQuery * query = [PFQuery queryWithClassName:@"Posts"];
+        [query whereKey:@"objectId" equalTo:self.postObj.objectId];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject * post, NSError *error){
+            PFObject * commentObject = [PFObject objectWithClassName:@"Comment"];
+            commentObject[@"replier"] = [PFUser currentUser].objectId;
+            commentObject[@"replierName"] = self.postObj[@"userName"];
+            commentObject[@"parent"] = post;
+            commentObject[@"postID"] = self.postObj.objectId;
+            commentObject[@"comment"] = self.CommentTextView.text;
+            
+            [commentObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    self.CommentTextView.text = @"";
+                    PFQuery * query = [PFQuery queryWithClassName:@"Posts"];
+                    
+                    [query getObjectInBackgroundWithId:self.postObj.objectId
+                                                 block:^(PFObject *object, NSError *error) {
+                                                     NSNumber * commentNumber = object[@"commentNumber"];
+                                                     commentNumber = @(commentNumber.intValue + 1);
+                                                     object[@"commentNumber"] = commentNumber;
+                                                     [object saveInBackground];
+                                                     //remove self.postObj
+                                                     self.postObj = nil;
+                                                 }];
+                    
+                } else {
+                    NSLog(@"Save comment failed: %@" , error);
+                }
+            }];
+
+        }];
+        
+        
+    }
+    
+}
+
 
 -(void)viewDismiss {
     

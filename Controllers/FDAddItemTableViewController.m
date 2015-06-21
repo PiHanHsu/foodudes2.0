@@ -82,6 +82,7 @@
                 post[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
                 post[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
                 post[@"likeNumber"] = @0;
+                 post[@"commentNumber"] = @0;
                 if(self.photoImageSelected) {
                     // reset
                     self.photoImageSelected = NO;
@@ -139,6 +140,7 @@
                 post[@"parent"] =[PFObject objectWithoutDataWithClassName:@"Restaurant_new" objectId:objID];                post[@"userID"] = [PFUser currentUser].objectId;
                 post[@"userName"] = [PFUser currentUser][@"name"];
                 post[@"likeNumber"] = @0;
+                post[@"commentNumber"] = @0;
                 
                 if(self.photoImageSelected) {
                     // reset
@@ -198,6 +200,7 @@
     post[@"lat"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lat"]];
     post[@"lng"] = [NSString stringWithFormat:@"%@", self.restaurantInfoDict[@"geometry"][@"location"][@"lng"]];
     post[@"likeNumber"] = @0;
+    post[@"commentNumber"] = @0;
     
         if(self.photoImageSelected) {
             // reset
@@ -252,6 +255,7 @@
         post[@"userID"] = [PFUser currentUser].objectId;
         post[@"userName"] = [PFUser currentUser][@"name"];
         post[@"likeNumber"] = @0;
+        post[@"commentNumber"] = @0;
         if(self.photoImageSelected) {
             // reset
             self.photoImageSelected = NO;

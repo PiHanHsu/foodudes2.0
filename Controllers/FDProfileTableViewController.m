@@ -70,6 +70,7 @@
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                                    if (connectionError == nil && data != nil) {
                                        self.userHeadImage.image = [UIImage imageWithData:data];
+                                       self.userHeadImage.contentMode = UIViewContentModeScaleAspectFit;
                                        self.userHeadImage.layer.cornerRadius = 5.0f;
                                        self.userHeadImage.clipsToBounds = YES;
                                        

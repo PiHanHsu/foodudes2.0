@@ -51,7 +51,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7uA-Y9-WSy">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7uA-Y9-WSy" customClass="FDCommentButton">
                                     <rect key="frame" x="101" y="169" width="68" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Comment">
@@ -98,7 +98,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="addressTextView" destination="BwC-Qw-gTR" id="pCU-A8-yqx"/>
-                <outlet property="commentButton" destination="7uA-Y9-WSy" id="5Ou-az-xmn"/>
+                <outlet property="commentButton" destination="7uA-Y9-WSy" id="w22-vC-lak"/>
                 <outlet property="likeButton" destination="8cc-Ju-RYe" id="PW2-8Z-GaN"/>
                 <outlet property="phoneTextView" destination="d4u-1x-Xfa" id="T80-5D-z3w"/>
                 <outlet property="postTextView" destination="eay-QJ-beB" id="pUG-Rk-crn"/>
