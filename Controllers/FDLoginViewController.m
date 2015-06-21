@@ -51,7 +51,7 @@
     [super viewDidAppear:animated];
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         NSLog(@"current user!!");
-        
+        [self getFBfriends];
         [self _ViewControllerAnimated:YES];
     }
 
@@ -93,8 +93,7 @@
             
         }
     }];
-    
-    //[_activityIndicator startAnimating]; // Show loading indicator until login is finished
+
 }
 
 - (void)_ViewControllerAnimated:(BOOL)animated {
@@ -170,7 +169,21 @@
             NSArray *friendsArray = [friendQuery findObjects];
             
             NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity: friendsArray.count];
-            //add current User objectId doesn't work
+            
+            NSMutableArray * onlyFriendsIdArray = [NSMutableArray arrayWithCapacity: friendsArray.count];
+            for(int i=0 ; i< friendsArray.count ; i++){
+                PFUser * user = friendsArray[i];
+                [onlyFriendsIdArray addObject:user.objectId];
+                
+                if (i == friendsArray.count -1) {
+                    
+                    NSUserDefaults * defaultFriendsOnly = [NSUserDefaults standardUserDefaults];
+                    [defaultFriendsOnly setObject:onlyFriendsIdArray forKey:@"onlyFriendsIdArray"];
+                    [defaultFriendsOnly synchronize];
+                }
+            }
+        
+            // add currentUserID
            [friendsIdArray addObject:self.currentUserID];
             
             for(int i=0 ; i< friendsArray.count ; i++){

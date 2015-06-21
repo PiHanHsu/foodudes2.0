@@ -603,6 +603,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Aaf-l5-oXM">
+                                <rect key="frame" x="281" y="282" width="37" height="37"/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXd-0s-ue7">
                                 <rect key="frame" x="13" y="49" width="20" height="24"/>
                                 <constraints>
@@ -661,8 +665,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="top" secondItem="irD-LV-FtS" secondAttribute="bottom" id="0vQ-Q6-mMn"/>
+                            <constraint firstAttribute="centerY" secondItem="Aaf-l5-oXM" secondAttribute="centerY" id="8C1-eU-JuA"/>
                             <constraint firstAttribute="trailing" secondItem="Xer-9Z-del" secondAttribute="trailing" id="MOd-ED-wJw"/>
                             <constraint firstItem="Xer-9Z-del" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leading" id="NqF-6d-bqi"/>
+                            <constraint firstAttribute="centerX" secondItem="Aaf-l5-oXM" secondAttribute="centerX" id="ZRZ-wE-epg"/>
                             <constraint firstItem="Kdm-sQ-avc" firstAttribute="leading" secondItem="lmW-h7-PCg" secondAttribute="leadingMargin" constant="-16" id="bnP-Hu-8bg"/>
                             <constraint firstItem="ZIi-rT-BFc" firstAttribute="top" secondItem="Kdm-sQ-avc" secondAttribute="bottom" constant="202" id="dBq-AQ-aij"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kdm-sQ-avc" secondAttribute="trailing" constant="-16" id="tKm-SR-0r9"/>
@@ -672,6 +678,7 @@
                     <connections>
                         <outlet property="CommentTextView" destination="nG1-G0-ZtE" id="EK5-68-vai"/>
                         <outlet property="commentView" destination="Kdm-sQ-avc" id="hQo-GD-k9G"/>
+                        <outlet property="indicator" destination="Aaf-l5-oXM" id="PsL-XU-pjJ"/>
                         <outlet property="postScrollView" destination="AXd-0s-ue7" id="VSt-He-SxJ"/>
                         <outlet property="searchBar" destination="Xer-9Z-del" id="aGp-PA-kDe"/>
                         <outlet property="sendButton" destination="6j5-Ng-Cb3" id="WNU-6r-BQP"/>
@@ -689,7 +696,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="RJL-I2-XjP">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="170"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -913,6 +919,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPD-LY-5ZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-731" y="145"/>
         </scene>
         <!--Profile-->
         <scene sceneID="G7c-2m-x8f">

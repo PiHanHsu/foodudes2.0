@@ -70,7 +70,7 @@
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                                    if (connectionError == nil && data != nil) {
                                        self.userHeadImage.image = [UIImage imageWithData:data];
-                                       self.userHeadImage.contentMode = UIViewContentModeScaleAspectFit;
+                                       self.userHeadImage.contentMode = UIViewContentModeScaleAspectFill;
                                        self.userHeadImage.layer.cornerRadius = 5.0f;
                                        self.userHeadImage.clipsToBounds = YES;
                                        
@@ -80,8 +80,14 @@
                                }];
     }
 
-    [self getlikes];
     [self getFBfriends];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [self getlikes];
+    [self getMyPost];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,9 +95,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-}
 
 #pragma mark - Table view data source
 
@@ -105,63 +108,99 @@
     return self.friendsArray.count;
 }
 
-// find FB friends
+//find FB friends
 -(void) getFBfriends{
-    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            // result will contain an array with your user's friends in the "data" key
-            NSArray *friendObjects = [result objectForKey:@"data"];
-            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-            // Create a list of friends' Facebook IDs
-            for (NSDictionary *friendObject in friendObjects) {
-                [friendIds addObject:[friendObject objectForKey:@"id"]];
-            }
-            
-            PFQuery *friendQuery = [PFUser query];
-            [friendQuery whereKey:@"facebookID" containedIn:friendIds];
-            self.friendsArray = [friendQuery findObjects];
-            self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
-            PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
-            [postQuery whereKey:@"userID" equalTo:[PFUser currentUser].objectId];
-            self.myPostArray = [postQuery findObjects];
-            self.userPostsLabel.text = [NSString stringWithFormat:@"Posts: %lu",self.myPostArray.count];
-            
-            
-            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
-            friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
-            
-            self.friendsPostArray = [[NSMutableArray alloc]initWithCapacity:0];
-            
-            for (int i = 0 ; i<self.friendsArray.count; i++) {
-                PFUser * user = self.friendsArray[i];
-                PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
-                [postQuery whereKey:@"userID" equalTo:user.objectId];
-                NSArray * postListArray = [postQuery findObjects];
-                NSLog(@"%lu", (unsigned long)postListArray.count);
-                
-                NSNumber * number = [NSNumber numberWithUnsignedLong:postListArray.count];
-                NSString * name = [NSString stringWithFormat:@"%@",self.friendsArray[i][@"name"]];
-                NSString *pictureURL = [NSString stringWithFormat:@"%@", self.friendsArray[i][@"pictureURL"]];
-                NSDictionary * dict = @{@"postNum" : number,
-                                        @"name" : name,
-                                        @"pictureURL" : pictureURL,
-                                        @"postListArray" : postListArray};
-                [self.friendsPostArray addObject:dict];
-                
-                if (i == self.friendsPostArray.count -1) {
-                    [self.tableView reloadData];
-                    [self.indicator stopAnimating];
-                    [self.indicator hidesWhenStopped];
-                }
-                
-            }
-            
-            
+    
+    NSUserDefaults * defaultFriendsOnly = [NSUserDefaults standardUserDefaults];
+    NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
+    friendsIdArray = [defaultFriendsOnly objectForKey:@"onlyFriendsIdArray"];
+    
+    PFQuery *friendQuery = [PFUser query];
+    [friendQuery whereKey:@"objectId" containedIn:friendsIdArray];
+    self.friendsArray = [friendQuery findObjects];
+    self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
+
+    self.friendsPostArray = [[NSMutableArray alloc]initWithCapacity:0];
+    
+    for (int i = 0 ; i<self.friendsArray.count; i++) {
+        PFUser * user = self.friendsArray[i];
+        PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+        [postQuery whereKey:@"userID" equalTo:user.objectId];
+        NSArray * postListArray = [postQuery findObjects];
+        //NSLog(@"%lu", (unsigned long)postListArray.count);
+        
+        NSNumber * number = [NSNumber numberWithUnsignedLong:postListArray.count];
+        NSString * name = [NSString stringWithFormat:@"%@",self.friendsArray[i][@"name"]];
+        NSString *pictureURL = [NSString stringWithFormat:@"%@", self.friendsArray[i][@"pictureURL"]];
+        NSDictionary * dict = @{@"postNum" : number,
+                                @"name" : name,
+                                @"pictureURL" : pictureURL,
+                                @"postListArray" : postListArray};
+        [self.friendsPostArray addObject:dict];
+        
+        if (i == self.friendsPostArray.count -1) {
+            [self.tableView reloadData];
+            [self.indicator stopAnimating];
+            [self.indicator hidesWhenStopped];
         }
-    }];
+        
+    }
     
 }
+
+
+//-(void) getFBfriends{
+//
+//       [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        if (!error) {
+//            // result will contain an array with your user's friends in the "data" key
+//            NSArray *friendObjects = [result objectForKey:@"data"];
+//            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
+//            // Create a list of friends' Facebook IDs
+//            for (NSDictionary *friendObject in friendObjects) {
+//                [friendIds addObject:[friendObject objectForKey:@"id"]];
+//            }
+//            
+//            PFQuery *friendQuery = [PFUser query];
+//            [friendQuery whereKey:@"facebookID" containedIn:friendIds];
+//            self.friendsArray = [friendQuery findObjects];
+//            self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
+//            
+//            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+//            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
+//            friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
+//            
+//            self.friendsPostArray = [[NSMutableArray alloc]initWithCapacity:0];
+//            
+//            for (int i = 0 ; i<self.friendsArray.count; i++) {
+//                PFUser * user = self.friendsArray[i];
+//                PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+//                [postQuery whereKey:@"userID" equalTo:user.objectId];
+//                NSArray * postListArray = [postQuery findObjects];
+//                //NSLog(@"%lu", (unsigned long)postListArray.count);
+//                
+//                NSNumber * number = [NSNumber numberWithUnsignedLong:postListArray.count];
+//                NSString * name = [NSString stringWithFormat:@"%@",self.friendsArray[i][@"name"]];
+//                NSString *pictureURL = [NSString stringWithFormat:@"%@", self.friendsArray[i][@"pictureURL"]];
+//                NSDictionary * dict = @{@"postNum" : number,
+//                                        @"name" : name,
+//                                        @"pictureURL" : pictureURL,
+//                                        @"postListArray" : postListArray};
+//                [self.friendsPostArray addObject:dict];
+//                
+//                if (i == self.friendsPostArray.count -1) {
+//                    [self.tableView reloadData];
+//                    [self.indicator stopAnimating];
+//                    [self.indicator hidesWhenStopped];
+//                }
+//                
+//            }
+//            
+//            
+//        }
+//    }];
+//    
+//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -182,6 +221,7 @@
                                    if (connectionError == nil && data != nil) {
                                        cell.headImageView.image = [UIImage imageWithData:data];
                                        cell.headImageView.backgroundColor = [UIColor lightGrayColor];
+                                       cell.headImageView.contentMode = UIViewContentModeScaleAspectFill;
                                        cell.headImageView.layer.cornerRadius = 25.0;
                                        cell.headImageView.layer.masksToBounds = YES;
                                    } else {
@@ -223,6 +263,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     }];
 }
 
+- (void)getMyPost{
+    PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+    [postQuery whereKey:@"userID" equalTo:[PFUser currentUser].objectId];
+    self.myPostArray = [postQuery findObjects];
+    self.userPostsLabel.text = [NSString stringWithFormat:@"Posts: %lu",self.myPostArray.count];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

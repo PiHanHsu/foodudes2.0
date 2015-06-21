@@ -37,6 +37,7 @@
 @property (strong, nonatomic) NSString *restaurantID;
 @property (strong, nonatomic) NSString *userID;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 @property(nonatomic,strong) UIDynamicAnimator *animator;
 @end
 
@@ -67,6 +68,7 @@
 
     self.gs = [[GCGeocodingService alloc] init];
     self.commentView.hidden = YES;
+    [self.indicator startAnimating];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -123,23 +125,16 @@
 
 
 - (void) loadFriendsPost{
-    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            
-            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
-            friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
-            
-            PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
-            [postQuery whereKey:@"userID" containedIn:friendsIdArray];
-            [postQuery findObjectsInBackgroundWithBlock:^(NSArray * postArray, NSError * error){
-                self.postArray = postArray;
-                [self displayMarker];
-            }];
-            
-        }else{
-            NSLog(@"load [friendspost failed: %@", error);
-        }
+    
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
+    friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
+    
+    PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
+    [postQuery whereKey:@"userID" containedIn:friendsIdArray];
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray * postArray, NSError * error){
+        self.postArray = postArray;
+        [self displayMarker];
     }];
 }
 
@@ -194,7 +189,7 @@
                                                                restaurantMarker.position = CLLocationCoordinate2DMake(lat, lng);
                                                                restaurantMarker.appearAnimation= kGMSMarkerAnimationPop;
                                                                restaurantMarker.map =self.mapView;
-                                                           }else {
+                                                               [self.indicator stopAnimating];                      }else {
                                                                NSLog(@"Failed to load user image for marker.");
                                                            }
                                                        }];
