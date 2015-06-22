@@ -138,77 +138,25 @@
                                 @"postListArray" : postListArray};
         [self.friendsPostArray addObject:dict];
         
-        //sorting
-        [self.friendsPostArray sortUsingComparator:^(id obj1, id obj2) {
-            NSNumber *num1 = [(NSDictionary *)obj1 objectForKey:@"postNum"];
-            NSNumber *num2 = [(NSDictionary *)obj2 objectForKey:@"postNum"];
-            return [num2 compare:num1];
-        }];
-        
         if (i == self.friendsPostArray.count -1) {
-            [self.tableView reloadData];
-            [self.indicator stopAnimating];
-            [self.indicator hidesWhenStopped];
+            [self sortAndReloadData];
         }
         
     }
     
 }
 
-
-//-(void) getFBfriends{
-//
-//       [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//        if (!error) {
-//            // result will contain an array with your user's friends in the "data" key
-//            NSArray *friendObjects = [result objectForKey:@"data"];
-//            NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-//            // Create a list of friends' Facebook IDs
-//            for (NSDictionary *friendObject in friendObjects) {
-//                [friendIds addObject:[friendObject objectForKey:@"id"]];
-//            }
-//            
-//            PFQuery *friendQuery = [PFUser query];
-//            [friendQuery whereKey:@"facebookID" containedIn:friendIds];
-//            self.friendsArray = [friendQuery findObjects];
-//            self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
-//            
-//            NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-//            NSMutableArray * friendsIdArray = [NSMutableArray arrayWithCapacity:0];
-//            friendsIdArray = [defaults objectForKey:@"friendsIdArray"];
-//            
-//            self.friendsPostArray = [[NSMutableArray alloc]initWithCapacity:0];
-//            
-//            for (int i = 0 ; i<self.friendsArray.count; i++) {
-//                PFUser * user = self.friendsArray[i];
-//                PFQuery * postQuery = [PFQuery queryWithClassName:@"Posts"];
-//                [postQuery whereKey:@"userID" equalTo:user.objectId];
-//                NSArray * postListArray = [postQuery findObjects];
-//                //NSLog(@"%lu", (unsigned long)postListArray.count);
-//                
-//                NSNumber * number = [NSNumber numberWithUnsignedLong:postListArray.count];
-//                NSString * name = [NSString stringWithFormat:@"%@",self.friendsArray[i][@"name"]];
-//                NSString *pictureURL = [NSString stringWithFormat:@"%@", self.friendsArray[i][@"pictureURL"]];
-//                NSDictionary * dict = @{@"postNum" : number,
-//                                        @"name" : name,
-//                                        @"pictureURL" : pictureURL,
-//                                        @"postListArray" : postListArray};
-//                [self.friendsPostArray addObject:dict];
-//                
-//                if (i == self.friendsPostArray.count -1) {
-//                    [self.tableView reloadData];
-//                    [self.indicator stopAnimating];
-//                    [self.indicator hidesWhenStopped];
-//                }
-//                
-//            }
-//            
-//            
-//        }
-//    }];
-//    
-//}
-
+- (void) sortAndReloadData{
+     //sorting
+    [self.friendsPostArray sortUsingComparator:^(id obj1, id obj2) {
+        NSNumber *num1 = [(NSDictionary *)obj1 objectForKey:@"postNum"];
+        NSNumber *num2 = [(NSDictionary *)obj2 objectForKey:@"postNum"];
+        return [num2 compare:num1];
+    }];
+    [self.tableView reloadData];
+    [self.indicator stopAnimating];
+    [self.indicator hidesWhenStopped];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FDFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friendsCell" forIndexPath:indexPath];
