@@ -118,7 +118,7 @@
     PFQuery *friendQuery = [PFUser query];
     [friendQuery whereKey:@"objectId" containedIn:friendsIdArray];
     self.friendsArray = [friendQuery findObjects];
-    self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", self.friendsArray.count];
+    self.userFriendsLabel.text = [NSString stringWithFormat:@"Friends: %lu", (unsigned long)self.friendsArray.count];
 
     self.friendsPostArray = [[NSMutableArray alloc]initWithCapacity:0];
     
@@ -137,6 +137,13 @@
                                 @"pictureURL" : pictureURL,
                                 @"postListArray" : postListArray};
         [self.friendsPostArray addObject:dict];
+        
+        //sorting
+        [self.friendsPostArray sortUsingComparator:^(id obj1, id obj2) {
+            NSNumber *num1 = [(NSDictionary *)obj1 objectForKey:@"postNum"];
+            NSNumber *num2 = [(NSDictionary *)obj2 objectForKey:@"postNum"];
+            return [num2 compare:num1];
+        }];
         
         if (i == self.friendsPostArray.count -1) {
             [self.tableView reloadData];
