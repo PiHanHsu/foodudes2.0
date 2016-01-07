@@ -106,8 +106,7 @@
             [alert show];
         } else if (placemark) {
             
-            self.placeDetailURL = [NSMutableString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=ture&key=%@",
-                                   place.reference, API_KEY];
+            self.placeDetailURL = [NSMutableString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?placeid=%@&sensor=ture&key=%@", place.placeId, API_KEY];
             NSLog(@"%@", self.placeDetailURL);
             [self runURLRequest];
             

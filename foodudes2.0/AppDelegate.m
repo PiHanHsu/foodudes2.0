@@ -10,7 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-#import <FlurrySDK/Flurry.h>
+#import <UXTesting/UXTesting.h>
 
 @interface AppDelegate ()
 
@@ -40,8 +40,21 @@
     
     
     // Flurry Analytics
-    [Flurry logEvent:@"Hello, Flurry!"];
-    [Flurry startSession:@"CQQ7TV7FMFFXG95DJDVF"];
+    //[Flurry logEvent:@"Hello, Flurry!"];
+    //[Flurry startSession:@"CQQ7TV7FMFFXG95DJDVF"];
+    
+    //UXTesting
+    //[[UXTestingManager sharedInstance] setAppKey:@"naBiIcJby2wzlaTXHP0T-g"];
+    /// Set to false: Tester mode, user "shake to start recording.
+    // Set to true:  Developers embedded start() and stop() for recording.
+    // Default value is false.
+    //[[UXTestingManager sharedInstance] setIsHiddingMode:false];
+    
+    // Set to false: Disable front cam recording.
+    // Set to true: Enable front cam recording.
+    // Default value is false.
+    //[[UXTestingManager sharedInstance] setIsFrontCameraRecording:true];
+    
     
     return YES;
 }

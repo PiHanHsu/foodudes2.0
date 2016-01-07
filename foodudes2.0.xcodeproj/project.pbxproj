@@ -319,6 +319,7 @@
 				E80389BC1AB5C289004FEEDD /* Frameworks */,
 				E80389BD1AB5C289004FEEDD /* Resources */,
 				7491324EBEA6D0936DDB7181 /* Copy Pods Resources */,
+				EEBFBCBA07137903F30D8C56 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -425,6 +426,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEBFBCBA07137903F30D8C56 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F207CD61AA91CF74F2C484AE /* Check Pods Manifest.lock */ = {
@@ -598,6 +614,7 @@
 			baseConfigurationReference = 3BB8460C594D5B6137AFE9CE /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = foodudes2.0/Info.plist;
@@ -613,6 +630,7 @@
 			baseConfigurationReference = 53E23976D275AF6292403D5D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = foodudes2.0/Info.plist;

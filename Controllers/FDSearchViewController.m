@@ -304,9 +304,13 @@
             }
         }];
     
-        infoView.commentButton.postObj = self.markerPostsArray[i];
-        [infoView.commentButton addTarget:self action:@selector(commentButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.sendButton addTarget:self action:@selector(sendButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        //disable commentButton
+//        infoView.commentButton.postObj = self.markerPostsArray[i];
+//        [infoView.commentButton addTarget:self action:@selector(commentButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.sendButton addTarget:self action:@selector(sendButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        infoView.commentButton.enabled = NO;
+        infoView.shareButton.enabled = NO;
+        
         
         PFFile * file = self.markerPostsArray[i][@"photo"];
         if(file)  {
